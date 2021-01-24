@@ -1,18 +1,13 @@
 import React, { useState } from 'react';
-import {
-  View,
-  SafeAreaView,
-  Image,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
+import { View, Image, Text, TouchableOpacity } from 'react-native';
 import { TextInput, Button, HelperText } from 'react-native-paper';
-import { LinearGradient } from 'expo-linear-gradient';
+
 import logoBio from '@assets/biogenetics-logo.png';
 
 import { useAuth } from '~/contexts/auth';
 
 import Container from '~/components/Container';
+import ButtonPrimary from '~/components/ButtonPrimary';
 
 const SignIn = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -83,16 +78,13 @@ const SignIn = ({ navigation }) => {
         <HelperText type="error" visible={!!erros.password}>
           {erros.password}
         </HelperText>
-        <Button
-          style={{ marginTop: 20, backgroundColor: '#004ba7' }}
-          icon="login"
-          mode="contained"
+
+        <ButtonPrimary
+          style={{ marginTop: 20 }}
+          text="Entrar"
           onPress={signSubIn}
-          labelStyle={{ color: '#fff', fontSize: 18 }}
-          contentStyle={{ height: 45 }}
-        >
-          Entrar
-        </Button>
+        />
+
         <View
           style={{
             justifyContent: 'center',

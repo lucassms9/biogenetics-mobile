@@ -1,45 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, SafeAreaView } from 'react-native';
 import { TextInput, Button, HelperText } from 'react-native-paper';
 
 import Header from '~/components/Header';
 import Container from '~/components/Container';
+import FormUser from '~/components/FormUser';
 
-const SignUp = ({ navigation }) => (
-  <Container style={{ flex: 1 }}>
-    <Header navigation={navigation} title="Cadastrar-se" />
+const SignUp = ({ navigation }) => {
+  const [status, setStatus] = useState('');
+  const submitForm = (values) => {
+    console.log(values);
+  };
+  return (
+    <Container style={{ flex: 1 }}>
+      <Header navigation={navigation} title="Cadastrar-se" />
 
-    <View
-      style={{
-        marginHorizontal: 20,
-        flex: 1,
-        justifyContent: 'flex-start',
-      }}
-    >
-      <TextInput
-        label="Email"
-        mode="outlined"
-        autoCapitalize="none"
-        keyboardType="email-address"
-        value={email}
-        onChangeText={(text) => setEmail(text)}
-      />
-      <HelperText type="error" visible={!!erros.email}>
-        {erros.email}
-      </HelperText>
-
-      <Button
-        style={{ marginTop: 20, backgroundColor: '#004ba7' }}
-        icon="login"
-        mode="contained"
-        onPress={() => {}}
-        labelStyle={{ color: '#fff', fontSize: 18 }}
-        contentStyle={{ height: 45 }}
+      <View
+        style={{
+          marginHorizontal: 20,
+          flex: 1,
+          justifyContent: 'flex-start',
+        }}
       >
-        Recurar Senha
-      </Button>
-    </View>
-  </Container>
-);
+        <FormUser
+          submitForm={submitForm}
+          status={status}
+          textButton="Enviar"
+          initData={{}}
+        />
+      </View>
+    </Container>
+  );
+};
 
 export default SignUp;

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { View, SafeAreaView, Image } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { View, Image } from 'react-native';
 
 import { TextInput, Button, HelperText } from 'react-native-paper';
 import logoBio from '@assets/biogenetics-logo.png';
