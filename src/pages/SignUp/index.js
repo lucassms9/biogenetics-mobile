@@ -1,0 +1,45 @@
+import React from 'react';
+import { View, SafeAreaView } from 'react-native';
+import { TextInput, Button, HelperText } from 'react-native-paper';
+
+import Header from '~/components/Header';
+import Container from '~/components/Container';
+
+const SignUp = ({ navigation }) => (
+  <Container style={{ flex: 1 }}>
+    <Header navigation={navigation} title="Cadastrar-se" />
+
+    <View
+      style={{
+        marginHorizontal: 20,
+        flex: 1,
+        justifyContent: 'flex-start',
+      }}
+    >
+      <TextInput
+        label="Email"
+        mode="outlined"
+        autoCapitalize="none"
+        keyboardType="email-address"
+        value={email}
+        onChangeText={(text) => setEmail(text)}
+      />
+      <HelperText type="error" visible={!!erros.email}>
+        {erros.email}
+      </HelperText>
+
+      <Button
+        style={{ marginTop: 20, backgroundColor: '#004ba7' }}
+        icon="login"
+        mode="contained"
+        onPress={() => {}}
+        labelStyle={{ color: '#fff', fontSize: 18 }}
+        contentStyle={{ height: 45 }}
+      >
+        Recurar Senha
+      </Button>
+    </View>
+  </Container>
+);
+
+export default SignUp;
