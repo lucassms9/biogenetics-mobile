@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { View, Image, Text, TouchableOpacity } from 'react-native';
-import { TextInput, Button, HelperText } from 'react-native-paper';
+import { TextInput, Modal, HelperText } from 'react-native-paper';
+import { useTranslation } from 'react-i18next';
+import { Feather } from '@expo/vector-icons';
 
 import logoBio from '@assets/biogenetics-logo.png';
 
@@ -8,23 +10,39 @@ import { useAuth } from '~/contexts/auth';
 
 import Container from '~/components/Container';
 import ButtonPrimary from '~/components/ButtonPrimary';
+import ModalLanguage from '~/components/ModalLanguage';
 
 const SignIn = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [erros, setErros] = useState({});
+  const [visible, setVisible] = useState(false);
 
   const { handleSignIn } = useAuth();
+  const { t, i18n } = useTranslation();
+  const selectedLngCode = i18n.language;
+
+  let LANGS = {
+    'pt-BR': 'Português',
+    en: 'Inglês',
+  };
+
+  if (selectedLngCode === 'en') {
+    LANGS = {
+      'pt-BR': 'Portuguese',
+      en: 'English',
+    };
+  }
 
   const hasErrors = () => {
     const errosHandle = {};
 
     if (!email) {
-      errosHandle.email = 'Campo obrigatório';
+      errosHandle.email = t('fieldRequired');
     }
 
     if (!password) {
-      errosHandle.password = 'Campo obrigatório';
+      errosHandle.password = t('fieldRequired');
     }
     setErros(errosHandle);
     return errosHandle;
@@ -34,6 +52,9 @@ const SignIn = ({ navigation }) => {
     // handleSignIn();
     hasErrors();
   };
+
+  const showModal = () => setVisible(true);
+  const hideModal = () => setVisible(false);
 
   return (
     <Container>
@@ -57,7 +78,7 @@ const SignIn = ({ navigation }) => {
         }}
       >
         <TextInput
-          label="Email"
+          label={t('signin:inputEmail')}
           mode="outlined"
           autoCapitalize="none"
           keyboardType="email-address"
@@ -69,7 +90,7 @@ const SignIn = ({ navigation }) => {
         </HelperText>
         <TextInput
           mode="outlined"
-          label="Senha"
+          label={t('signin:inputPassword')}
           autoCapitalize="none"
           secureTextEntry
           value={password}
@@ -81,7 +102,7 @@ const SignIn = ({ navigation }) => {
 
         <ButtonPrimary
           style={{ marginTop: 20 }}
-          text="Entrar"
+          text={t('signin:buttonLogin')}
           onPress={signSubIn}
         />
 
@@ -94,8 +115,10 @@ const SignIn = ({ navigation }) => {
         >
           <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
             <Text style={{ fontSize: 15 }}>
-              Não tem uma conta?{' '}
-              <Text style={{ fontWeight: 'bold' }}>Cadastre-se agora.</Text>
+              {t('signin:createAccount')}{' '}
+              <Text style={{ fontWeight: 'bold' }}>
+                {t('signin:createAccount2')}
+              </Text>
             </Text>
           </TouchableOpacity>
         </View>
@@ -108,11 +131,21 @@ const SignIn = ({ navigation }) => {
         >
           <TouchableOpacity onPress={() => navigation.navigate('Recover')}>
             <Text style={{ fontSize: 15, textDecorationLine: 'underline' }}>
-              Esqueci minha senha
+              {t('signin:recoverPassword')}
             </Text>
           </TouchableOpacity>
         </View>
+
+        <View style={{ position: 'absolute', right: 0, bottom: 10 }}>
+          <TouchableOpacity onPress={showModal}>
+            <View style={{ flexDirection: 'row' }}>
+              <Text style={{ fontSize: 18 }}>{LANGS[selectedLngCode]} </Text>
+              <Feather name="globe" size={20} color="black" />
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
+      <ModalLanguage visible={visible} hideModal={hideModal} />
     </Container>
   );
 };
