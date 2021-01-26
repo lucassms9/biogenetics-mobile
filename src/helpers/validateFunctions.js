@@ -1,10 +1,14 @@
+import moment from 'moment';
+
+export const validarDate = (date) => moment(date, 'DD/MM/YYYY', true).isValid();
+
 export const validateEmail = (email) => {
   const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(email);
 };
 export const validarCPFCnpj = (val) => {
   if (val.length == 14) {
-    var cpf = val.trim();
+    let cpf = val.trim();
 
     cpf = cpf.replace(/\./g, '');
     cpf = cpf.replace('-', '');
@@ -50,11 +54,11 @@ export const validarCPFCnpj = (val) => {
 
     if (v2 != cpf[10]) {
       return false;
-    } else {
-      return true;
     }
-  } else if (val.length == 18) {
-    var cnpj = val.trim();
+    return true;
+  }
+  if (val.length == 18) {
+    let cnpj = val.trim();
 
     cnpj = cnpj.replace(/\./g, '');
     cnpj = cnpj.replace('-', '');
@@ -83,7 +87,7 @@ export const validarCPFCnpj = (val) => {
       }
     }
 
-    v1 = v1 % 11;
+    v1 %= 11;
 
     if (v1 < 2) {
       v1 = 0;
@@ -103,7 +107,7 @@ export const validarCPFCnpj = (val) => {
       }
     }
 
-    v2 = v2 % 11;
+    v2 %= 11;
 
     if (v2 < 2) {
       v2 = 0;
@@ -113,12 +117,10 @@ export const validarCPFCnpj = (val) => {
 
     if (v2 != cnpj[13]) {
       return false;
-    } else {
-      return true;
     }
-  } else {
-    return false;
+    return true;
   }
+  return false;
 };
 
 export const testarCC = (nr) => {
@@ -135,7 +137,7 @@ export const testarCC = (nr) => {
     JCB: /^(?:2131|1800|35\d{3})\d{11}/,
   };
 
-  for (var cartao in cartoes) {
+  for (const cartao in cartoes) {
     if (nr.match(cartoes[cartao])) {
       return cartao;
     }

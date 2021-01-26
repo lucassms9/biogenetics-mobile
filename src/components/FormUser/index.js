@@ -210,8 +210,8 @@ function FormUser({ submitForm, status, textButton, initData }) {
                 value={values.bairro}
               />
 
-              <HelperText type="error" visible={!!errors.endereco}>
-                {errors.endereco}
+              <HelperText type="error" visible={!!errors.bairro}>
+                {errors.bairro}
               </HelperText>
 
               <TextInput
