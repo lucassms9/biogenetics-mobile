@@ -35,8 +35,12 @@ const languageDetector = {
         }
         // const bestLng = Localization.findBestAvailableLanguage(['en', 'hi']);
         const bestLng = Localization.locale;
-        console.log(bestLng);
-        callback(bestLng ?? 'en');
+        if (!AVAILABLE_LANGUAGES[bestLng]) {
+          callback('pt-BR');
+        } else {
+          callback(bestLng);
+        }
+
         return;
       }
       callback(lng);

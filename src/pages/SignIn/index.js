@@ -10,13 +10,17 @@ import { useAuth } from '~/contexts/auth';
 
 import Container from '~/components/Container';
 import ButtonPrimary from '~/components/ButtonPrimary';
+import Alert from '~/components/Alert';
 import ModalLanguage from '~/components/ModalLanguage';
 
 const SignIn = ({ navigation }) => {
+  const [visibleAlert, setVisibleAlert] = useState(false);
+  const [messageAlert, setMessageAlert] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [erros, setErros] = useState({});
   const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const { handleSignIn } = useAuth();
   const { t, i18n } = useTranslation();
@@ -45,12 +49,26 @@ const SignIn = ({ navigation }) => {
       errosHandle.password = t('fieldRequired');
     }
     setErros(errosHandle);
-    return errosHandle;
+    if (Object.keys(errosHandle).length > 0) {
+      return false;
+    }
+    return true;
   };
 
-  const signSubIn = () => {
-    // handleSignIn();
-    hasErrors();
+  const signSubIn = async () => {
+    try {
+      setLoading(true);
+      const valid = hasErrors();
+
+      if (valid) {
+        await handleSignIn(email, password);
+      }
+    } catch (error) {
+      setMessageAlert(error.response.data.result.message);
+      setVisibleAlert(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const showModal = () => setVisible(true);
@@ -104,6 +122,7 @@ const SignIn = ({ navigation }) => {
           style={{ marginTop: 20 }}
           text={t('signin:buttonLogin')}
           onPress={signSubIn}
+          loading={loading}
         />
 
         <View
@@ -145,6 +164,11 @@ const SignIn = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       </View>
+      <Alert
+        visible={visibleAlert}
+        hideDialog={() => setVisibleAlert(false)}
+        message={messageAlert}
+      />
       <ModalLanguage visible={visible} hideModal={hideModal} />
     </Container>
   );

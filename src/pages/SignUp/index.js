@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, SafeAreaView } from 'react-native';
+import { View, SafeAreaView, ScrollView } from 'react-native';
 import { TextInput, Button, HelperText } from 'react-native-paper';
 
 import Header from '~/components/Header';
@@ -15,20 +15,22 @@ const SignUp = ({ navigation }) => {
     <Container style={{ flex: 1 }}>
       <Header navigation={navigation} title="Cadastrar-se" />
 
-      <View
-        style={{
-          marginHorizontal: 20,
-          flex: 1,
-          justifyContent: 'flex-start',
-        }}
-      >
-        <FormUser
-          submitForm={submitForm}
-          status={status}
-          textButton="Enviar"
-          initData={{}}
-        />
-      </View>
+      <ScrollView>
+        <View
+          style={{
+            marginHorizontal: 20,
+            flex: 1,
+            justifyContent: 'flex-start',
+          }}
+        >
+          <FormUser
+            submitForm={submitForm}
+            status={status}
+            textButton="Enviar"
+            initData={{}}
+          />
+        </View>
+      </ScrollView>
     </Container>
   );
 };

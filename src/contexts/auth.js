@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
-import { signIn } from '../services/auth';
+import { signIn, recover, signUp } from '../services/auth';
 import api from '../services/api';
 
 const AuthContext = createContext();
@@ -24,13 +24,66 @@ export const AuthProvider = ({ children }) => {
     loadStorageData();
   }, []);
 
-  const handleSignIn = async () => {
-    const res = await signIn();
-    setUser(res.user);
-    await AsyncStorage.setItem('@RNAuth:user', JSON.stringify(res.user));
-    await AsyncStorage.setItem('@RNAuth:token', res.token);
+  const handleSignIn = async (email, senha) => {
+    // eslint-disable-next-line no-useless-catch
+    try {
+      const {
+        data: {
+          result: { result },
+        },
+      } = await signIn(email, senha);
 
-    api.defaults.headers.Authorization = `Bearer ${res.token}`;
+      setUser(result.paciente);
+      await AsyncStorage.setItem(
+        '@RNAuth:user',
+        JSON.stringify(result.paciente)
+      );
+      await AsyncStorage.setItem('@RNAuth:token', result.token);
+
+      api.defaults.headers.Authorization = `Bearer ${result.token}`;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const handleSignUp = async (data) => {
+    // eslint-disable-next-line no-useless-catch
+    try {
+      const {
+        data: {
+          result: { result },
+        },
+      } = await signUp(data);
+
+      console.log(result);
+      return;
+
+      // setUser(result.paciente);
+      // await AsyncStorage.setItem(
+      //   '@RNAuth:user',
+      //   JSON.stringify(result.paciente)
+      // );
+      // await AsyncStorage.setItem('@RNAuth:token', result.token);
+
+      // api.defaults.headers.Authorization = `Bearer ${result.token}`;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const handleRecover = async (email) => {
+    // eslint-disable-next-line no-useless-catch
+    try {
+      const {
+        data: {
+          result: { result },
+        },
+      } = await recover(email);
+
+      return result;
+    } catch (error) {
+      throw error;
+    }
   };
 
   const handleSignOut = () => {
@@ -47,6 +100,8 @@ export const AuthProvider = ({ children }) => {
         user,
         handleSignIn,
         handleSignOut,
+        handleRecover,
+        handleSignUp,
       }}
     >
       {children}
