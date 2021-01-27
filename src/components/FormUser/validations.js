@@ -50,6 +50,7 @@ const validationSchema = yup.object().shape({
   cidade: yup.string().required('Campo obrigatório'),
   bairro: yup.string().required('Campo obrigatório'),
   nome_da_mae: yup.string().required('Campo obrigatório'),
+  senha: yup.string().required('Campo obrigatório'),
 });
 
 export default validationSchema;

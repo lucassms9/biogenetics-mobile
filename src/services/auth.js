@@ -9,9 +9,7 @@ export async function signIn(email, senha) {
 }
 
 export async function signUp(data) {
-  const res = await api.post('pacientes/add', {
-    ...data,
-  });
+  const res = await api.post('pacientes/add', data);
   return res;
 }
 

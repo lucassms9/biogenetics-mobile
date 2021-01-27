@@ -46,27 +46,25 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const handleSignUp = async (data) => {
+  const handleSignUp = async (dataParam) => {
     // eslint-disable-next-line no-useless-catch
     try {
       const {
         data: {
           result: { result },
         },
-      } = await signUp(data);
+      } = await signUp(dataParam);
 
-      console.log(result);
-      return;
+      setUser(result.paciente);
+      await AsyncStorage.setItem(
+        '@RNAuth:user',
+        JSON.stringify(result.paciente)
+      );
+      await AsyncStorage.setItem('@RNAuth:token', result.token);
 
-      // setUser(result.paciente);
-      // await AsyncStorage.setItem(
-      //   '@RNAuth:user',
-      //   JSON.stringify(result.paciente)
-      // );
-      // await AsyncStorage.setItem('@RNAuth:token', result.token);
-
-      // api.defaults.headers.Authorization = `Bearer ${result.token}`;
+      api.defaults.headers.Authorization = `Bearer ${result.token}`;
     } catch (error) {
+      console.log(error);
       throw error;
     }
   };

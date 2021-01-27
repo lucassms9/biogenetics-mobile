@@ -1,11 +1,14 @@
 import React, { useRef } from 'react';
-import { ScrollView, View } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import { Formik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import Toast from 'react-native-tiny-toast';
 import axios from 'axios';
+import { Ionicons } from '@expo/vector-icons';
 
 import { TextInput, Button, HelperText } from 'react-native-paper';
+import RNPickerSelect from 'react-native-picker-select';
+
 import ButtonPrimary from '~/components/ButtonPrimary';
 
 import styles from './styles';
@@ -149,17 +152,44 @@ function FormUser({ submitForm, status, textButton, initData }) {
                 {errors.phone}
               </HelperText>
 
-              <TextInput
-                label={t('Sexo')}
-                mode="outlined"
-                autoCapitalize="none"
-                error={errors.sexo}
-                onChangeText={(text) => setFieldValue('sexo', text)}
-                value={values.sexo}
-              />
-              <HelperText type="error" visible={!!errors.sexo}>
-                {errors.sexo}
-              </HelperText>
+              <View style={styles.mh5}>
+                <Text style={styles.labelPicker}>Sexo</Text>
+                <RNPickerSelect
+                  onSubmitEditing={() => {}}
+                  onValueChange={(text) => setFieldValue('sexo', text)}
+                  value={values.sexo}
+                  items={[
+                    {
+                      label: 'Feminino',
+                      value: 'F',
+                    },
+                    {
+                      label: 'Masculino',
+                      value: 'M',
+                    },
+                  ]}
+                  placeholder={{
+                    label: 'Escolha',
+                    value: '',
+                    color: 'black',
+                  }}
+                  style={{
+                    ...pickerSelectStyles,
+                    iconContainer: {
+                      top: 15,
+                      right: 10,
+                    },
+                  }}
+                  useNativeAndroidPickerStyle={false}
+                  // textInputProps={{ underlineColor: 'yellow' }}
+                  Icon={() => (
+                    <Ionicons name="md-arrow-down" size={24} color="gray" />
+                  )}
+                />
+                <HelperText type="error" visible={!!errors.sexo}>
+                  {errors.sexo}
+                </HelperText>
+              </View>
 
               <TextInput
                 label={t('Data de Nascimento')}
@@ -252,6 +282,20 @@ function FormUser({ submitForm, status, textButton, initData }) {
                 {errors.nome_da_mae}
               </HelperText>
 
+              <TextInput
+                label={t('Senha')}
+                mode="outlined"
+                autoCapitalize="none"
+                error={errors.senha}
+                secureTextEntry
+                onChangeText={(text) => setFieldValue('senha', text)}
+                value={values.senha}
+              />
+
+              <HelperText type="error" visible={!!errors.senha}>
+                {errors.senha}
+              </HelperText>
+
               <View style={{ marginTop: 20 }}>
                 <ButtonPrimary
                   loading={status === 'loading'}
@@ -268,3 +312,30 @@ function FormUser({ submitForm, status, textButton, initData }) {
 }
 
 export default FormUser;
+
+const pickerSelectStyles = StyleSheet.create({
+  inputIOS: {
+    marginBottom: 0,
+    fontSize: 16,
+    paddingVertical: 12,
+    paddingHorizontal: 10,
+    borderWidth: 1,
+    borderColor: 'gray',
+    borderRadius: 4,
+    height: 55,
+    color: '#000',
+    backgroundColor: '#fff',
+    paddingRight: 30, // to ensure the text is never behind the icon
+  },
+  inputAndroid: {
+    fontSize: 16,
+    marginBottom: 0,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    borderWidth: 0.5,
+    borderColor: 'gray',
+    borderRadius: 8,
+    color: '#000',
+    paddingRight: 30, // to ensure the text is never behind the icon
+  },
+});
