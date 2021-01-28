@@ -17,6 +17,7 @@ import { maskCPF, maskPhone, maskDate, maskCEP } from '~/helpers';
 import { commons } from '~/styles';
 
 import validationSchema from './validations';
+import validationUpdateSchema from './validationUpdateSchema';
 
 function FormUser({
   submitForm,
@@ -29,14 +30,17 @@ function FormUser({
   termShow,
 }) {
   const { t } = useTranslation();
+  console.log(initData);
   return (
     <View style={{ flex: 1, marginTop: 20 }}>
       <Formik
+        enableReinitialize
         initialValues={initData}
-        validationSchema={validationSchema}
+        validationSchema={termShow ? validationSchema : validationUpdateSchema}
         onSubmit={(values) => submitForm(values, 1)}
       >
         {({ handleSubmit, values, setFieldValue, errors }) => {
+          console.log(values);
           const loadingCep = async (state) => {
             if (state) {
               setFieldValue('endereco', '...');
@@ -267,7 +271,7 @@ function FormUser({
               </HelperText>
 
               <TextInput
-                label={t('Cidade')}
+                label={t('UF')}
                 mode="outlined"
                 autoCapitalize="none"
                 error={errors.uf}

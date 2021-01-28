@@ -5,12 +5,13 @@ import Autocomplete from 'react-native-autocomplete-input';
 import { Feather } from '@expo/vector-icons';
 import Container from '~/components/Container';
 import Header from '~/components/Header';
+import Loader from '~/components/Loader';
 
 import { list } from '~/services/clinics';
 
 const NearbyClinics = ({ navigation }) => {
   const [query, setQuery] = useState('');
-
+  const [loading, setLoading] = useState(false);
   const [autoHandle, setAutoHandle] = useState([]);
   const [visibleAlert, setVisibleAlert] = useState(false);
   const [choose, setChoose] = useState(false);
@@ -22,11 +23,11 @@ const NearbyClinics = ({ navigation }) => {
   const setComplete = (query) => {
     if (!query) {
       setHasFilter(false);
-      return setAutoHandle({});
+      return setAutoHandle([]);
     }
     if (choose) {
       setChoose(false);
-      return setAutoHandle({});
+      return setAutoHandle([]);
     }
     setHideResults(false);
     setHasFilter(false);
@@ -53,6 +54,7 @@ const NearbyClinics = ({ navigation }) => {
 
   const getClinics = async () => {
     try {
+      setLoading(true);
       const {
         data: {
           result: {
@@ -64,12 +66,22 @@ const NearbyClinics = ({ navigation }) => {
       setRemoteClinics(clientes);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     setComplete(query);
   }, [query]);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      getClinics();
+    });
+
+    return unsubscribe;
+  }, [navigation]);
 
   useEffect(() => {
     getClinics();
@@ -144,9 +156,10 @@ const NearbyClinics = ({ navigation }) => {
             />
           </View>
         </View>
-
+        {loading && <Loader />}
         {clinics.map((clinic) => (
           <View
+            key={clinic.id}
             style={{
               padding: 15,
               backgroundColor: '#fff',
