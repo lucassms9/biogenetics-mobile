@@ -6,7 +6,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons, Feather } from '@expo/vector-icons';
 
-import Dashboard from '../pages/Dashboard';
+import MyExamDetail from '../pages/MyExams/detail';
+import ClinicDetail from '../pages/NearbyClinics/detail';
+
+import Profile from '../pages/Profile';
 import MyExams from '~/pages/MyExams';
 import ReadQrcode from '~/pages/ReadQrcode';
 import NearbyClinics from '~/pages/NearbyClinics';
@@ -92,7 +95,28 @@ const MainTabBottom = () => (
 const AppStack = createStackNavigator();
 
 const AppRoutes = () => (
-  <AppStack.Navigator>
+  <AppStack.Navigator initialRouteName="Main">
+    <AppStack.Screen
+      name="ClinicDetail"
+      component={ClinicDetail}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <AppStack.Screen
+      name="Profile"
+      component={Profile}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <AppStack.Screen
+      name="MyExamDetail"
+      component={MyExamDetail}
+      options={{
+        headerShown: false,
+      }}
+    />
     <AppStack.Screen
       name="Main"
       component={MainTabBottom}

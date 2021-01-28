@@ -1,12 +1,12 @@
 import React, { useRef } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Formik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import Toast from 'react-native-tiny-toast';
 import axios from 'axios';
 import { Ionicons } from '@expo/vector-icons';
 
-import { TextInput, Button, HelperText } from 'react-native-paper';
+import { TextInput, Checkbox, HelperText } from 'react-native-paper';
 import RNPickerSelect from 'react-native-picker-select';
 
 import ButtonPrimary from '~/components/ButtonPrimary';
@@ -18,7 +18,16 @@ import { commons } from '~/styles';
 
 import validationSchema from './validations';
 
-function FormUser({ submitForm, status, textButton, initData }) {
+function FormUser({
+  submitForm,
+  status,
+  textButton,
+  initData,
+  checked,
+  setChecked,
+  openModel,
+  termShow,
+}) {
   const { t } = useTranslation();
   return (
     <View style={{ flex: 1, marginTop: 20 }}>
@@ -296,6 +305,56 @@ function FormUser({ submitForm, status, textButton, initData }) {
                 {errors.senha}
               </HelperText>
 
+              {termShow && (
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <View
+                    style={{
+                      borderWidth: 1,
+                      borderColor: '#000',
+                      width: 30,
+                      height: 30,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <View style={{ position: 'absolute', right: 2 }}>
+                      <Checkbox
+                        color="#f00"
+                        uncheckedColor="#f00"
+                        status={checked ? 'checked' : 'unchecked'}
+                        onPress={() => {
+                          setChecked(!checked);
+                        }}
+                      />
+                    </View>
+                  </View>
+
+                  <TouchableOpacity
+                    onPress={() => {
+                      setChecked(!checked);
+                    }}
+                  >
+                    <Text style={{ marginLeft: 5, fontSize: 15 }}>
+                      Aceitar termos
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => {
+                      openModel(true);
+                    }}
+                  >
+                    <Text
+                      style={{
+                        marginLeft: 5,
+                        fontSize: 15,
+                        textDecorationLine: 'underline',
+                      }}
+                    >
+                      Ler Termos de uso
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              )}
               <View style={{ marginTop: 20 }}>
                 <ButtonPrimary
                   loading={status === 'loading'}

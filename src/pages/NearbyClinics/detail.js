@@ -4,13 +4,13 @@ import { View, Text } from 'react-native';
 import Container from '~/components/Container';
 import Header from '~/components/Header';
 
-const ReadQrcode = ({ navigation }) => {
+const ClinicDetail = ({ navigation }) => {
   const [visibleAlert, setVisibleAlert] = useState(false);
   return (
     <Container style={{ flex: 1 }}>
-      <Header noBack navigation={navigation} title="Anamnese" />
+      <Header navigation={navigation} title="Laborátorio" />
     </Container>
   );
 };
 
-export default ReadQrcode;
+export default ClinicDetail;

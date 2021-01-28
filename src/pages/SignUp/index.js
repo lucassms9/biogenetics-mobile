@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, SafeAreaView, ScrollView } from 'react-native';
-import { TextInput, Button, HelperText } from 'react-native-paper';
+import { Text, Button, Modal } from 'react-native-paper';
 import Toast from 'react-native-tiny-toast';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
@@ -9,10 +9,14 @@ import Container from '~/components/Container';
 import FormUser from '~/components/FormUser';
 import Alert from '~/components/Alert';
 
+import { term } from './terms';
+
 import { useAuth } from '~/contexts/auth';
 
 const SignUp = ({ navigation }) => {
   const [status, setStatus] = useState('');
+  const [checked, setChecked] = useState(false);
+  const [modalVisiable, setModalVisiable] = useState(false);
   const [visibleAlert, setVisibleAlert] = useState(false);
   const [messageAlert, setMessageAlert] = useState('');
   const { t } = useTranslation();
@@ -20,6 +24,11 @@ const SignUp = ({ navigation }) => {
 
   const submitForm = async (values) => {
     try {
+      if (!checked) {
+        setVisibleAlert(true);
+        setMessageAlert('Você precisa marcar como lido o termo de uso');
+        return;
+      }
       setStatus('loading');
       const body = {
         ...values,
@@ -41,6 +50,14 @@ const SignUp = ({ navigation }) => {
       setStatus('');
     }
   };
+
+  const openModel = () => {
+    setModalVisiable(true);
+  };
+  const hideModal = () => {
+    setModalVisiable(false);
+  };
+
   return (
     <Container style={{ flex: 1 }}>
       <Header navigation={navigation} title="Cadastrar-se" />
@@ -58,6 +75,10 @@ const SignUp = ({ navigation }) => {
             status={status}
             textButton="Enviar"
             initData={{}}
+            checked={checked}
+            setChecked={setChecked}
+            openModel={openModel}
+            termShow
           />
         </View>
       </ScrollView>
@@ -66,6 +87,15 @@ const SignUp = ({ navigation }) => {
         hideDialog={() => setVisibleAlert(false)}
         message={messageAlert}
       />
+      <Modal
+        visible={modalVisiable}
+        onDismiss={hideModal}
+        contentContainerStyle={{ backgroundColor: 'white', padding: 20 }}
+      >
+        <ScrollView>
+          <Text>{term}</Text>
+        </ScrollView>
+      </Modal>
     </Container>
   );
 };
