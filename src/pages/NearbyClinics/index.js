@@ -6,107 +6,147 @@ import { Feather } from '@expo/vector-icons';
 import Container from '~/components/Container';
 import Header from '~/components/Header';
 
+import { list } from '~/services/clinics';
+
 const NearbyClinics = ({ navigation }) => {
   const [query, setQuery] = useState('');
-  const [films, setFilms] = useState([
-    {
-      title: 'lucas',
-    },
-    {
-      title: 'silva',
-    },
-    {
-      title: 'santos',
-    },
-  ]);
 
-  const [filmsHandle, setFilmsHandle] = useState([]);
+  const [autoHandle, setAutoHandle] = useState([]);
   const [visibleAlert, setVisibleAlert] = useState(false);
+  const [choose, setChoose] = useState(false);
   const [hideResults, setHideResults] = useState(false);
-  const [clinics, setClinics] = useState([
-    {
-      id: 1,
-      nome: 'Nome da clinica 1',
-      endereco: 'rua casa da joana casa da joana casa da joana',
-      bairro: 'bairro teste teste',
-      cidade: 'Sorocaba',
-      uf: 'SP',
-      handleCity: 'Sorocaba - SP',
-      cep: '18550-000',
-      responsavel_telefone: '15-99788-5245',
-    },
-    {
-      id: 2,
-      nome: 'Nome da clinica 2',
-      endereco: 'rua casa da joana casa da joana casa da joana',
-      bairro: 'bairro teste teste',
-      cidade: 'Boituva',
-      uf: 'SP',
-      handleCity: 'Boituva - SP',
-      responsavel_telefone: '15-99788-5245',
-    },
-  ]);
+  const [hasFilter, setHasFilter] = useState(false);
+  const [remoteClinics, setRemoteClinics] = useState([]);
+  const [clinics, setClinics] = useState([]);
 
   const setComplete = (query) => {
     if (!query) {
-      return setFilmsHandle({});
+      setHasFilter(false);
+      return setAutoHandle({});
+    }
+    if (choose) {
+      setChoose(false);
+      return setAutoHandle({});
     }
     setHideResults(false);
+    setHasFilter(false);
     const queryHandle = query.toLowerCase().trim();
     const regex = new RegExp(`${queryHandle}`, 'i');
 
-    const getData = clinics.filter((clinic) => {
-      const title = clinic.handleCity.toLowerCase().trim();
+    const getData = remoteClinics.filter((Remoclinic) => {
+      const title = Remoclinic.handleCity.toLowerCase().trim();
 
       return title.search(regex) >= 0;
     });
-    setFilmsHandle(getData);
+    const group = getData.reduce((acum, current) => {
+      const test = acum.find((ac) => ac.handleCity === current.handleCity);
+      if (!test) {
+        return acum.concat(current);
+      }
+      return acum;
+    }, []);
+
+    setAutoHandle(group);
+    setHasFilter(true);
+    setHideResults(false);
+  };
+
+  const getClinics = async () => {
+    try {
+      const {
+        data: {
+          result: {
+            result: { clientes },
+          },
+        },
+      } = await list();
+      setClinics(clientes);
+      setRemoteClinics(clientes);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
     setComplete(query);
   }, [query]);
 
+  useEffect(() => {
+    getClinics();
+  }, []);
+
   const selectItem = (item) => {
-    alert(item.title);
-    setHideResults(true);
+    const newClinic = remoteClinics.filter(
+      (remoClinic) =>
+        remoClinic.uf === item.uf && remoClinic.cidade === item.cidade
+    );
+    setClinics(newClinic);
+    setQuery(item.handleCity);
+
+    setChoose(true);
+  };
+
+  const clearFilter = () => {
+    setClinics(remoteClinics);
+    setQuery('');
   };
   return (
     <Container style={{ flex: 1 }}>
       <Header noBack navigation={navigation} title="Laboratórios" />
-      <View style={{ marginVertical: 20, zIndex: '1', marginHorizontal: 20 }}>
-        <View>
-          <Text style={{ fontSize: 15, fontWeight: 'bold', marginBottom: 10 }}>
-            Selecione a cidade:
-          </Text>
-        </View>
-        <View style={{ backgroundColor: '#fff', padding: 7, borderRadius: 15 }}>
-          <Autocomplete
-            data={filmsHandle}
-            autoCorrect={false}
-            hideResults={hideResults}
-            listContainerStyle={{ borderWidth: 0 }}
-            inputContainerStyle={{ borderWidth: 0 }}
-            listStyle={{ borderBottomWidth: 1, borderRadius: 10, top: -5 }}
-            defaultValue={query}
-            onChangeText={(text) => setQuery(text)}
-            renderItem={({ item, i }) => (
+
+      <ScrollView>
+        <View style={{ marginVertical: 20, zIndex: '1', marginHorizontal: 20 }}>
+          <View>
+            <Text
+              style={{ fontSize: 15, fontWeight: 'bold', marginBottom: 10 }}
+            >
+              Selecione a cidade:
+            </Text>
+          </View>
+          <View
+            style={{ backgroundColor: '#fff', padding: 7, borderRadius: 15 }}
+          >
+            {hasFilter && (
               <TouchableOpacity
                 style={{
-                  marginVertical: 15,
-                  marginHorizontal: 20,
+                  position: 'absolute',
+                  zIndex: '2',
+                  right: 20,
+                  top: 15,
                 }}
-                onPress={() => selectItem(item)}
+                onPress={() => clearFilter()}
               >
-                <Text>{item.handleCity}</Text>
+                <View>
+                  <Text>limpar filtro</Text>
+                </View>
               </TouchableOpacity>
             )}
-          />
+            <Autocomplete
+              data={autoHandle}
+              autoCorrect={false}
+              hideResults={hideResults}
+              listContainerStyle={{ borderWidth: 0 }}
+              inputContainerStyle={{ borderWidth: 0 }}
+              listStyle={{ borderBottomWidth: 1, borderRadius: 10, top: -5 }}
+              defaultValue={query}
+              onChangeText={(text) => setQuery(text)}
+              renderItem={({ item, i }) => (
+                <TouchableOpacity
+                  style={{
+                    paddingVertical: 15,
+                    marginHorizontal: 20,
+                  }}
+                  onPress={() => selectItem(item)}
+                >
+                  <Text>{item.handleCity}</Text>
+                </TouchableOpacity>
+              )}
+            />
+          </View>
         </View>
-      </View>
-      <ScrollView>
+
         {clinics.map((clinic) => (
-          <TouchableOpacity
+          <View
             style={{
               padding: 15,
               backgroundColor: '#fff',
@@ -123,7 +163,7 @@ const NearbyClinics = ({ navigation }) => {
 
               elevation: 20,
             }}
-            onPress={() => navigation.navigate('ClinicDetail')}
+            onPress={() => {}}
           >
             <View>
               <View style={{ marginBottom: 7 }}>
@@ -165,7 +205,7 @@ const NearbyClinics = ({ navigation }) => {
                 </Text>
               </View>
             </View>
-          </TouchableOpacity>
+          </View>
         ))}
       </ScrollView>
     </Container>
