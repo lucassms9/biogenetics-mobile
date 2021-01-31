@@ -4,14 +4,17 @@ import { Text } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Ionicons, Feather } from '@expo/vector-icons';
+import { Ionicons, Feather, MaterialIcons } from '@expo/vector-icons';
 
 import MyExamDetail from '../pages/MyExams/detail';
 import ClinicDetail from '../pages/NearbyClinics/detail';
 
+import Suport from '../pages/Suport';
 import Profile from '../pages/Profile';
 import MyExams from '~/pages/MyExams';
-import ReadQrcode from '~/pages/ReadQrcode';
+import Services from '~/pages/Services';
+import Anamnese from '~/pages/Anamnese';
+import LaboratoryList from '~/pages/LaboratoryList';
 import NearbyClinics from '~/pages/NearbyClinics';
 import More from '~/pages/More';
 import { colors } from '~/styles';
@@ -46,16 +49,16 @@ const MainTabBottom = () => (
     />
 
     <Tab.Screen
-      name="ReadQrcode"
-      component={ReadQrcode}
+      name="Services"
+      component={Services}
       options={{
         headerShown: false,
         tabBarIcon: ({ focused, color, size }) => (
-          <Ionicons name="ios-qr-code-outline" size={24} color={color} />
+          <MaterialIcons name="medical-services" size={24} color={color} />
         ),
         tabBarLabel: ({ focused }) => {
           const color = focused ? colors.primary : '#000';
-          return <Text style={{ fontSize: 14, color }}> Anamnese </Text>;
+          return <Text style={{ fontSize: 14, color }}> Serviços </Text>;
         },
       }}
     />
@@ -97,6 +100,13 @@ const AppStack = createStackNavigator();
 const AppRoutes = () => (
   <AppStack.Navigator initialRouteName="Main">
     <AppStack.Screen
+      name="Anamnese"
+      component={Anamnese}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <AppStack.Screen
       name="ClinicDetail"
       component={ClinicDetail}
       options={{
@@ -111,8 +121,29 @@ const AppRoutes = () => (
       }}
     />
     <AppStack.Screen
+      name="LaboratoryList"
+      component={LaboratoryList}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <AppStack.Screen
       name="MyExamDetail"
       component={MyExamDetail}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <AppStack.Screen
+      name="MyExams"
+      component={MyExams}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <AppStack.Screen
+      name="Suport"
+      component={Suport}
       options={{
         headerShown: false,
       }}

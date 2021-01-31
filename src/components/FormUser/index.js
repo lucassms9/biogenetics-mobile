@@ -4,7 +4,7 @@ import { Formik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import Toast from 'react-native-tiny-toast';
 import axios from 'axios';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, AntDesign, FontAwesome } from '@expo/vector-icons';
 
 import { TextInput, Checkbox, HelperText } from 'react-native-paper';
 import RNPickerSelect from 'react-native-picker-select';
@@ -18,6 +18,7 @@ import { commons } from '~/styles';
 
 import validationSchema from './validations';
 import validationUpdateSchema from './validationUpdateSchema';
+import { colors } from '~/styles/index';
 
 function FormUser({
   submitForm,
@@ -310,35 +311,37 @@ function FormUser({
               </HelperText>
 
               {termShow && (
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <View
-                    style={{
-                      borderWidth: 1,
-                      borderColor: '#000',
-                      width: 30,
-                      height: 30,
-                      justifyContent: 'center',
-                      alignItems: 'center',
+                <View style={{ flexDirection: 'row', marginLeft: 10 }}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setChecked(!checked);
                     }}
+                    style={{ flexDirection: 'row', alignItems: 'center' }}
                   >
-                    <View style={{ position: 'absolute', right: 2 }}>
-                      <Checkbox
-                        color="#f00"
-                        uncheckedColor="#f00"
-                        status={checked ? 'checked' : 'unchecked'}
-                        onPress={() => {
-                          setChecked(!checked);
-                        }}
-                      />
+                    <View style={{ flexDirection: 'row' }}>
+                      {checked ? (
+                        <AntDesign
+                          name="checkcircleo"
+                          size={24}
+                          color={colors.primary}
+                        />
+                      ) : (
+                        <FontAwesome
+                          name="circle-thin"
+                          size={27}
+                          color={colors.primary}
+                          style={{ top: -2 }}
+                        />
+                      )}
                     </View>
-                  </View>
+                  </TouchableOpacity>
 
                   <TouchableOpacity
                     onPress={() => {
                       setChecked(!checked);
                     }}
                   >
-                    <Text style={{ marginLeft: 5, fontSize: 15 }}>
+                    <Text style={{ marginLeft: 5, fontSize: 15, marginTop: 4 }}>
                       Aceitar termos
                     </Text>
                   </TouchableOpacity>
@@ -351,6 +354,7 @@ function FormUser({
                       style={{
                         marginLeft: 5,
                         fontSize: 15,
+                        marginTop: 3,
                         textDecorationLine: 'underline',
                       }}
                     >
