@@ -219,6 +219,19 @@ function FormUser({
               </HelperText>
 
               <TextInput
+                label={t('Profissão')}
+                mode="outlined"
+                autoCapitalize="none"
+                error={errors.profissao}
+                onChangeText={(text) => setFieldValue('profissao', text)}
+                value={values.profissao}
+              />
+
+              <HelperText type="error" visible={!!errors.profissao}>
+                {errors.profissao}
+              </HelperText>
+
+              <TextInput
                 label={t('Cep')}
                 mode="outlined"
                 autoCapitalize="none"
@@ -310,7 +323,7 @@ function FormUser({
                 {errors.senha}
               </HelperText>
 
-              {termShow && (
+              {termShow ? (
                 <View style={{ flexDirection: 'row', marginLeft: 10 }}>
                   <TouchableOpacity
                     onPress={() => {
@@ -362,6 +375,23 @@ function FormUser({
                     </Text>
                   </TouchableOpacity>
                 </View>
+              ) : (
+                <TouchableOpacity
+                  onPress={() => {
+                    openModel(true);
+                  }}
+                >
+                  <Text
+                    style={{
+                      marginLeft: 5,
+                      fontSize: 15,
+                      marginTop: 3,
+                      textDecorationLine: 'underline',
+                    }}
+                  >
+                    Ler Termos de uso
+                  </Text>
+                </TouchableOpacity>
               )}
               <View style={{ marginTop: 20 }}>
                 <ButtonPrimary

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, ScrollView } from 'react-native';
 import moment from 'moment';
 import Toast from 'react-native-tiny-toast';
-
+import { Text, Modal } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import FormUser from '~/components/FormUser';
 
@@ -13,6 +13,7 @@ import Loader from '~/components/Loader';
 
 import { getProfile, edit } from '~/services/auth';
 import { maskOnlyCPF, maskOnlyPhone, maskOnlyCEP } from '~/helpers';
+import { term } from '~/pages/SignUp/terms';
 
 const Profile = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
@@ -20,6 +21,7 @@ const Profile = ({ navigation }) => {
   const [status, setStatus] = useState('');
   const [visibleAlert, setVisibleAlert] = useState(false);
   const [messageAlert, setMessageAlert] = useState('');
+  const [modalVisiable, setModalVisiable] = useState(false);
 
   const { t } = useTranslation();
 
@@ -78,6 +80,13 @@ const Profile = ({ navigation }) => {
     getData();
   }, []);
 
+  const openModel = () => {
+    setModalVisiable(true);
+  };
+  const hideModal = () => {
+    setModalVisiable(false);
+  };
+
   return (
     <Container style={{ flex: 1 }}>
       <Header navigation={navigation} title="Meus Dados" />
@@ -96,6 +105,7 @@ const Profile = ({ navigation }) => {
               status={status}
               textButton="Enviar"
               initData={dataProfile}
+              openModel={openModel}
             />
           )}
         </View>
@@ -105,6 +115,15 @@ const Profile = ({ navigation }) => {
         hideDialog={() => setVisibleAlert(false)}
         message={messageAlert}
       />
+      <Modal
+        visible={modalVisiable}
+        onDismiss={hideModal}
+        contentContainerStyle={{ backgroundColor: 'white', padding: 20 }}
+      >
+        <ScrollView>
+          <Text>{term}</Text>
+        </ScrollView>
+      </Modal>
     </Container>
   );
 };
