@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import Autocomplete from 'react-native-autocomplete-input';
+
 import { Feather } from '@expo/vector-icons';
 import Container from '~/components/Container';
 import Header from '~/components/Header';
 import Loader from '~/components/Loader';
+import ButtonPrimary from '~/components/ButtonPrimary';
 
 import { list } from '~/services/clinics';
 
@@ -110,7 +112,9 @@ const LaboratoryList = ({ navigation }) => {
                 </Text>
               </View>
               <View style={{ alignItems: 'center' }}>
-                <TouchableOpacity
+                <ButtonPrimary
+                  icon=""
+                  text="Iniciar Exame"
                   onPress={() => {
                     navigation.navigate('Anamnese', {
                       cliente_id: clinic.id,
@@ -122,12 +126,8 @@ const LaboratoryList = ({ navigation }) => {
                       justifyContent: 'center',
                       alignItems: 'center',
                     }}
-                  >
-                    <Text style={{ marginLeft: 10, fontSize: 15 }}>
-                      Iniciar Exame
-                    </Text>
-                  </View>
-                </TouchableOpacity>
+                  />
+                </ButtonPrimary>
               </View>
             </View>
           </View>

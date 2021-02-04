@@ -10,25 +10,9 @@ const StepTwo = ({ data, setChecked, setInput }) => {
 
   return (
     <View>
-      <Text>
-        O PACIENTE UTILIZOU ANALGÉSICO, ANTITÉRMICO OU ANTI-INFLAMATÓRIO?
-      </Text>
-      <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-        <CheckBox
-          title={t('Sim')}
-          checked={data.analgesico_antitermico_antiinflamatorio}
-          onPress={() => setChecked('analgesico_antitermico_antiinflamatorio')}
-        />
-        <CheckBox
-          title="Não"
-          checked={!data.analgesico_antitermico_antiinflamatorio}
-          onPress={() => setChecked('analgesico_antitermico_antiinflamatorio')}
-        />
-      </View>
-
       <View style={{ marginLeft: 10, marginTop: 10 }}>
         <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
-          SELECIONE OS SINAIS CLÍNICOS OBSERVADOS
+          Selecione as doenças associadas
         </Text>
       </View>
 
@@ -40,18 +24,61 @@ const StepTwo = ({ data, setChecked, setInput }) => {
         }}
       >
         <CheckBox
-          title={t('FEBRE')}
-          checked={data.clinico_febre}
-          onPress={() => setChecked('clinico_febre')}
+          title={t('HIPERTENSÃO ARTERIAL')}
+          checked={data.clinico_cardiovascular}
+          onPress={() => setChecked('clinico_cardiovascular')}
         />
-        {data.clinico_febre && (
+
+        <CheckBox
+          title={t('DIABETES')}
+          checked={data.clinico_diabetes}
+          onPress={() => setChecked('clinico_diabetes')}
+        />
+      </View>
+      <View
+        style={{
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          justifyContent: 'space-between',
+        }}
+      >
+        <CheckBox
+          title={t('ALTERAÇÃO COLESTEROL/TRIGLICÉRIDES')}
+          checked={data.clinico_alteracao_colesterol}
+          onPress={() => setChecked('clinico_alteracao_colesterol')}
+        />
+
+        <CheckBox
+          title={t('OBESIDADE')}
+          checked={data.clinico_obesidade}
+          onPress={() => setChecked('clinico_obesidade')}
+        />
+      </View>
+
+      <View
+        style={{
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          justifyContent: 'space-between',
+        }}
+      >
+        <CheckBox
+          title={t('DOENÇAS REUMATOLÓGICAS')}
+          checked={data.clinico_doencas_reumatologicas}
+          onPress={() => setChecked('clinico_doencas_reumatologicas')}
+        />
+
+        {data.clinico_doencas_reumatologicas_qual && (
           <TextInput
-            label={t('TEMPERATURA DE')}
+            label={t('Qual')}
             style={{ width: 200 }}
             mode="outlined"
-            maxLength={2}
-            onChangeText={(text) => setInput('clinico_febre_temp', text)}
-            value={data.clinico_febre_temp}
+            autoCapitalize="none"
+            error=""
+            onChangeText={(text) =>
+              setInput('clinico_doencas_reumatologicas_qual', text)
+            }
+            value={data.clinico_doencas_reumatologicas_qual}
           />
         )}
       </View>
@@ -64,15 +91,15 @@ const StepTwo = ({ data, setChecked, setInput }) => {
         }}
       >
         <CheckBox
-          title={t('EXSUDATO FARÍNGEO')}
-          checked={data.clinico_exsudato}
-          onPress={() => setChecked('clinico_exsudato')}
+          title={t('DPOC (ENFISEMA)')}
+          checked={data.clinico_dpoc_enfisema}
+          onPress={() => setChecked('clinico_dpoc_enfisema')}
         />
 
         <CheckBox
-          title={t('CONVULSÃO')}
-          checked={data.clinico_convulsao}
-          onPress={() => setChecked('clinico_convulsao')}
+          title={t('ASMA')}
+          checked={data.clinico_asma}
+          onPress={() => setChecked('clinico_asma')}
         />
       </View>
 
@@ -84,15 +111,53 @@ const StepTwo = ({ data, setChecked, setInput }) => {
         }}
       >
         <CheckBox
-          title={t('EXSUDATO FARÍNGEO')}
-          checked={data.clinico_exsudato}
-          onPress={() => setChecked('clinico_exsudato')}
+          title={t('RINITE')}
+          checked={data.clinico_rinite}
+          onPress={() => setChecked('clinico_rinite')}
         />
-
         <CheckBox
-          title={t('CONJUNTIVITE')}
-          checked={data.clinico_conjuntivite}
-          onPress={() => setChecked('clinico_conjuntivite')}
+          title={t('APNEIA DO SONO')}
+          checked={data.clinico_apneia_do_sone}
+          onPress={() => setChecked('clinico_apneia_do_sone')}
+        />
+      </View>
+      <View
+        style={{
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          justifyContent: 'space-between',
+        }}
+      >
+        <CheckBox
+          title={t('NEOPLASIA / CÂNCER')}
+          checked={data.clinico_neoplasia_cancer}
+          onPress={() => setChecked('clinico_neoplasia_cancer')}
+        />
+        {data.clinico_neoplasia_cancer_qual && (
+          <TextInput
+            label={t('Qual')}
+            style={{ width: 200 }}
+            mode="outlined"
+            autoCapitalize="none"
+            error=""
+            onChangeText={(text) =>
+              setInput('clinico_neoplasia_cancer_qual', text)
+            }
+            value={data.clinico_neoplasia_cancer_qual}
+          />
+        )}
+      </View>
+      <View
+        style={{
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          justifyContent: 'space-between',
+        }}
+      >
+        <CheckBox
+          title={t('INSUFICIÊNCIA RENAL')}
+          checked={data.clinico_insuficiencia_renal}
+          onPress={() => setChecked('clinico_insuficiencia_renal')}
         />
       </View>
 
@@ -104,35 +169,23 @@ const StepTwo = ({ data, setChecked, setInput }) => {
         }}
       >
         <CheckBox
-          title={t('COMA')}
-          checked={data.clinico_coma}
-          onPress={() => setChecked('clinico_coma')}
+          title={t('DOENÇAS HEPÁTICAS')}
+          checked={data.clinico_doencas_hepaticas}
+          onPress={() => setChecked('clinico_doencas_hepaticas')}
         />
-
-        <CheckBox
-          title={t('DISPNEIA/TAQUIPNEIA')}
-          checked={data.clinico_dispneia_taquipneia}
-          onPress={() => setChecked('clinico_dispneia_taquipneia')}
-        />
-      </View>
-      <View
-        style={{
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
-        }}
-      >
-        <CheckBox
-          title={t('ALTERAÇÃO DE AUSCULTA PULMONAR')}
-          checked={data.clinico_alteracao_de_ausculta_pulmonar}
-          onPress={() => setChecked('clinico_alteracao_de_ausculta_pulmonar')}
-        />
-
-        <CheckBox
-          title={t('ALTERAÇÃO NA RADIOLOGIA DE TÓRAX')}
-          checked={data.clinico_alteracao_na_radiologia_de_torax}
-          onPress={() => setChecked('clinico_alteracao_na_radiologia_de_torax')}
-        />
+        {data.clinico_doencas_hepaticas_qual && (
+          <TextInput
+            label={t('Qual')}
+            style={{ width: 200 }}
+            mode="outlined"
+            autoCapitalize="none"
+            error=""
+            onChangeText={(text) =>
+              setInput('clinico_doencas_hepaticas_qual', text)
+            }
+            value={data.clinico_doencas_hepaticas_qual}
+          />
+        )}
       </View>
       <View
         style={{
@@ -148,7 +201,7 @@ const StepTwo = ({ data, setChecked, setInput }) => {
         />
         {data.clinico_outros && (
           <TextInput
-            label={t('Especificar')}
+            label={t('Qual')}
             style={{ width: 200 }}
             mode="outlined"
             autoCapitalize="none"
@@ -157,105 +210,6 @@ const StepTwo = ({ data, setChecked, setInput }) => {
             value={data.clinico_outros_observacao}
           />
         )}
-      </View>
-
-      <View style={{ marginLeft: 10, marginTop: 10 }}>
-        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
-          MORBIDADES PRÉVIAS (SELECIONAR TODAS MORBIDADES PERTINENTES)
-        </Text>
-      </View>
-
-      <View
-        style={{
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
-        }}
-      >
-        <CheckBox
-          title={t('DOENÇA CARDIOVASCULAR, INCLUINDO HIPERTENSÃO')}
-          checked={data.morbidade_cardiovascular}
-          onPress={() => setChecked('morbidade_cardiovascular')}
-        />
-
-        <CheckBox
-          title={t('DIABETES')}
-          checked={data.morbidade_diabetes}
-          onPress={() => setChecked('morbidade_diabetes')}
-        />
-      </View>
-      <View
-        style={{
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
-        }}
-      >
-        <CheckBox
-          title={t('DOENÇA HEPÁTICA')}
-          checked={data.morbidade_hepatica}
-          onPress={() => setChecked('morbidade_hepatica')}
-        />
-
-        <CheckBox
-          title={t('DOENÇA NEUROLÓGICA CRÔNICA OU NEUROMUSCULAR')}
-          checked={data.morbidade_neurologica}
-          onPress={() => setChecked('morbidade_neurologica')}
-        />
-      </View>
-
-      <View
-        style={{
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
-        }}
-      >
-        <CheckBox
-          title={t('IMUNODEFICIÊNCIA')}
-          checked={data.morbidade_imunodeficiencia}
-          onPress={() => setChecked('morbidade_imunodeficiencia')}
-        />
-
-        <CheckBox
-          title={t('INFECÇÃO PELO HIV')}
-          checked={data.morbidade_hiv}
-          onPress={() => setChecked('morbidade_hiv')}
-        />
-      </View>
-
-      <View
-        style={{
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
-        }}
-      >
-        <CheckBox
-          title={t('DOENÇA RENAL')}
-          checked={data.morbidade_renal}
-          onPress={() => setChecked('morbidade_renal')}
-        />
-
-        <CheckBox
-          title={t('DOENÇA PULMONAR CRÔNICA')}
-          checked={data.morbidade_pulmonar}
-          onPress={() => setChecked('morbidade_pulmonar')}
-        />
-      </View>
-
-      <View
-        style={{
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
-        }}
-      >
-        <CheckBox
-          title={t('NEOPLASIA (TUMOR SÓLIDO OU HEMATOLÓGICO)')}
-          checked={data.morbidade_neoplasia}
-          onPress={() => setChecked('morbidade_neoplasia')}
-        />
       </View>
     </View>
   );

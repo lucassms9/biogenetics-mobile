@@ -49,37 +49,46 @@ const Anamnese = ({ navigation, route }) => {
         );
         const { data: resCity } = await getCityById(data.viagem_brasil_cidade);
 
-        let handleHistorico = '';
-        let handleHistoricoOption = '';
+        let handleHistoricoOption = 'SIM';
 
-        if (data.viagem_brasil || data.viagem_exterior) {
-          handleHistoricoOption = 'SIM';
-          if (data.viagem_brasil) {
-            handleHistorico += `Brasil: ${resState.nome} - ${resCity.nome}`;
-          }
-
-          if (data.viagem_exterior) {
-            handleHistorico += ` Exterior: ${data.viagem_exteriorobs_pais}`;
-          }
-        } else {
+        if (!data.viagem_brasil || !data.viagem_exterior) {
           handleHistoricoOption = 'NÃO';
         }
+
         dataBody = {
           ...data,
           viagem_brasil_cidade: resCity.nome,
-          viagem_brasil_estado: resState.nome,
+          viagem_brasil_estado: resState.sigla,
 
-          paciente_his_deslocamento_14_dias: handleHistorico,
+          // paciente_his_deslocamento_14_dias: handleHistorico,
           paciente_historico_viagem_14_dias: handleHistoricoOption,
+        };
+      }
+
+      if (data.paciente_unidade_saude_14_dias === 'SIM') {
+        const { data: resState2 } = await getStateById(
+          data.paciente_unidade_saude_14_dias_local_estado
+        );
+        const { data: resCity2 } = await getCityById(
+          data.paciente_unidade_saude_14_dias_local_cidade
+        );
+
+        const handleData = Object.keys(dataBody).length > 0 ? dataBody : data;
+        dataBody = {
+          ...handleData,
+
+          paciente_unidade_saude_14_dias_cidade: resCity2.nome,
+          paciente_unidade_saude_14_dias_estado: resState2.sigla,
         };
       }
 
       const handleDate = moment()
         .subtract(data.data_primeiros_sintomas, 'days')
         .format('YYYY-MM-DD');
+
+      const handleData = Object.keys(dataBody).length > 0 ? dataBody : data;
       dataBody = {
-        ...data,
-        data_primeiros_sintomas: handleDate,
+        ...handleData,
         cliente_id: route.params.cliente_id, // todo - set o cliente de forma auto
       };
 

@@ -12,7 +12,6 @@ const StepThree = ({ data, setChecked, setInput }) => {
   const { t } = useTranslation();
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
-  const [citiesUnidades, setCitiesUnidades] = useState([]);
 
   const handleStates = async () => {
     const { data } = await getStates();
@@ -23,20 +22,13 @@ const StepThree = ({ data, setChecked, setInput }) => {
     setStates(stateRes);
   };
   const handleCities = async (state) => {
+    console.log(state);
     const { data } = await getCity(state);
     const citiesRes = data.map((city) => ({
       value: city.id,
       label: city.nome,
     }));
     setCities(citiesRes);
-  };
-  const handleCitiesUnidades = async (state) => {
-    const { data } = await getCity(state);
-    const citiesRes = data.map((city) => ({
-      value: city.id,
-      label: city.nome,
-    }));
-    setCitiesUnidades(citiesRes);
   };
 
   useEffect(() => {
@@ -46,10 +38,6 @@ const StepThree = ({ data, setChecked, setInput }) => {
   useEffect(() => {
     handleCities(data.viagem_brasil_estado);
   }, [data.viagem_brasil_estado]);
-
-  useEffect(() => {
-    handleCitiesUnidades(data.paciente_unidade_saude_14_dias_local_estado);
-  }, [data.paciente_unidade_saude_14_dias_local_estado]);
 
   return (
     <View>
@@ -307,8 +295,8 @@ const StepThree = ({ data, setChecked, setInput }) => {
       </View>
 
       <Text style={{ marginTop: 10 }}>
-        ESTEVE EM UNIDADE DE SAÚDE NOS ÚLTIMOS 14 DIAS?(PRONTO SOCORRO;
-        INTERNAÇÃO; UTI)
+        ESTEVE EM ALGUMA UNIDADE DE SAÚDE NOS 14 DIAS ANTES DO INÍCIO DOS
+        SINTOMAS?
       </Text>
       <View>
         <CheckBox
@@ -316,7 +304,11 @@ const StepThree = ({ data, setChecked, setInput }) => {
           checked={data.paciente_unidade_saude_14_dias === 'NÃO'}
           onPress={() => setInput('paciente_unidade_saude_14_dias', 'NÃO')}
         />
-
+        <CheckBox
+          title={t('NÃO SABE')}
+          checked={data.paciente_unidade_saude_14_dias === 'NÃO SABE'}
+          onPress={() => setInput('paciente_unidade_saude_14_dias', 'NÃO SABE')}
+        />
         <CheckBox
           title={t('SIM')}
           checked={data.paciente_unidade_saude_14_dias === 'SIM'}
@@ -324,72 +316,17 @@ const StepThree = ({ data, setChecked, setInput }) => {
         />
 
         {data.paciente_unidade_saude_14_dias === 'SIM' && (
-          <>
-            <TextInput
-              label={t('INFORMAR NOME DA UNIDADE')}
-              style={{ width: '97.5%', marginBottom: 10 }}
-              mode="outlined"
-              autoCapitalize="none"
-              error=""
-              onChangeText={(text) =>
-                setInput('paciente_unidade_saude_14_dias_local', text)
-              }
-              value={data.paciente_unidade_saude_14_dias_local}
-            />
-            <View style={{ flexDirection: 'row' }}>
-              <RNPickerSelect
-                onValueChange={(text) =>
-                  setInput('paciente_unidade_saude_14_dias_local_estado', text)
-                }
-                value={data.paciente_unidade_saude_14_dias_local_estado}
-                items={states}
-                placeholder={{
-                  label: 'Estado',
-                  value: '',
-                  color: 'black',
-                }}
-                style={{
-                  ...pickerSelectStyles,
-
-                  iconContainer: {
-                    top: 15,
-                    right: 10,
-                  },
-                }}
-                useNativeAndroidPickerStyle={false}
-                // textInputProps={{ underlineColor: 'yellow' }}
-                Icon={() => (
-                  <Ionicons name="md-arrow-down" size={24} color="gray" />
-                )}
-              />
-
-              <RNPickerSelect
-                onSubmitEditing={() => {}}
-                onValueChange={(text) =>
-                  setInput('paciente_unidade_saude_14_dias_local_cidade', text)
-                }
-                value={data.paciente_unidade_saude_14_dias_local_cidade}
-                items={citiesUnidades}
-                placeholder={{
-                  label: 'Cidade',
-                  value: '',
-                  color: 'black',
-                }}
-                style={{
-                  ...pickerSelectStyles,
-                  iconContainer: {
-                    top: 15,
-                    right: 10,
-                  },
-                }}
-                useNativeAndroidPickerStyle={false}
-                // textInputProps={{ underlineColor: 'yellow' }}
-                Icon={() => (
-                  <Ionicons name="md-arrow-down" size={24} color="gray" />
-                )}
-              />
-            </View>
-          </>
+          <TextInput
+            label={t('INFORMAR NOME, ENDEREÇO E CONTATO')}
+            style={{ width: '100%' }}
+            mode="outlined"
+            autoCapitalize="none"
+            error=""
+            onChangeText={(text) =>
+              setInput('paciente_unidade_saude_14_dias_local', text)
+            }
+            value={data.paciente_unidade_saude_14_dias_local}
+          />
         )}
       </View>
     </View>

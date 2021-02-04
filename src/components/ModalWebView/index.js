@@ -40,6 +40,12 @@ const ModalWebView = ({ url, visible, hideModal }) => {
             source={{
               uri: url,
             }}
+            javaScriptEnabled
+            domStorageEnabled
+            allowFileAccessFromFileURLs
+            startInLoadingState
+            originWhitelist={['*']}
+            mixedContentMode="compatibility"
           />
           {visibleAct ? <ActivityIndicatorElement /> : null}
         </View>
