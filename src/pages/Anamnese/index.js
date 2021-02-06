@@ -15,7 +15,7 @@ import StepTwo from './StepTwo';
 import StepThree from './StepThree';
 
 import ButtonPrimary from '~/components/ButtonPrimary';
-import { getStateById, getCityById } from '~/services/ibge';
+import { getStateById } from '~/services/geoName';
 import { createAnamnese } from '~/services/clinics';
 
 const Anamnese = ({ navigation, route }) => {
@@ -47,7 +47,8 @@ const Anamnese = ({ navigation, route }) => {
         const { data: resState } = await getStateById(
           data.viagem_brasil_estado
         );
-        const { data: resCity } = await getCityById(data.viagem_brasil_cidade);
+
+        // const { data: resCity } = await getCityById(data.viagem_brasil_cidade);
 
         let handleHistoricoOption = 'SIM';
 
@@ -57,7 +58,7 @@ const Anamnese = ({ navigation, route }) => {
 
         dataBody = {
           ...data,
-          viagem_brasil_cidade: resCity.nome,
+          // viagem_brasil_cidade: resCity.nome,
           viagem_brasil_estado: resState.sigla,
 
           // paciente_his_deslocamento_14_dias: handleHistorico,
@@ -69,22 +70,18 @@ const Anamnese = ({ navigation, route }) => {
         const { data: resState2 } = await getStateById(
           data.paciente_unidade_saude_14_dias_local_estado
         );
-        const { data: resCity2 } = await getCityById(
-          data.paciente_unidade_saude_14_dias_local_cidade
-        );
+        // const { data: resCity2 } = await getCityById(
+        //   data.paciente_unidade_saude_14_dias_local_cidade
+        // );
 
         const handleData = Object.keys(dataBody).length > 0 ? dataBody : data;
         dataBody = {
           ...handleData,
 
-          paciente_unidade_saude_14_dias_cidade: resCity2.nome,
+          // paciente_unidade_saude_14_dias_cidade: resCity2.nome,
           paciente_unidade_saude_14_dias_estado: resState2.sigla,
         };
       }
-
-      const handleDate = moment()
-        .subtract(data.data_primeiros_sintomas, 'days')
-        .format('YYYY-MM-DD');
 
       const handleData = Object.keys(dataBody).length > 0 ? dataBody : data;
       dataBody = {

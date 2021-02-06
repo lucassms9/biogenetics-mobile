@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { TextInput, HelperText } from 'react-native-paper';
 
 import CheckBox from '~/components/CheckBox';
 
+import { getStates } from '~/services/geoName';
+
 const StepOne = ({ data, setChecked, setInput }) => {
+  const getStatesRes = async () => {
+    const res = await getStates();
+  };
+  useEffect(() => {
+    getStatesRes();
+  }, []);
+
   const { t } = useTranslation();
 
   return (

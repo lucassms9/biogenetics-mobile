@@ -31,8 +31,8 @@ const StepTwo = ({ data, setChecked, setInput }) => {
 
         <CheckBox
           title={t('DIABETES')}
-          checked={data.clinico_diabetes}
-          onPress={() => setChecked('clinico_diabetes')}
+          checked={data.morbidade_diabetes}
+          onPress={() => setChecked('morbidade_diabetes')}
         />
       </View>
       <View

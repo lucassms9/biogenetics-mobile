@@ -6,7 +6,8 @@ import RNPickerSelect from 'react-native-picker-select';
 import { Ionicons } from '@expo/vector-icons';
 import CheckBox from '~/components/CheckBox';
 
-import { getStates, getCity } from '~/services/ibge';
+import {} from '~/services/ibge';
+import { getStates, getCity } from '~/services/geoName';
 
 const StepThree = ({ data, setChecked, setInput }) => {
   const { t } = useTranslation();
@@ -16,6 +17,7 @@ const StepThree = ({ data, setChecked, setInput }) => {
 
   const handleStates = async () => {
     const { data } = await getStates();
+
     const stateRes = data.map((state) => ({
       value: state.id,
       label: state.nome,
