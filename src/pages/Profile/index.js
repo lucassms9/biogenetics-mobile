@@ -89,7 +89,7 @@ const Profile = ({ navigation }) => {
 
   return (
     <Container style={{ flex: 1 }}>
-      <Header navigation={navigation} title="Meus Dados" />
+      <Header navigation={navigation} title={t('Meus Dados')} />
       <ScrollView>
         <View
           style={{
@@ -103,7 +103,7 @@ const Profile = ({ navigation }) => {
             <FormUser
               submitForm={submitForm}
               status={status}
-              textButton="Enviar"
+              textButton={t('Enviar')}
               initData={dataProfile}
               openModel={openModel}
             />

@@ -12,7 +12,7 @@ const StepTwo = ({ data, setChecked, setInput }) => {
     <View>
       <View style={{ marginLeft: 10, marginTop: 10 }}>
         <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
-          Selecione as doenças associadas
+          {t('Selecione as doenças associadas')}
         </Text>
       </View>
 

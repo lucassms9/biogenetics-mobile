@@ -56,8 +56,9 @@ const StepThree = ({ data, setChecked, setInput }) => {
   return (
     <View>
       <Text style={{ marginBottom: 10 }}>
-        PACIENTE TEM HISTÓRICO DE VIAGEM ATÉ 14 DIAS ANTES DO INÍCIO DOS
-        SINTOMAS?
+        {t(
+          `PACIENTE TEM HISTÓRICO DE VIAGEM ATÉ 14 DIAS ANTES DO INÍCIO DOS SINTOMAS?`
+        )}
       </Text>
       <View
         style={{ flexDirection: 'row', flexWrap: 'wrap', marginBottom: 10 }}
@@ -74,7 +75,7 @@ const StepThree = ({ data, setChecked, setInput }) => {
               value={data.viagem_brasil_estado}
               items={states}
               placeholder={{
-                label: 'Estado',
+                label: t('Estado'),
                 value: '',
                 color: 'black',
               }}
@@ -98,7 +99,7 @@ const StepThree = ({ data, setChecked, setInput }) => {
               value={data.viagem_brasil_cidade}
               items={cities}
               placeholder={{
-                label: 'Cidade',
+                label: t('Cidade'),
                 value: '',
                 color: 'black',
               }}
@@ -120,7 +121,7 @@ const StepThree = ({ data, setChecked, setInput }) => {
       </View>
       <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
         <CheckBox
-          title="Exterior"
+          title={t('Exterior')}
           checked={data.viagem_exterior}
           onPress={() => setChecked('viagem_exterior')}
         />
@@ -138,8 +139,9 @@ const StepThree = ({ data, setChecked, setInput }) => {
       </View>
 
       <Text style={{ marginTop: 10 }}>
-        O PACIENTE TEVE CONTATO PRÓXIMO COM UMA PESSOA QUE SEJA CASO SUSPEITO DE
-        NOVO CORONAVÍRUS (COVID-19)?
+        {t(
+          'O PACIENTE TEVE CONTATO PRÓXIMO COM UMA PESSOA QUE SEJA CASO SUSPEITO DE NOVO CORONAVÍRUS (COVID-19)?'
+        )}
       </Text>
       <View
         style={{
@@ -262,8 +264,9 @@ const StepThree = ({ data, setChecked, setInput }) => {
       </View>
 
       <Text style={{ marginTop: 10 }}>
-        O PACIENTE TEVE CONTATO PRÓXIMO COM UMA PESSOA QUE SEJA CASO CONFIRMADO
-        DE NOVO CORONAVÍRUS (COVID-19)?
+        {t(
+          'O PACIENTE TEVE CONTATO PRÓXIMO COM UMA PESSOA QUE SEJA CASO CONFIRMADO DE NOVO CORONAVÍRUS (COVID-19)?'
+        )}
       </Text>
       <View>
         <CheckBox
@@ -309,8 +312,9 @@ const StepThree = ({ data, setChecked, setInput }) => {
       </View>
 
       <Text style={{ marginTop: 10 }}>
-        ESTEVE EM UNIDADE DE SAÚDE NOS ÚLTIMOS 14 DIAS?(PRONTO SOCORRO;
-        INTERNAÇÃO; UTI)
+        {t(
+          'ESTEVE EM UNIDADE DE SAÚDE NOS ÚLTIMOS 14 DIAS?(PRONTO SOCORRO;INTERNAÇÃO; UTI)'
+        )}
       </Text>
       <View>
         <CheckBox
@@ -346,7 +350,7 @@ const StepThree = ({ data, setChecked, setInput }) => {
                 value={data.paciente_unidade_saude_14_dias_local_estado}
                 items={states}
                 placeholder={{
-                  label: 'Estado',
+                  label: t('Estado'),
                   value: '',
                   color: 'black',
                 }}
@@ -373,7 +377,7 @@ const StepThree = ({ data, setChecked, setInput }) => {
                 value={data.paciente_unidade_saude_14_dias_local_cidade}
                 items={citiesUnidades}
                 placeholder={{
-                  label: 'Cidade',
+                  label: t('Cidade'),
                   value: '',
                   color: 'black',
                 }}

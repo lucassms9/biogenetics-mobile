@@ -386,7 +386,7 @@ function FormUser({
                       textDecorationLine: 'underline',
                     }}
                   >
-                    Ler Termos de uso
+                    {t('Ler Termos de uso')}
                   </Text>
                 </TouchableOpacity>
               )}

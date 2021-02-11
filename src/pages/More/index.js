@@ -12,7 +12,6 @@ import ModalLanguage from '~/components/ModalLanguage';
 
 const More = ({ navigation }) => {
   const [visible, setVisible] = useState(false);
-  const [loading, setLoading] = useState(false);
 
   const { handleSignOut, user } = useAuth();
 
@@ -41,7 +40,7 @@ const More = ({ navigation }) => {
 
   return (
     <Container style={{ flex: 1 }}>
-      <Header noBack navigation={navigation} title="Mais opções" />
+      <Header noBack navigation={navigation} title={t('Mais opções')} />
       <ScrollView>
         <TouchableOpacity
           style={{
@@ -67,7 +66,7 @@ const More = ({ navigation }) => {
           >
             <FontAwesome5 name="user-edit" size={24} color="black" />
             <Text style={{ marginLeft: 10, marginTop: 5, fontSize: 17 }}>
-              Meus Dados
+              {t('Meus Dados')}
             </Text>
           </View>
         </TouchableOpacity>
@@ -96,7 +95,7 @@ const More = ({ navigation }) => {
           >
             <Feather name="help-circle" size={28} color="black" />
             <Text style={{ marginLeft: 10, marginTop: 5, fontSize: 17 }}>
-              Suporte
+              {t('Suporte')}
             </Text>
           </View>
         </TouchableOpacity>
@@ -125,7 +124,7 @@ const More = ({ navigation }) => {
           >
             <MaterialIcons name="logout" size={28} color="black" />
             <Text style={{ marginLeft: 10, marginTop: 5, fontSize: 17 }}>
-              Fazer logout
+              {t('Fazer logout')}
             </Text>
           </View>
         </TouchableOpacity>

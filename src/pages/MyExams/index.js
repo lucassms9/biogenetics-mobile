@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
 import { MaterialCommunityIcons, Fontisto } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 
 import Container from '~/components/Container';
 import Header from '~/components/Header';
@@ -18,6 +19,7 @@ const MyExams = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
   const [exams, setExams] = useState([]);
   const [result, setResult] = useState(null);
+  const { t } = useTranslation();
 
   const getExams = async () => {
     try {
@@ -29,7 +31,7 @@ const MyExams = ({ navigation }) => {
           },
         },
       } = await list();
-      console.log(pedidos);
+
       setExams(pedidos);
     } catch (error) {
       console.log(error);
@@ -39,9 +41,6 @@ const MyExams = ({ navigation }) => {
   };
   useEffect(() => {
     getExams();
-
-    console.log(statusPedido);
-    console.log(exams);
   }, []);
 
   useEffect(() => {
@@ -62,7 +61,7 @@ const MyExams = ({ navigation }) => {
   return (
     <>
       <Container style={{ flex: 1 }}>
-        <Header noBack navigation={navigation} title="Meus Laudos" />
+        <Header noBack navigation={navigation} title={t('Meus Laudos')} />
         {loading && <Loader />}
         <ScrollView>
           {exams.map((exam) => (
@@ -121,7 +120,7 @@ const MyExams = ({ navigation }) => {
                       fontWeight: 'bold',
                     }}
                   >
-                    {statusPedido[exam.status]}
+                    {t(statusPedido[exam.status])}
                   </Text>
                 </View>
               </View>
@@ -152,14 +151,13 @@ const MyExams = ({ navigation }) => {
                     <Text
                       style={{ fontSize: 14 }}
                     >{`Tipo de amostra: ${exam.amostra_tipo}`}</Text>
-                    <Text
-                      style={{ fontSize: 15 }}
-                    >{`Resultado: ${exam.resultado}`}</Text>
+                    <Text style={{ fontSize: 15 }}>{`Resultado: ${t(
+                      exam.resultado
+                    )}`}</Text>
                   </View>
                   <View
                     style={{
-                      flex: 0.2,
-
+                      flex: 0.3,
                       justifyContent: 'center',
                       alignItems: 'center',
                     }}
