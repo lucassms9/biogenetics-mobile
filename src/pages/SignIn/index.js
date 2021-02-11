@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Image, Text, TouchableOpacity } from 'react-native';
-import { TextInput, Modal, HelperText } from 'react-native-paper';
+import { TextInput, HelperText } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { Feather } from '@expo/vector-icons';
 

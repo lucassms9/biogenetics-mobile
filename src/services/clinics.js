@@ -12,5 +12,6 @@ export async function listServices() {
 
 export async function createAnamnese(data) {
   const res = await api.post('pacientes/createAnamnese', data);
+  console.log(data);
   return res;
 }

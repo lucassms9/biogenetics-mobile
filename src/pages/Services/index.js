@@ -3,6 +3,7 @@ import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 
 import { SimpleLineIcons } from '@expo/vector-icons';
 
+import { useTranslation } from 'react-i18next';
 import Container from '~/components/Container';
 import Header from '~/components/Header';
 import Loader from '~/components/Loader';
@@ -11,6 +12,7 @@ import { listServices } from '~/services/clinics';
 const Services = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
   const [services, setServices] = useState([]);
+  const { t } = useTranslation();
 
   const getServices = async () => {
     try {
@@ -22,7 +24,6 @@ const Services = ({ navigation }) => {
           },
         },
       } = await listServices();
-      console.log(servicos);
       setServices(servicos);
     } catch (error) {
       console.log(error);
@@ -45,11 +46,12 @@ const Services = ({ navigation }) => {
 
   return (
     <Container style={{ flex: 1 }}>
-      <Header noBack navigation={navigation} title="Serviços" />
+      <Header noBack navigation={navigation} title={t('Serviços')} />
       {loading && <Loader />}
-      <ScrollView>
+      <ScrollView style={{ flex: 1 }}>
         {services.map((service) => (
           <TouchableOpacity
+            style={{ marginBottom: 15 }}
             key={service.id}
             onPress={() => navigation.navigate('LaboratoryList')}
           >

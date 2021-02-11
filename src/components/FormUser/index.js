@@ -6,7 +6,7 @@ import Toast from 'react-native-tiny-toast';
 import axios from 'axios';
 import { Ionicons, AntDesign, FontAwesome } from '@expo/vector-icons';
 
-import { TextInput, Checkbox, HelperText } from 'react-native-paper';
+import { TextInput, HelperText } from 'react-native-paper';
 import RNPickerSelect from 'react-native-picker-select';
 
 import ButtonPrimary from '~/components/ButtonPrimary';
@@ -14,7 +14,6 @@ import ButtonPrimary from '~/components/ButtonPrimary';
 import styles from './styles';
 
 import { maskCPF, maskPhone, maskDate, maskCEP } from '~/helpers';
-import { commons } from '~/styles';
 
 import validationSchema from './validations';
 import validationUpdateSchema from './validationUpdateSchema';
@@ -31,7 +30,6 @@ function FormUser({
   termShow,
 }) {
   const { t } = useTranslation();
-  console.log(initData);
   return (
     <View style={{ flex: 1, marginTop: 20 }}>
       <Formik
@@ -41,7 +39,6 @@ function FormUser({
         onSubmit={(values) => submitForm(values, 1)}
       >
         {({ handleSubmit, values, setFieldValue, errors }) => {
-          console.log(values);
           const loadingCep = async (state) => {
             if (state) {
               setFieldValue('endereco', '...');
@@ -71,7 +68,7 @@ function FormUser({
             } else {
               loadingCep(false);
               setFieldValue('cep', '');
-              Toast.show('CEP não encontrado.', {
+              Toast.show(t('CEP não encontrado.'), {
                 duration: 2000,
                 containerStyle: {
                   backgroundColor: '#ff3d3d',
@@ -91,7 +88,7 @@ function FormUser({
               if (validacep.test(cep)) {
                 getCep(cep);
               } else {
-                Toast.show('Formato de CEP inválido.', {
+                Toast.show(t('Formato de CEP inválido.'), {
                   position: Toast.position.center,
                   duration: 2000,
                   containerStyle: {
@@ -115,7 +112,7 @@ function FormUser({
                 value={values.name}
               />
               <HelperText type="error" visible={!!errors.name}>
-                {errors.name}
+                {t(errors.name)}
               </HelperText>
 
               <TextInput
@@ -127,7 +124,7 @@ function FormUser({
                 value={values.email}
               />
               <HelperText type="error" visible={!!errors.email}>
-                {errors.email}
+                {t(errors.email)}
               </HelperText>
 
               <TextInput
@@ -139,7 +136,7 @@ function FormUser({
                 value={values.cpf}
               />
               <HelperText type="error" visible={!!errors.cpf}>
-                {errors.cpf}
+                {t(errors.cpf)}
               </HelperText>
 
               <TextInput
@@ -151,7 +148,7 @@ function FormUser({
                 value={values.rg}
               />
               <HelperText type="error" visible={!!errors.rg}>
-                {errors.rg}
+                {t(errors.rg)}
               </HelperText>
 
               <TextInput
@@ -163,27 +160,27 @@ function FormUser({
                 value={values.phone}
               />
               <HelperText type="error" visible={!!errors.phone}>
-                {errors.phone}
+                {t(errors.phone)}
               </HelperText>
 
               <View style={styles.mh5}>
-                <Text style={styles.labelPicker}>Sexo</Text>
+                <Text style={styles.labelPicker}>{t('Sexo')}</Text>
                 <RNPickerSelect
                   onSubmitEditing={() => {}}
                   onValueChange={(text) => setFieldValue('sexo', text)}
                   value={values.sexo}
                   items={[
                     {
-                      label: 'Feminino',
+                      label: t('Feminino'),
                       value: 'F',
                     },
                     {
-                      label: 'Masculino',
+                      label: t('Masculino'),
                       value: 'M',
                     },
                   ]}
                   placeholder={{
-                    label: 'Escolha',
+                    label: t('Escolha'),
                     value: '',
                     color: 'black',
                   }}
@@ -201,7 +198,7 @@ function FormUser({
                   )}
                 />
                 <HelperText type="error" visible={!!errors.sexo}>
-                  {errors.sexo}
+                  {t(errors.sexo)}
                 </HelperText>
               </View>
 
@@ -215,7 +212,7 @@ function FormUser({
               />
 
               <HelperText type="error" visible={!!errors.data_nascimento}>
-                {errors.data_nascimento}
+                {t(errors.data_nascimento)}
               </HelperText>
 
               <TextInput
@@ -228,7 +225,7 @@ function FormUser({
               />
 
               <HelperText type="error" visible={!!errors.profissao}>
-                {errors.profissao}
+                {t(errors.profissao)}
               </HelperText>
 
               <TextInput
@@ -242,7 +239,7 @@ function FormUser({
               />
 
               <HelperText type="error" visible={!!errors.cep}>
-                {errors.cep}
+                {t(errors.cep)}
               </HelperText>
 
               <TextInput
@@ -255,7 +252,7 @@ function FormUser({
               />
 
               <HelperText type="error" visible={!!errors.endereco}>
-                {errors.endereco}
+                {t(errors.endereco)}
               </HelperText>
 
               <TextInput
@@ -268,7 +265,7 @@ function FormUser({
               />
 
               <HelperText type="error" visible={!!errors.bairro}>
-                {errors.bairro}
+                {t(errors.bairro)}
               </HelperText>
 
               <TextInput
@@ -281,7 +278,7 @@ function FormUser({
               />
 
               <HelperText type="error" visible={!!errors.cidade}>
-                {errors.cidade}
+                {t(errors.cidade)}
               </HelperText>
 
               <TextInput
@@ -294,7 +291,7 @@ function FormUser({
               />
 
               <HelperText type="error" visible={!!errors.uf}>
-                {errors.uf}
+                {t(errors.uf)}
               </HelperText>
               <TextInput
                 label={t('Nome da Mãe')}
@@ -306,7 +303,7 @@ function FormUser({
               />
 
               <HelperText type="error" visible={!!errors.nome_da_mae}>
-                {errors.nome_da_mae}
+                {t(errors.nome_da_mae)}
               </HelperText>
 
               <TextInput
@@ -320,7 +317,7 @@ function FormUser({
               />
 
               <HelperText type="error" visible={!!errors.senha}>
-                {errors.senha}
+                {t(errors.senha)}
               </HelperText>
 
               {termShow ? (
@@ -355,7 +352,7 @@ function FormUser({
                     }}
                   >
                     <Text style={{ marginLeft: 5, fontSize: 15, marginTop: 4 }}>
-                      Aceitar termos
+                      {t('Aceitar termos')}
                     </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
@@ -371,7 +368,7 @@ function FormUser({
                         textDecorationLine: 'underline',
                       }}
                     >
-                      Ler Termos de uso
+                      {t('Ler Termos de uso')}
                     </Text>
                   </TouchableOpacity>
                 </View>
@@ -397,7 +394,7 @@ function FormUser({
                 <ButtonPrimary
                   loading={status === 'loading'}
                   onPress={handleSubmit}
-                  text={textButton || 'Enviar'}
+                  text={textButton || t('Enviar')}
                 />
               </View>
             </>

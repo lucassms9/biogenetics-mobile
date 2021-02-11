@@ -1,19 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Button, TouchableOpacity } from 'react-native';
 
 import { ScrollView } from 'react-native-gesture-handler';
 import { MaterialIcons, FontAwesome5, Feather } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/auth';
 
 import Container from '~/components/Container';
 import Header from '~/components/Header';
+import ModalLanguage from '~/components/ModalLanguage';
 
 const More = ({ navigation }) => {
+  const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const { handleSignOut, user } = useAuth();
+
+  const showModal = () => setVisible(true);
+  const hideModal = () => setVisible(false);
+
+  const { t, i18n } = useTranslation();
 
   const signOut = () => {
     handleSignOut();
   };
+
+  const selectedLngCode = i18n.language;
+
+  let LANGS = {
+    'pt-BR': 'Português',
+    en: 'Inglês',
+  };
+
+  if (selectedLngCode === 'en') {
+    LANGS = {
+      'pt-BR': 'Portuguese',
+      en: 'English',
+    };
+  }
 
   return (
     <Container style={{ flex: 1 }}>
@@ -106,6 +130,15 @@ const More = ({ navigation }) => {
           </View>
         </TouchableOpacity>
       </ScrollView>
+      <View style={{ position: 'absolute', right: 10, bottom: 10 }}>
+        <TouchableOpacity onPress={showModal}>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={{ fontSize: 18 }}>{LANGS[selectedLngCode]} </Text>
+            <Feather name="globe" size={20} color="black" />
+          </View>
+        </TouchableOpacity>
+      </View>
+      <ModalLanguage visible={visible} hideModal={hideModal} />
     </Container>
   );
 };

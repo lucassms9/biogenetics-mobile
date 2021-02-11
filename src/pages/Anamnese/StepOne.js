@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
 import { View, Text } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { TextInput, HelperText } from 'react-native-paper';
 
 import CheckBox from '~/components/CheckBox';
 
 import { getStates } from '~/services/geoName';
 
 const StepOne = ({ data, setChecked, setInput }) => {
+  const { t } = useTranslation();
+
   const getStatesRes = async () => {
     const res = await getStates();
   };
@@ -15,13 +16,11 @@ const StepOne = ({ data, setChecked, setInput }) => {
     getStatesRes();
   }, []);
 
-  const { t } = useTranslation();
-
   return (
     <View>
       <View style={{ marginLeft: 10, marginTop: 10 }}>
         <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
-          Selecione os sinais e sintomas apresentados
+          {t('Selecione os sinais e sintomas apresentados')}
         </Text>
       </View>
 

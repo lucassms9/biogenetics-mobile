@@ -24,6 +24,16 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
+      "splash": {
+        "backgroundColor": "#000000",
+        "resizeMode": "contain",
+        // "ldpi": "./src/assets/splash-biogenetics-ldpi.png",
+        // "mdpi": "./src/assets/splash-biogenetics-mdpi.png",
+        // "hdpi": "./src/assets/splash-biogenetics-hdpi.png",
+        // "xhdpi": "./src/assets/splash-biogenetics-xhdpi.png",
+        // "xxhdpi": "./src/assets/splash-biogenetics-xhdpi.png",
+        // "xxxhdpi": "./src/assets/splash-biogenetics-xhdpi.png"
+      },
       "package": "biogenetics.com.br"
     },
     "web": {

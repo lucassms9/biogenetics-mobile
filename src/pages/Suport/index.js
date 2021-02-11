@@ -54,7 +54,7 @@ const Suport = ({ navigation }) => (
         </TouchableOpacity>
         <TouchableOpacity
           style={{ flexDirection: 'row' }}
-          onPress={() => Linking.openURL('mailto://bio@bio.io')}
+          onPress={() => Linking.openURL('mailto://sac@imunoscan.com')}
         >
           <Feather name="mail" size={22} color="black" />
           <Text
@@ -65,7 +65,7 @@ const Suport = ({ navigation }) => (
               textDecorationLine: 'underline',
             }}
           >
-            E-mail: bio@bio.com.br
+            E-mail: sac@imunoscan.com
           </Text>
         </TouchableOpacity>
       </View>

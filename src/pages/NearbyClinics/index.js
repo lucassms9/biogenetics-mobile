@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Platform } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import Autocomplete from 'react-native-autocomplete-input';
 import { Feather } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 import Container from '~/components/Container';
 import Header from '~/components/Header';
 import Loader from '~/components/Loader';
@@ -19,6 +20,8 @@ const NearbyClinics = ({ navigation }) => {
   const [hasFilter, setHasFilter] = useState(false);
   const [remoteClinics, setRemoteClinics] = useState([]);
   const [clinics, setClinics] = useState([]);
+  const [handleOS, setHandleOS] = useState('');
+  const { t } = useTranslation();
 
   const setComplete = (query) => {
     if (!query) {
@@ -85,6 +88,8 @@ const NearbyClinics = ({ navigation }) => {
 
   useEffect(() => {
     getClinics();
+    const handle = Platform.OS === 'ios' ? 'zIndex' : 'elevation';
+    setHandleOS(handle);
   }, []);
 
   const selectItem = (item) => {
@@ -104,15 +109,17 @@ const NearbyClinics = ({ navigation }) => {
   };
   return (
     <Container style={{ flex: 1 }}>
-      <Header noBack navigation={navigation} title="Laboratórios" />
+      <Header noBack navigation={navigation} title={t('Laboratórios')} />
 
       <ScrollView>
-        <View style={{ marginVertical: 20, zIndex: '1', marginHorizontal: 20 }}>
+        <View
+          style={{ marginVertical: 20, [handleOS]: 1, marginHorizontal: 20 }}
+        >
           <View>
             <Text
               style={{ fontSize: 15, fontWeight: 'bold', marginBottom: 10 }}
             >
-              Selecione a cidade:
+              {t('Selecione a cidade:')}
             </Text>
           </View>
           <View
@@ -122,14 +129,15 @@ const NearbyClinics = ({ navigation }) => {
               <TouchableOpacity
                 style={{
                   position: 'absolute',
-                  zIndex: '2',
+
+                  [handleOS]: 2,
                   right: 20,
                   top: 15,
                 }}
                 onPress={() => clearFilter()}
               >
                 <View>
-                  <Text>limpar filtro</Text>
+                  <Text>{t('Limpar filtro')}</Text>
                 </View>
               </TouchableOpacity>
             )}

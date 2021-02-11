@@ -26,7 +26,7 @@ const SignUp = ({ navigation }) => {
     try {
       if (!checked) {
         setVisibleAlert(true);
-        setMessageAlert('Você precisa marcar como lido o termo de uso');
+        setMessageAlert(t('Você precisa marcar como lido o termo de uso'));
         return;
       }
       setStatus('loading');
@@ -60,7 +60,7 @@ const SignUp = ({ navigation }) => {
 
   return (
     <Container style={{ flex: 1 }}>
-      <Header navigation={navigation} title="Cadastrar-se" />
+      <Header navigation={navigation} title={t('Cadastrar-se')} />
 
       <ScrollView>
         <View
@@ -73,7 +73,7 @@ const SignUp = ({ navigation }) => {
           <FormUser
             submitForm={submitForm}
             status={status}
-            textButton="Enviar"
+            textButton={t('Enviar')}
             initData={{}}
             checked={checked}
             setChecked={setChecked}

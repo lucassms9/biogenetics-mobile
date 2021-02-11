@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
-import moment from 'moment';
+import { View } from 'react-native';
 import Toast from 'react-native-tiny-toast';
 
 import { useTranslation } from 'react-i18next';
@@ -19,14 +18,13 @@ import { getStateById } from '~/services/geoName';
 import { createAnamnese } from '~/services/clinics';
 
 const Anamnese = ({ navigation, route }) => {
+  const { t } = useTranslation();
   const [messageAlert, setMessageAlert] = useState('');
   const [visibleAlert, setVisibleAlert] = useState(false);
   const [step, setStep] = useState(1);
-  const [textButton, setTextButton] = useState('PRÓXIMO');
+  const [textButton, setTextButton] = useState(t('PRÓXIMO'));
   const [data, setData] = useState({});
   const [status, setStatus] = useState('');
-
-  const { t } = useTranslation();
 
   const setChecked = (name) => {
     const handleName = data[name] || false;
@@ -47,8 +45,6 @@ const Anamnese = ({ navigation, route }) => {
         const { data: resState } = await getStateById(
           data.viagem_brasil_estado
         );
-
-        // const { data: resCity } = await getCityById(data.viagem_brasil_cidade);
 
         let handleHistoricoOption = 'SIM';
 
@@ -93,7 +89,6 @@ const Anamnese = ({ navigation, route }) => {
       Toast.showSuccess(t('Dados enviados com sucesso'));
       navigation.navigate('Main', { screen: 'MyExams' });
     } catch (error) {
-      console.log(error);
       setMessageAlert(error.response.data.result.message);
       setVisibleAlert(true);
     } finally {
@@ -104,14 +99,14 @@ const Anamnese = ({ navigation, route }) => {
   const nextStep = () => {
     if (step === 1) {
       if (data.sintoma_outros && !data.sintoma_outros_observacao) {
-        setMessageAlert('Preencher o campo OUTROS em sintomas');
+        setMessageAlert(t('Preencher o campo OUTROS em sintomas'));
         setVisibleAlert(true);
         return;
       }
     }
     if (step === 2) {
       if (data.clinico_outros && !data.clinico_outros_observacao) {
-        setMessageAlert('Preencher o campo OUTROS em sinais clínicos');
+        setMessageAlert(t('Preencher o campo OUTROS em sinais clínicos'));
         setVisibleAlert(true);
         return;
       }
@@ -119,7 +114,7 @@ const Anamnese = ({ navigation, route }) => {
 
     if (step >= 3) {
       if (data.viagem_brasil && !data.viagem_brasil_estado) {
-        setMessageAlert('Escolha o estado para continuar');
+        setMessageAlert(t('Escolha o estado para continuar'));
         setVisibleAlert(true);
         return;
       }
@@ -129,20 +124,20 @@ const Anamnese = ({ navigation, route }) => {
         data.viagem_brasil_estado &&
         !data.viagem_brasil_cidade
       ) {
-        setMessageAlert('Escolha a cidade para continuar');
+        setMessageAlert(t('Escolha a cidade para continuar'));
         setVisibleAlert(true);
         return;
       }
 
       if (data.viagem_exterior && !data.viagem_exteriorobs_pais) {
-        setMessageAlert('Preencher o campo país para continuar');
+        setMessageAlert(t('Preencher o campo país para continuar'));
         setVisibleAlert(true);
         return;
       }
 
       if (!data.paciente_contato_pessoa_com_suspeita_covid) {
         setMessageAlert(
-          'Escolha ao menos uma opção sobre a suspeita de covid do paciente '
+          t('Escolha ao menos uma opção sobre a suspeita de covid do paciente')
         );
         setVisibleAlert(true);
         return;
@@ -153,7 +148,9 @@ const Anamnese = ({ navigation, route }) => {
         !data.paciente_contato_pessoa_com_suspeita_covid_local
       ) {
         setMessageAlert(
-          'Escolha ao menos uma opção sobre o local de suspeita de covid do paciente '
+          t(
+            'Escolha ao menos uma opção sobre o local de suspeita de covid do paciente'
+          )
         );
         setVisibleAlert(true);
         return;
@@ -164,7 +161,7 @@ const Anamnese = ({ navigation, route }) => {
         !data.paciente_contato_pessoa_com_suspeita_covid_local_desc
       ) {
         setMessageAlert(
-          'Preencher o campo Especificação de OUTROS para continuar'
+          t('Preencher o campo Especificação de OUTROS para continuar')
         );
         setVisibleAlert(true);
         return;
@@ -173,17 +170,17 @@ const Anamnese = ({ navigation, route }) => {
         data.paciente_contato_pessoa_com_confirmado_covid === 'SIM' &&
         !data.paciente_contato_pessoa_com_confirmado_covid_caso_fonte
       ) {
-        setMessageAlert('Preencher o campo Caso Fonte');
+        setMessageAlert(t('Preencher o campo Caso Fonte'));
         setVisibleAlert(true);
         return;
       }
-      console.log('aqui4');
+
       if (
         data.paciente_unidade_saude_14_dias === 'SIM' &&
         !data.paciente_unidade_saude_14_dias_local
       ) {
         setMessageAlert(
-          'Preencher o campo Nome, Endereço e Contato para continuar'
+          t('Preencher o campo Nome, Endereço e Contato para continuar')
         );
         setVisibleAlert(true);
         return;
@@ -200,9 +197,9 @@ const Anamnese = ({ navigation, route }) => {
 
   useEffect(() => {
     if (step >= 3) {
-      setTextButton('FINALIZAR');
+      setTextButton(t('FINALIZAR'));
     } else {
-      setTextButton('PRÓXIMO');
+      setTextButton(t('PRÓXIMO'));
     }
   }, [step]);
 
@@ -225,7 +222,7 @@ const Anamnese = ({ navigation, route }) => {
   };
   return (
     <Container style={{ flex: 1 }}>
-      <Header navigation={navigation} title="Informações Clínicas" />
+      <Header navigation={navigation} title={t('Informações Clínicas')} />
       <ScrollView>
         <View style={{ marginHorizontal: 15 }}>
           <View style={{ marginTop: 20 }}>
@@ -243,7 +240,7 @@ const Anamnese = ({ navigation, route }) => {
                   <ButtonPrimary
                     loading={status === 'loading'}
                     onPress={backStep}
-                    text="VOLTAR"
+                    text={t('VOLTAR')}
                   />
                 )}
               </View>

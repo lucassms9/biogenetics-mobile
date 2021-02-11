@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import Autocomplete from 'react-native-autocomplete-input';
 
+import { useTranslation } from 'react-i18next';
 import { Feather } from '@expo/vector-icons';
 import Container from '~/components/Container';
 import Header from '~/components/Header';
@@ -14,6 +14,7 @@ import { list } from '~/services/clinics';
 const LaboratoryList = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
   const [clinics, setClinics] = useState([]);
+  const { t } = useTranslation();
 
   const getClinics = async () => {
     try {
@@ -27,7 +28,6 @@ const LaboratoryList = ({ navigation }) => {
       } = await list();
       setClinics(clientes);
     } catch (error) {
-      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -47,7 +47,7 @@ const LaboratoryList = ({ navigation }) => {
 
   return (
     <Container style={{ flex: 1 }}>
-      <Header navigation={navigation} title="Laboratórios" />
+      <Header navigation={navigation} title={t('Laboratórios')} />
 
       <ScrollView>
         {loading && <Loader />}
@@ -114,7 +114,7 @@ const LaboratoryList = ({ navigation }) => {
               <View style={{ alignItems: 'center' }}>
                 <ButtonPrimary
                   icon=""
-                  text="Iniciar Exame"
+                  text={t('Iniciar Exame')}
                   onPress={() => {
                     navigation.navigate('Anamnese', {
                       cliente_id: clinic.id,

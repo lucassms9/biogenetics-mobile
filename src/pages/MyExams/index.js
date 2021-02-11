@@ -29,6 +29,7 @@ const MyExams = ({ navigation }) => {
           },
         },
       } = await list();
+      console.log(pedidos);
       setExams(pedidos);
     } catch (error) {
       console.log(error);
@@ -88,12 +89,12 @@ const MyExams = ({ navigation }) => {
                 alignItems: 'center',
               }}
             >
-              <View style={{ flex: 0.3 }}>
+              <View style={{ flex: 0.4 }}>
                 <View
                   style={{
                     justifyContent: 'center',
                     alignItems: 'center',
-                    left: -5,
+                    left: -7,
                   }}
                 >
                   <MaterialCommunityIcons
