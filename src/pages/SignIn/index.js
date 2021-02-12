@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
-import { View, Image, Text, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Image,
+  Text,
+  TouchableOpacity,
+  Platform,
+  KeyboardAvoidingView,
+  Keyboard,
+} from 'react-native';
 import { TextInput, HelperText } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { Feather } from '@expo/vector-icons';
@@ -71,7 +79,10 @@ const SignIn = ({ navigation }) => {
     }
   };
 
-  const showModal = () => setVisible(true);
+  const showModal = () => {
+    Keyboard.dismiss();
+    setVisible(true);
+  };
   const hideModal = () => setVisible(false);
 
   return (
@@ -88,6 +99,21 @@ const SignIn = ({ navigation }) => {
           style={{ width: '85%', height: 95, top: 20 }}
           source={logoBio}
         />
+        <View>
+          <Text
+            style={{
+              color: '#0F6FA7',
+              fontSize: 17,
+              justifyContent: 'flex-end',
+              fontWeight: '500',
+              alignItems: 'flex-end',
+
+              right: -65,
+            }}
+          >
+            {t('D I A G N Ó S T I C O S')}
+          </Text>
+        </View>
       </View>
       <View
         style={{
@@ -154,16 +180,28 @@ const SignIn = ({ navigation }) => {
             </Text>
           </TouchableOpacity>
         </View>
-
-        <View style={{ position: 'absolute', right: 0, bottom: 10 }}>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'flex-end',
+            alignSelf: 'flex-end',
+            marginBottom: 10,
+          }}
+        >
           <TouchableOpacity onPress={showModal}>
             <View style={{ flexDirection: 'row' }}>
               <Text style={{ fontSize: 18 }}>{LANGS[selectedLngCode]} </Text>
-              <Feather name="globe" size={20} color="black" />
+              <Feather
+                style={{ marginTop: Platform.OS === 'ios' ? 0 : 3 }}
+                name="globe"
+                size={20}
+                color="black"
+              />
             </View>
           </TouchableOpacity>
         </View>
       </View>
+
       <Alert
         visible={visibleAlert}
         hideDialog={() => setVisibleAlert(false)}

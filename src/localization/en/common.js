@@ -121,5 +121,6 @@ export default {
   Suporte: 'Suport',
   'Fazer logout': 'Logout',
   Telefone: 'Phone',
-  'Entre em contato com nosso suporte por e-mail ou telefone':'Contact our support by email or phone.'
+  'Entre em contato com nosso suporte por e-mail ou telefone':'Contact our support by email or phone.',
+  'D I A G N Ó S T I C O S':'D I A G N O S T I C S'
 };

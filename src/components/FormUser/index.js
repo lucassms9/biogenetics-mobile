@@ -422,14 +422,16 @@ const pickerSelectStyles = StyleSheet.create({
     paddingRight: 30, // to ensure the text is never behind the icon
   },
   inputAndroid: {
-    fontSize: 16,
     marginBottom: 0,
+    fontSize: 16,
+    paddingVertical: 12,
     paddingHorizontal: 10,
-    paddingVertical: 8,
-    borderWidth: 0.5,
+    borderWidth: 1,
     borderColor: 'gray',
-    borderRadius: 8,
+    borderRadius: 4,
+    height: 55,
     color: '#000',
+    backgroundColor: '#fff',
     paddingRight: 30, // to ensure the text is never behind the icon
   },
 });

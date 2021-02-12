@@ -10,6 +10,8 @@ const ModalLanguage = ({ hideModal, visible }) => (
     contentContainerStyle={{
       backgroundColor: 'white',
       padding: 20,
+      top: -150,
+
       justifyContent: 'center',
       alignItems: 'center',
     }}

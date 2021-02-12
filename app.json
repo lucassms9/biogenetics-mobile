@@ -6,8 +6,8 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "image": "./assets/splash-biogenetics-xhdpi.png",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "updates": {
@@ -26,13 +26,13 @@
       },
       "splash": {
         "backgroundColor": "#000000",
-        "resizeMode": "contain",
-        // "ldpi": "./src/assets/splash-biogenetics-ldpi.png",
-        // "mdpi": "./src/assets/splash-biogenetics-mdpi.png",
-        // "hdpi": "./src/assets/splash-biogenetics-hdpi.png",
-        // "xhdpi": "./src/assets/splash-biogenetics-xhdpi.png",
-        // "xxhdpi": "./src/assets/splash-biogenetics-xhdpi.png",
-        // "xxxhdpi": "./src/assets/splash-biogenetics-xhdpi.png"
+        "resizeMode": "cover",
+        "ldpi": "./assets/splash-biogenetics-ldpi.png",
+        "mdpi": "./assets/splash-biogenetics-mdpi.png",
+        "hdpi": "./assets/splash-biogenetics-hdpi.png",
+        "xhdpi": "./assets/splash-biogenetics-xhdpi.png",
+        "xxhdpi": "./assets/splash-biogenetics-xhdpi.png",
+        "xxxhdpi": "./assets/splash-biogenetics-xhdpi.png"
       },
       "package": "biogenetics.com.br"
     },
