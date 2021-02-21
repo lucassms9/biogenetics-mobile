@@ -29,3 +29,10 @@ export async function edit(data) {
   const res = await api.post('pacientes/edit', data);
   return res;
 }
+export async function saveTokenPush(token, userId) {
+  const res = await api.post('auth/save-token', {
+    token,
+    userId,
+  });
+  return res;
+}

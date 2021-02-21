@@ -53,7 +53,9 @@ const Services = ({ navigation }) => {
           <TouchableOpacity
             style={{ marginBottom: 15 }}
             key={service.id}
-            onPress={() => navigation.navigate('LaboratoryList')}
+            onPress={() =>
+              navigation.navigate('LaboratoryList', { serviceId: service.id })
+            }
           >
             <View
               style={{

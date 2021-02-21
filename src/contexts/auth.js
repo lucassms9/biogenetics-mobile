@@ -1,7 +1,8 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
-import { signIn, recover, signUp } from '../services/auth';
+import { signIn, recover, signUp, saveTokenPush } from '../services/auth';
 import api from '../services/api';
+import { registerForPushNotificationsAsync } from '../services/push';
 
 const AuthContext = createContext();
 
@@ -24,6 +25,9 @@ export const AuthProvider = ({ children }) => {
     loadStorageData();
   }, []);
 
+  const sendTokenPush = async (token, userId) => {
+    await saveTokenPush(token, userId);
+  };
   const handleSignIn = async (email, senha) => {
     // eslint-disable-next-line no-useless-catch
     try {
@@ -38,9 +42,14 @@ export const AuthProvider = ({ children }) => {
         '@RNAuth:user',
         JSON.stringify(result.paciente)
       );
-      await AsyncStorage.setItem('@RNAuth:token', result.token);
 
+      registerForPushNotificationsAsync().then((token) => {
+        if (token) {
+          sendTokenPush(token, result.paciente.id);
+        }
+      });
       api.defaults.headers.Authorization = `Bearer ${result.token}`;
+      await AsyncStorage.setItem('@RNAuth:token', result.token);
     } catch (error) {
       throw error;
     }

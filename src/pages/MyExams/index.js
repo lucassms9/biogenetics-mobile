@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
+import * as Linking from 'expo-linking';
 import { MaterialCommunityIcons, Fontisto } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
 
@@ -54,6 +55,7 @@ const MyExams = ({ navigation }) => {
   const openLaudo = async (url) => {
     showModal(true);
     showModalUrl(url);
+    // Linking.openURL(url);
   };
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
@@ -168,7 +170,7 @@ const MyExams = ({ navigation }) => {
                         onPress={() => openLaudo(exam.url_exame)}
                       >
                         <View style={{ alignItems: 'center' }}>
-                          <Text>Acessar</Text>
+                          <Text>PDF</Text>
                           <Fontisto name="world-o" size={24} color="black" />
                         </View>
                       </TouchableOpacity>

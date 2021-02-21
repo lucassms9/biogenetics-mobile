@@ -72,6 +72,7 @@ const SignIn = ({ navigation }) => {
         await handleSignIn(email, password);
       }
     } catch (error) {
+      console.log(error);
       setMessageAlert(error.response.data.result.message);
       setVisibleAlert(true);
     } finally {

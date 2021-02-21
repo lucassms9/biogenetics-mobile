@@ -11,10 +11,11 @@ import ButtonPrimary from '~/components/ButtonPrimary';
 
 import { list } from '~/services/clinics';
 
-const LaboratoryList = ({ navigation }) => {
+const LaboratoryList = ({ navigation, route }) => {
   const [loading, setLoading] = useState(false);
   const [clinics, setClinics] = useState([]);
   const { t } = useTranslation();
+  const { serviceId } = route.params;
 
   const getClinics = async () => {
     try {
@@ -118,6 +119,7 @@ const LaboratoryList = ({ navigation }) => {
                   onPress={() => {
                     navigation.navigate('Anamnese', {
                       cliente_id: clinic.id,
+                      serviceId,
                     });
                   }}
                 >

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "920304851708",
+    "project_id": "biogenetics-mobile",
+    "storage_bucket": "biogenetics-mobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:920304851708:android:7c8d5becaa0d68b2491579",
+        "android_client_info": {
+          "package_name": "biogenetics.com.br"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "920304851708-59ar39l9p9dko3bjf00j9b27o7g69uqd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8zJ97oVoc5QA7pWNDq0vs6ODqkRDBoMc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "920304851708-59ar39l9p9dko3bjf00j9b27o7g69uqd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -7,7 +7,6 @@ import { useTranslation } from 'react-i18next';
 import Container from '~/components/Container';
 import Header from '~/components/Header';
 import Loader from '~/components/Loader';
-
 import { list } from '~/services/clinics';
 
 const NearbyClinics = ({ navigation }) => {

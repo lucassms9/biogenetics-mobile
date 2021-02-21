@@ -83,6 +83,7 @@ const Anamnese = ({ navigation, route }) => {
       dataBody = {
         ...handleData,
         cliente_id: route.params.cliente_id, // todo - set o cliente de forma auto
+        entrada_exame_id: route.params.serviceId,
       };
 
       const res = await createAnamnese(dataBody);
