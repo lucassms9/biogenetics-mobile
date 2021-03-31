@@ -34,17 +34,11 @@ const SignIn = ({ navigation }) => {
   const { t, i18n } = useTranslation();
   const selectedLngCode = i18n.language;
 
-  let LANGS = {
-    'pt-BR': 'Português',
-    en: 'Inglês',
+  const LANGS = {
+    'pt-BR': t('Português'),
+    en: t('Inglês'),
+    es: t('Espanhol'),
   };
-
-  if (selectedLngCode === 'en') {
-    LANGS = {
-      'pt-BR': 'Portuguese',
-      en: 'English',
-    };
-  }
 
   const hasErrors = () => {
     const errosHandle = {};

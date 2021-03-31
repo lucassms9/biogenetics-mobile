@@ -26,17 +26,11 @@ const More = ({ navigation }) => {
 
   const selectedLngCode = i18n.language;
 
-  let LANGS = {
-    'pt-BR': 'Português',
-    en: 'Inglês',
+  const LANGS = {
+    'pt-BR': t('Português'),
+    en: t('Inglês'),
+    es: t('Espanhol'),
   };
-
-  if (selectedLngCode === 'en') {
-    LANGS = {
-      'pt-BR': 'Portuguese',
-      en: 'English',
-    };
-  }
 
   return (
     <Container style={{ flex: 1 }}>

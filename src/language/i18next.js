@@ -4,12 +4,13 @@ import AsyncStorage from '@react-native-community/async-storage';
 import * as Localization from 'expo-localization';
 
 import en from '../localization/en';
-import pt from '../localization/pt';
+import es from '../localization/es';
 import ptBr from '../localization/pt';
 
 export const AVAILABLE_LANGUAGES = {
   en,
   'pt-BR': ptBr,
+  es,
 };
 
 // console.log(Localization.locale);

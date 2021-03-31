@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  Platform,
+} from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
 import * as Linking from 'expo-linking';
 import { MaterialCommunityIcons, Fontisto } from '@expo/vector-icons';
@@ -53,8 +59,14 @@ const MyExams = ({ navigation }) => {
   }, [navigation]);
 
   const openLaudo = async (url) => {
-    showModal(true);
-    showModalUrl(url);
+    if (Platform.OS === 'android') {
+      Linking.openURL(url);
+    } else {
+      showModal(true);
+      showModalUrl(url);
+    }
+    // showModal(true);
+    // showModalUrl(url);
     // Linking.openURL(url);
   };
   const showModal = () => setVisible(true);

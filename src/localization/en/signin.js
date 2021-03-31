@@ -1,5 +1,5 @@
 export default {
-  inputEmail: 'Email',
+  inputEmail: 'E-mail',
   inputPassword: 'Password',
   buttonLogin: 'Login',
   createAccount: `Don't have an account?`,

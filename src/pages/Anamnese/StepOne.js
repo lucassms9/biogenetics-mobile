@@ -114,7 +114,7 @@ const StepOne = ({ data, setChecked, setInput }) => {
           onPress={() => setChecked('sintoma_diarreia')}
         />
         <CheckBox
-          title={t('FALDA DE APETITE')}
+          title={t('FALTA DE APETITE')}
           checked={data.sintoma_falta_de_apetite}
           onPress={() => setChecked('sintoma_falta_de_apetite')}
         />

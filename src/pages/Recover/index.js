@@ -87,7 +87,7 @@ const Recover = ({ navigation }) => {
 
         <ButtonPrimary
           style={{ marginTop: 20 }}
-          text={t('Recurar Senha')}
+          text={t('Recuperar Senha')}
           onPress={recoverSub}
           loading={loading}
         />

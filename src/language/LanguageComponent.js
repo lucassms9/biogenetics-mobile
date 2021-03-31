@@ -15,17 +15,11 @@ const LanguageComponent = () => {
   const { t, i18n } = useTranslation();
   const selectedLngCode = i18n.language;
 
-  let LANGS = [
-    { lngCode: 'pt-BR', label: 'Português' },
-    { lngCode: 'en', label: 'Inglês' },
+  const LANGS = [
+    { lngCode: 'pt-BR', label: t('Português') },
+    { lngCode: 'en', label: t('Inglês') },
+    { lngCode: 'es', label: t('Espanhol') },
   ];
-
-  if (selectedLngCode === 'en') {
-    LANGS = [
-      { lngCode: 'pt-BR', label: 'Portuguese' },
-      { lngCode: 'en', label: 'English' },
-    ];
-  }
 
   const setLng = (lngCode) => {
     i18n.changeLanguage(lngCode);
@@ -36,6 +30,7 @@ const LanguageComponent = () => {
         <Text style={styles.select}>{t('selectLng')}</Text>
       </View>
       {LANGS.map((l) => {
+        console.log(l.lngCode);
         const selected = l.lngCode === selectedLngCode;
         return (
           <TouchableOpacity
@@ -47,12 +42,20 @@ const LanguageComponent = () => {
               <Text style={[selected ? styles.selectedText : styles.text]}>
                 {l.label}
               </Text>
-              {selected &&
-                (l.lngCode === 'en' ? (
-                  <Text style={{ fontSize: 20 }}> 🇺🇸 </Text>
-                ) : (
-                  <Text style={{ fontSize: 20 }}> 🇧🇷 </Text>
-                ))}
+
+              {selected && (
+                <>
+                  {l.lngCode === 'en' && (
+                    <Text style={{ fontSize: 20 }}> 🇺🇸 </Text>
+                  )}
+                  {l.lngCode === 'pt-BR' && (
+                    <Text style={{ fontSize: 20 }}> 🇧🇷 </Text>
+                  )}
+                  {l.lngCode === 'es' && (
+                    <Text style={{ fontSize: 20 }}> 🇪🇸 </Text>
+                  )}
+                </>
+              )}
             </View>
           </TouchableOpacity>
         );

@@ -243,7 +243,7 @@ function FormUser({
               </HelperText>
 
               <TextInput
-                label={t('Endreço')}
+                label={t('Endereço')}
                 mode="outlined"
                 autoCapitalize="none"
                 error={errors.endereco}

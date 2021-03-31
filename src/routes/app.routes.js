@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons, Feather, MaterialIcons } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 
 import MyExamDetail from '../pages/MyExams/detail';
 import ClinicDetail from '../pages/NearbyClinics/detail';
@@ -21,79 +22,88 @@ import { colors } from '~/styles';
 
 const Tab = createBottomTabNavigator();
 
-const MainTabBottom = () => (
-  <Tab.Navigator
-    initialRouteName="NearbyClinics"
-    tabBarOptions={{
-      activeTintColor: colors.primary,
-      inactiveTintColor: 'gray',
-      style: {
-        backgroundColor: colors.tabBarColor,
-        borderTopColor: 'transparent',
-      },
-    }}
-  >
-    <Tab.Screen
-      name="NearbyClinics"
-      component={NearbyClinics}
-      options={{
-        headerShown: false,
-        tabBarIcon: ({ focused, color, size }) => (
-          <Ionicons name="md-location-sharp" size={24} color={color} />
-        ),
-        tabBarLabel: ({ focused }) => {
-          const color = focused ? colors.primary : '#000';
-          return <Text style={{ fontSize: 13, color }}> Laboratórios </Text>;
+const MainTabBottom = () => {
+  const { t, i18n } = useTranslation();
+  return (
+    <Tab.Navigator
+      initialRouteName="NearbyClinics"
+      tabBarOptions={{
+        activeTintColor: colors.primary,
+        inactiveTintColor: 'gray',
+        style: {
+          backgroundColor: colors.tabBarColor,
+          borderTopColor: 'transparent',
         },
       }}
-    />
+    >
+      <Tab.Screen
+        name="NearbyClinics"
+        component={NearbyClinics}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons name="md-location-sharp" size={24} color={color} />
+          ),
+          tabBarLabel: ({ focused }) => {
+            const color = focused ? colors.primary : '#000';
+            return (
+              <Text style={{ fontSize: 13, color }}> {t('Laboratórios')} </Text>
+            );
+          },
+        }}
+      />
 
-    <Tab.Screen
-      name="Services"
-      component={Services}
-      options={{
-        headerShown: false,
-        tabBarIcon: ({ focused, color, size }) => (
-          <MaterialIcons name="medical-services" size={24} color={color} />
-        ),
-        tabBarLabel: ({ focused }) => {
-          const color = focused ? colors.primary : '#000';
-          return <Text style={{ fontSize: 14, color }}> Serviços </Text>;
-        },
-      }}
-    />
+      <Tab.Screen
+        name="Services"
+        component={Services}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ focused, color, size }) => (
+            <MaterialIcons name="medical-services" size={24} color={color} />
+          ),
+          tabBarLabel: ({ focused }) => {
+            const color = focused ? colors.primary : '#000';
+            return (
+              <Text style={{ fontSize: 14, color }}> {t('Serviços')} </Text>
+            );
+          },
+        }}
+      />
 
-    <Tab.Screen
-      name="MyExams"
-      component={MyExams}
-      options={{
-        headerShown: false,
-        tabBarIcon: ({ focused, color, size }) => (
-          <Ionicons name="document-outline" size={24} color={color} />
-        ),
-        tabBarLabel: ({ focused }) => {
-          const color = focused ? colors.primary : '#000';
-          return <Text style={{ fontSize: 13, color }}> Meus Laudos </Text>;
-        },
-      }}
-    />
+      <Tab.Screen
+        name="MyExams"
+        component={MyExams}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons name="document-outline" size={24} color={color} />
+          ),
+          tabBarLabel: ({ focused }) => {
+            const color = focused ? colors.primary : '#000';
+            return (
+              <Text style={{ fontSize: 13, color }}> {t('Meus Laudos')} </Text>
+            );
+          },
+        }}
+      />
 
-    <Tab.Screen
-      name="More"
-      component={More}
-      options={{
-        headerShown: false,
-        tabBarIcon: ({ focused, color, size }) => (
-          <Feather name="list" size={24} color={color} />
-        ),
-        tabBarLabel: ({ focused }) => {
-          const color = focused ? colors.primary : '#000';
-          return <Text style={{ fontSize: 13, color }}> Mais </Text>;
-        },
-      }}
-    />
-  </Tab.Navigator>
-);
+      <Tab.Screen
+        name="More"
+        component={More}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ focused, color, size }) => (
+            <Feather name="list" size={24} color={color} />
+          ),
+          tabBarLabel: ({ focused }) => {
+            const color = focused ? colors.primary : '#000';
+            return <Text style={{ fontSize: 13, color }}> {t('Mais')} </Text>;
+          },
+        }}
+      />
+    </Tab.Navigator>
+  );
+};
 
 const AppStack = createStackNavigator();
 

@@ -87,7 +87,11 @@ const Anamnese = ({ navigation, route }) => {
       };
 
       const res = await createAnamnese(dataBody);
-      Toast.showSuccess(t('Dados enviados com sucesso'));
+      Toast.showSuccess(
+        t(
+          'Cadastro conclúido! por favor, dirija-se ao laboratório escolhido para a realizar coleta.'
+        )
+      );
       navigation.navigate('Main', { screen: 'MyExams' });
     } catch (error) {
       setMessageAlert(error.response.data.result.message);

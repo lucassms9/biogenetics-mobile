@@ -118,7 +118,7 @@ const NearbyClinics = ({ navigation }) => {
             <Text
               style={{ fontSize: 15, fontWeight: 'bold', marginBottom: 10 }}
             >
-              {t('Selecione a cidade:')}
+              {`${t('Laboratório de Pesquisa por Cidade')}:`}
             </Text>
           </View>
           <View
@@ -200,6 +200,7 @@ const NearbyClinics = ({ navigation }) => {
               <View style={{ marginBottom: 10 }}>
                 <Text style={{ fontSize: 15 }}>{clinic.endereco}</Text>
                 <Text style={{ fontSize: 15 }}>{clinic.bairro}</Text>
+                <Text style={{ fontSize: 15 }}>{clinic.cep}</Text>
               </View>
               <View style={{ marginBottom: 10 }}>
                 <Text
