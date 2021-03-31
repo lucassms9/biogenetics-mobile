@@ -2,8 +2,8 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const api = axios.create({
-  baseURL: 'http://biogenetics.test/api/',
-  // baseURL: 'http://covidexpress.com.br/api/',
+  // baseURL: 'http://biogenetics.test/api/',
+  baseURL: 'http://covidexpress.com.br/api/',
   headers: {
     'Content-Type': 'application/json',
   },

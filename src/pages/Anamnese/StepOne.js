@@ -18,121 +18,88 @@ const StepOne = ({ data, setChecked, setInput }) => {
 
   return (
     <View>
-      <View style={{ marginLeft: 10, marginTop: 10 }}>
-        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
-          {t('Selecione os sinais e sintomas apresentados')}
+      <View
+        style={{
+          marginLeft: 5,
+          marginTop: 15,
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+        }}
+      >
+        <Text style={{ fontSize: 17 }}>{t('Selecione os ')}</Text>
+        <Text style={{ fontSize: 17, fontWeight: 'bold' }}>{t('sinais ')}</Text>
+        <Text style={{ fontSize: 17 }}>{t('e ')}</Text>
+        <Text style={{ fontSize: 17, fontWeight: 'bold' }}>
+          {t('sintomas ')}
         </Text>
+        <Text style={{ fontSize: 17 }}>{t('apresentados')}</Text>
       </View>
 
-      <View
-        style={{
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
-        }}
-      >
-        <CheckBox
-          title={t('FEBRE')}
-          checked={data.sintoma_febre}
-          onPress={() => setChecked('sintoma_febre')}
-        />
+      <CheckBox
+        title={t('CANSAÇO / FALTA DE AR')}
+        checked={data.sintoma_cansaco_falta_de_ar}
+        onPress={() => setChecked('sintoma_cansaco_falta_de_ar')}
+      />
 
-        <CheckBox
-          title={t('TOSSE')}
-          checked={data.sintoma_tosse}
-          onPress={() => setChecked('sintoma_tosse')}
-        />
-      </View>
+      <CheckBox
+        title={t('CORIZA/CONGESTÃO NASAL')}
+        checked={data.sintoma_corisa_congestao_nasal}
+        onPress={() => setChecked('sintoma_corisa_congestao_nasal')}
+      />
 
-      <View
-        style={{
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
-        }}
-      >
-        <CheckBox
-          title={t('CORISA/CONGESTÃO NASAL')}
-          checked={data.sintoma_corisa_congestao_nasal}
-          onPress={() => setChecked('sintoma_corisa_congestao_nasal')}
-        />
-        <CheckBox
-          title={t('DOR NO CORPO')}
-          checked={data.sintoma_dor_no_corpo}
-          onPress={() => setChecked('sintoma_dor_no_corpo')}
-        />
-      </View>
+      <CheckBox
+        title={t('DIARREIA')}
+        checked={data.sintoma_diarreia}
+        onPress={() => setChecked('sintoma_diarreia')}
+      />
 
-      <View
-        style={{
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
-        }}
-      >
-        <CheckBox
-          title={t('EXPECTORAÇÃO')}
-          checked={data.sintoma_expectoracao}
-          onPress={() => setChecked('sintoma_expectoracao')}
-        />
-        <CheckBox
-          title={t('DOR DE CABEÇA')}
-          checked={data.sintoma_cefaleia_dor_de_cabeca}
-          onPress={() => setChecked('sintoma_cefaleia_dor_de_cabeca')}
-        />
-      </View>
+      <CheckBox
+        title={t('DOR DE CABEÇA')}
+        checked={data.sintoma_cefaleia_dor_de_cabeca}
+        onPress={() => setChecked('sintoma_cefaleia_dor_de_cabeca')}
+      />
 
-      <View
-        style={{
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
-        }}
-      >
-        <CheckBox
-          title={t('FRAQUEZA')}
-          checked={data.sintoma_adinamia_fraqueza}
-          onPress={() => setChecked('sintoma_adinamia_fraqueza')}
-        />
-        <CheckBox
-          title={t('CANSAÇO / FALTA DE AR')}
-          checked={data.sintoma_cansaco_falta_de_ar}
-          onPress={() => setChecked('sintoma_cansaco_falta_de_ar')}
-        />
-      </View>
+      <CheckBox
+        title={t('DOR NO CORPO')}
+        checked={data.sintoma_dor_no_corpo}
+        onPress={() => setChecked('sintoma_dor_no_corpo')}
+      />
 
-      <View
-        style={{
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
-        }}
-      >
-        <CheckBox
-          title={t('DIARREIA')}
-          checked={data.sintoma_diarreia}
-          onPress={() => setChecked('sintoma_diarreia')}
-        />
-        <CheckBox
-          title={t('FALTA DE APETITE')}
-          checked={data.sintoma_falta_de_apetite}
-          onPress={() => setChecked('sintoma_falta_de_apetite')}
-        />
-      </View>
+      <CheckBox
+        title={t('ESCARRO')}
+        checked={data.sintoma_expectoracao}
+        onPress={() => setChecked('sintoma_expectoracao')}
+      />
 
-      <View
-        style={{
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
-        }}
-      >
-        <CheckBox
-          title={t('NÁUSEA/VÔMITOS')}
-          checked={data.sintoma_nausea_vomitos}
-          onPress={() => setChecked('sintoma_nausea_vomitos')}
-        />
-      </View>
+      <CheckBox
+        title={t('FALTA DE APETITE')}
+        checked={data.sintoma_falta_de_apetite}
+        onPress={() => setChecked('sintoma_falta_de_apetite')}
+      />
+
+      <CheckBox
+        title={t('FEBRE')}
+        checked={data.sintoma_febre}
+        onPress={() => setChecked('sintoma_febre')}
+      />
+
+      <CheckBox
+        title={t('FRAQUEZA')}
+        checked={data.sintoma_adinamia_fraqueza}
+        onPress={() => setChecked('sintoma_adinamia_fraqueza')}
+      />
+
+      <CheckBox
+        title={t('NÁUSEA/VÔMITOS')}
+        checked={data.sintoma_nausea_vomitos}
+        onPress={() => setChecked('sintoma_nausea_vomitos')}
+      />
+
+      <CheckBox
+        title={t('TOSSE')}
+        checked={data.sintoma_tosse}
+        onPress={() => setChecked('sintoma_tosse')}
+      />
     </View>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Formik } from 'formik';
 import { useTranslation } from 'react-i18next';
@@ -13,7 +13,7 @@ import ButtonPrimary from '~/components/ButtonPrimary';
 
 import styles from './styles';
 
-import { maskCPF, maskPhone, maskDate, maskCEP } from '~/helpers';
+import { maskCPF, maskPhone, maskDate, maskCEP, maskRG } from '~/helpers';
 
 import validationSchema from './validations';
 import validationUpdateSchema from './validationUpdateSchema';
@@ -30,6 +30,7 @@ function FormUser({
   termShow,
 }) {
   const { t } = useTranslation();
+  const [isSucure, setIsSucure] = useState(true);
   return (
     <View style={{ flex: 1, marginTop: 20 }}>
       <Formik
@@ -144,7 +145,7 @@ function FormUser({
                 mode="outlined"
                 autoCapitalize="none"
                 error={errors.rg}
-                onChangeText={(text) => setFieldValue('rg', text)}
+                onChangeText={maskRG(setFieldValue, 'rg')}
                 value={values.rg}
               />
               <HelperText type="error" visible={!!errors.rg}>
@@ -311,9 +312,15 @@ function FormUser({
                 mode="outlined"
                 autoCapitalize="none"
                 error={errors.senha}
-                secureTextEntry
+                secureTextEntry={isSucure}
                 onChangeText={(text) => setFieldValue('senha', text)}
                 value={values.senha}
+                right={
+                  <TextInput.Icon
+                    name="eye" // where <Icon /> is any component from vector-icons or anything else
+                    onPress={() => setIsSucure(!isSucure)}
+                  />
+                }
               />
 
               <HelperText type="error" visible={!!errors.senha}>

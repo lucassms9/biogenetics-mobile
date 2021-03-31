@@ -8,6 +8,7 @@ import Header from '~/components/Header';
 import Container from '~/components/Container';
 import FormUser from '~/components/FormUser';
 import Alert from '~/components/Alert';
+import ModalWebView from '~/components/ModalWebView';
 
 import { term } from './terms';
 
@@ -87,15 +88,12 @@ const SignUp = ({ navigation }) => {
         hideDialog={() => setVisibleAlert(false)}
         message={messageAlert}
       />
-      <Modal
+
+      <ModalWebView
         visible={modalVisiable}
-        onDismiss={hideModal}
-        contentContainerStyle={{ backgroundColor: 'white', padding: 20 }}
-      >
-        <ScrollView>
-          <Text>{term}</Text>
-        </ScrollView>
-      </Modal>
+        hideModal={hideModal}
+        url="http://biogenetics.test/termo_de_uso.pdf"
+      />
     </Container>
   );
 };

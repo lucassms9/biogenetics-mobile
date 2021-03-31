@@ -122,30 +122,36 @@ const NearbyClinics = ({ navigation }) => {
             </Text>
           </View>
           <View
-            style={{ backgroundColor: '#fff', padding: 7, borderRadius: 15 }}
+            style={{
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
           >
             {hasFilter && (
               <TouchableOpacity
                 style={{
-                  position: 'absolute',
-
-                  [handleOS]: 2,
-                  right: 20,
-                  top: 15,
+                  padding: 10,
                 }}
                 onPress={() => clearFilter()}
               >
                 <View>
-                  <Text>{t('Limpar filtro')}</Text>
+                  <Text style={{ color: '#ff8500', fontWeight: 'bold' }}>
+                    {t('Limpar filtro')}
+                  </Text>
                 </View>
               </TouchableOpacity>
             )}
+          </View>
+          <View
+            style={{ backgroundColor: '#fff', padding: 7, borderRadius: 15 }}
+          >
             <Autocomplete
               data={autoHandle}
               autoCorrect={false}
               hideResults={hideResults}
               listContainerStyle={{ borderWidth: 0 }}
-              inputContainerStyle={{ borderWidth: 0 }}
+              inputContainerStyle={{ borderWidth: 0, elevation: -3 }}
               listStyle={{ borderBottomWidth: 1, borderRadius: 10, top: -5 }}
               defaultValue={query}
               onChangeText={(text) => setQuery(text)}

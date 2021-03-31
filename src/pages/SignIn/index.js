@@ -8,7 +8,7 @@ import {
   KeyboardAvoidingView,
   Keyboard,
 } from 'react-native';
-import { TextInput, HelperText } from 'react-native-paper';
+import { TextInput, HelperText, Icon } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { Feather } from '@expo/vector-icons';
 
@@ -29,6 +29,7 @@ const SignIn = ({ navigation }) => {
   const [erros, setErros] = useState({});
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isSucure, setIsSucure] = useState(true);
 
   const { handleSignIn } = useAuth();
   const { t, i18n } = useTranslation();
@@ -131,9 +132,15 @@ const SignIn = ({ navigation }) => {
           mode="outlined"
           label={t('signin:inputPassword')}
           autoCapitalize="none"
-          secureTextEntry
+          secureTextEntry={isSucure}
           value={password}
           onChangeText={(text) => setPassword(text)}
+          right={
+            <TextInput.Icon
+              name="eye" // where <Icon /> is any component from vector-icons or anything else
+              onPress={() => setIsSucure(!isSucure)}
+            />
+          }
         />
         <HelperText type="error" visible={!!erros.password}>
           {erros.password}

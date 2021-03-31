@@ -63,9 +63,9 @@ export default {
     'Seleccione los signos y síntomas presentados',
   FEBRE: 'FIEBRE',
   TOSSE: 'TOS',
-  'CORISA/CONGESTÃO NASAL': 'CORISA / CONGESTIÓN NASAL',
+  'CORIZA/CONGESTÃO NASAL': 'CORIZA / CONGESTIÓN NASAL',
   'DOR NO CORPO': 'DOLOR EN EL CUERPO',
-  EXPECTORAÇÃO: 'EXPECTORACIÓN',
+  ESCARRO: 'ESPUTO',
   'DOR DE CABEÇA': 'DOLOR DE CABEZA',
   FRAQUEZA: 'DEBILIDAD',
   'CANSAÇO / FALTA DE AR': 'CANSANCIO / FALTA DE AIRE',
@@ -128,5 +128,12 @@ export default {
   'Inglês':'Inglés',
   'Espanhol':'Español',
   Mais:'más',
-  'Laboratório de Pesquisa por Cidade':'Laboratorio de investigación por ciudad'
+  'Laboratório de Pesquisa por Cidade':'Laboratorio de investigación por ciudad',
+  'Selecione as ':'Seleccione los ',
+  'Selecione os ':'Seleccione los ',
+  'sinais ':'signos ',
+  'e ':'y ',
+  'sintomas ':'síntomas ',
+  'apresentados ':'presentados',
+  'doenças associadas':''
 };

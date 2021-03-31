@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Appbar } from 'react-native-paper';
 
 const Header = ({ navigation, title, noBack }) => {
-  const goBack = () => navigation.pop();
+  const goBack = () => navigation.goBack();
 
   const handleSearch = () => console.log('Searching');
 

@@ -56,100 +56,138 @@ const StepThree = ({ data, setChecked, setInput }) => {
   return (
     <View>
       <Text style={{ marginBottom: 10 }}>
-        {t(
-          `PACIENTE TEM HISTÓRICO DE VIAGEM ATÉ 14 DIAS ANTES DO INÍCIO DOS SINTOMAS?`
-        )}
+        <Text> {t(`O paciente tem histórico de `)}</Text>
+        <Text style={{ fontWeight: 'bold' }}> {t(`viagem recente? `)}</Text>
+        <Text> {t(`(período de 14 dias)`)}</Text>
       </Text>
-      <View
-        style={{ flexDirection: 'row', flexWrap: 'wrap', marginBottom: 10 }}
-      >
-        <CheckBox
-          title={t('Brasil')}
-          checked={data.viagem_brasil}
-          onPress={() => setChecked('viagem_brasil')}
-        />
-        {data.viagem_brasil && (
-          <View style={{ flexDirection: 'row', marginLeft: 15 }}>
-            <RNPickerSelect
-              onValueChange={(text) => setInput('viagem_brasil_estado', text)}
-              value={data.viagem_brasil_estado}
-              items={states}
-              placeholder={{
-                label: t('Estado'),
-                value: '',
-                color: 'black',
-              }}
-              style={{
-                ...pickerSelectStyles,
-                iconContainer: {
-                  top: 15,
-                  right: 10,
-                },
-              }}
-              useNativeAndroidPickerStyle={false}
-              // textInputProps={{ underlineColor: 'yellow' }}
-              Icon={() => (
-                <Ionicons name="md-arrow-down" size={24} color="gray" />
-              )}
-            />
 
-            <RNPickerSelect
-              onSubmitEditing={() => {}}
-              onValueChange={(text) => setInput('viagem_brasil_cidade', text)}
-              value={data.viagem_brasil_cidade}
-              items={cities}
-              placeholder={{
-                label: t('Cidade'),
-                value: '',
-                color: 'black',
-              }}
-              style={{
-                ...pickerSelectStyles,
-                iconContainer: {
-                  top: 15,
-                  right: 10,
-                },
-              }}
-              useNativeAndroidPickerStyle={false}
-              // textInputProps={{ underlineColor: 'yellow' }}
-              Icon={() => (
-                <Ionicons name="md-arrow-down" size={24} color="gray" />
-              )}
+      <CheckBox
+        title={t('SIM')}
+        checked={data.viagem_status === 'SIM'}
+        onPress={() => setInput('viagem_status', 'SIM')}
+      />
+
+      <CheckBox
+        title={t('NÃO')}
+        checked={data.viagem_status === 'NÃO' || !data.viagem_status}
+        onPress={() => setInput('viagem_status', 'NÃO')}
+      />
+
+      {data.viagem_status === 'SIM' && (
+        <>
+          <View
+            style={{
+              flexDirection: 'column',
+              flexWrap: 'wrap',
+              marginBottom: 10,
+            }}
+          >
+            <CheckBox
+              title={t('Brasil')}
+              checked={data.viagem_brasil}
+              onPress={() => setChecked('viagem_brasil')}
             />
+            {data.viagem_brasil && (
+              <View style={{ flexDirection: 'column', marginLeft: 15 }}>
+                <RNPickerSelect
+                  onValueChange={(text) =>
+                    setInput('viagem_brasil_estado', text)
+                  }
+                  value={data.viagem_brasil_estado}
+                  items={states}
+                  placeholder={{
+                    label: t('Estado'),
+                    value: '',
+                    color: 'black',
+                  }}
+                  style={{
+                    ...pickerSelectStyles,
+                    iconContainer: {
+                      top: 15,
+                      right: 10,
+                    },
+                  }}
+                  useNativeAndroidPickerStyle={false}
+                  // textInputProps={{ underlineColor: 'yellow' }}
+                  Icon={() => (
+                    <Ionicons name="md-arrow-down" size={24} color="gray" />
+                  )}
+                />
+
+                <View style={{ marginTop: 10 }}>
+                  <RNPickerSelect
+                    onSubmitEditing={() => {}}
+                    onValueChange={(text) =>
+                      setInput('viagem_brasil_cidade', text)
+                    }
+                    value={data.viagem_brasil_cidade}
+                    items={cities}
+                    placeholder={{
+                      label: t('Cidade'),
+                      value: '',
+                      color: 'black',
+                    }}
+                    style={{
+                      ...pickerSelectStyles,
+                      iconContainer: {
+                        top: 15,
+                        right: 10,
+                      },
+                    }}
+                    useNativeAndroidPickerStyle={false}
+                    // textInputProps={{ underlineColor: 'yellow' }}
+                    Icon={() => (
+                      <Ionicons name="md-arrow-down" size={24} color="gray" />
+                    )}
+                  />
+                </View>
+              </View>
+            )}
           </View>
-        )}
-      </View>
-      <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-        <CheckBox
-          title={t('Exterior')}
-          checked={data.viagem_exterior}
-          onPress={() => setChecked('viagem_exterior')}
-        />
-        {data.viagem_exterior && (
-          <TextInput
-            label={t('Qual País')}
-            style={{ width: 200 }}
-            mode="outlined"
-            autoCapitalize="none"
-            error=""
-            onChangeText={(text) => setInput('viagem_exteriorobs_pais', text)}
-            value={data.viagem_exteriorobs_pais}
-          />
-        )}
-      </View>
+          <View style={{ flexDirection: 'column', flexWrap: 'wrap' }}>
+            <CheckBox
+              title={t('Exterior')}
+              checked={data.viagem_exterior}
+              onPress={() => setChecked('viagem_exterior')}
+            />
+            {data.viagem_exterior && (
+              <TextInput
+                label={t('Qual País')}
+                style={{ width: 200 }}
+                mode="outlined"
+                autoCapitalize="none"
+                error=""
+                onChangeText={(text) =>
+                  setInput('viagem_exteriorobs_pais', text)
+                }
+                value={data.viagem_exteriorobs_pais}
+              />
+            )}
+          </View>
+        </>
+      )}
 
-      <Text style={{ marginTop: 10 }}>
-        {t(
-          'O PACIENTE TEVE CONTATO PRÓXIMO COM UMA PESSOA QUE SEJA CASO SUSPEITO DE NOVO CORONAVÍRUS (COVID-19)?'
-        )}
+      <Text style={{ marginBottom: 10 }}>
+        <Text>{t(`O paciente teve `)}</Text>
+        <Text style={{ fontWeight: 'bold' }}> {t(`contato `)}</Text>
+        <Text> {t(`com algum caso suspeito ou confirmado de COVID-19?`)}</Text>
       </Text>
+
       <View
         style={{
-          flexDirection: 'row',
+          flexDirection: 'column',
           flexWrap: 'wrap',
           justifyContent: 'space-between',
         }}
       >
+        <CheckBox
+          title={t('SIM')}
+          checked={data.paciente_contato_pessoa_com_suspeita_covid === 'SIM'}
+          onPress={() =>
+            setInput('paciente_contato_pessoa_com_suspeita_covid', 'SIM')
+          }
+        />
+
         <CheckBox
           title={t('NÃO')}
           checked={data.paciente_contato_pessoa_com_suspeita_covid === 'NÃO'}
@@ -166,237 +204,26 @@ const StepThree = ({ data, setChecked, setInput }) => {
             setInput('paciente_contato_pessoa_com_suspeita_covid', 'NÃO SABE')
           }
         />
-        <CheckBox
-          title={t('SIM')}
-          checked={data.paciente_contato_pessoa_com_suspeita_covid === 'SIM'}
-          onPress={() =>
-            setInput('paciente_contato_pessoa_com_suspeita_covid', 'SIM')
-          }
-        />
-        {data.paciente_contato_pessoa_com_suspeita_covid === 'SIM' && (
-          <View>
-            <CheckBox
-              title={t('UNIDADE DE SAÚDE')}
-              checked={
-                data.paciente_contato_pessoa_com_suspeita_covid_local ===
-                'UNIDADE DE SAÚDE'
-              }
-              onPress={() =>
-                setInput(
-                  'paciente_contato_pessoa_com_suspeita_covid_local',
-                  'UNIDADE DE SAÚDE'
-                )
-              }
-            />
-            <CheckBox
-              title={t('DOMICÍLIO')}
-              checked={
-                data.paciente_contato_pessoa_com_suspeita_covid_local ===
-                'DOMICÍLIO'
-              }
-              onPress={() =>
-                setInput(
-                  'paciente_contato_pessoa_com_suspeita_covid_local',
-                  'DOMICÍLIO'
-                )
-              }
-            />
-            <CheckBox
-              title={t('LOCAL DE TRABALHO')}
-              checked={
-                data.paciente_contato_pessoa_com_suspeita_covid_local ===
-                'LOCAL DE TRABALHO'
-              }
-              onPress={() =>
-                setInput(
-                  'paciente_contato_pessoa_com_suspeita_covid_local',
-                  'LOCAL DE TRABALHO'
-                )
-              }
-            />
-            <CheckBox
-              title={t('DESCONHECIDO')}
-              checked={
-                data.paciente_contato_pessoa_com_suspeita_covid_local ===
-                'DESCONHECIDO'
-              }
-              onPress={() =>
-                setInput(
-                  'paciente_contato_pessoa_com_suspeita_covid_local',
-                  'DESCONHECIDO'
-                )
-              }
-            />
-            <CheckBox
-              title={t('OUTRO')}
-              checked={
-                data.paciente_contato_pessoa_com_suspeita_covid_local ===
-                'OUTRO'
-              }
-              onPress={() =>
-                setInput(
-                  'paciente_contato_pessoa_com_suspeita_covid_local',
-                  'OUTRO'
-                )
-              }
-            />
-            {data.paciente_contato_pessoa_com_suspeita_covid_local ===
-              'OUTRO' && (
-              <TextInput
-                label={t('Especificar')}
-                style={{ width: '100%' }}
-                mode="outlined"
-                autoCapitalize="none"
-                error=""
-                onChangeText={(text) =>
-                  setInput(
-                    'paciente_contato_pessoa_com_suspeita_covid_local_desc',
-                    text
-                  )
-                }
-                value={
-                  data.paciente_contato_pessoa_com_suspeita_covid_local_desc
-                }
-              />
-            )}
-          </View>
-        )}
       </View>
 
       <Text style={{ marginTop: 10 }}>
-        {t(
-          'O PACIENTE TEVE CONTATO PRÓXIMO COM UMA PESSOA QUE SEJA CASO CONFIRMADO DE NOVO CORONAVÍRUS (COVID-19)?'
-        )}
+        <Text>{t('O paciente esteve em alguma ')}</Text>
+        <Text style={{ fontWeight: 'bold' }}>{t('Unidade de Saúde ')}</Text>
+        <Text>
+          {t('nos últimos 14 dias? (Pronto Socorro, Internação, UTI)')}
+        </Text>
       </Text>
       <View>
-        <CheckBox
-          title={t('NÃO')}
-          checked={data.paciente_contato_pessoa_com_confirmado_covid === 'NÃO'}
-          onPress={() =>
-            setInput('paciente_contato_pessoa_com_confirmado_covid', 'NÃO')
-          }
-        />
-        <CheckBox
-          title={t('NÃO SABE')}
-          checked={
-            data.paciente_contato_pessoa_com_confirmado_covid === 'NÃO SABE'
-          }
-          onPress={() =>
-            setInput('paciente_contato_pessoa_com_confirmado_covid', 'NÃO SABE')
-          }
-        />
-        <CheckBox
-          title={t('SIM')}
-          checked={data.paciente_contato_pessoa_com_confirmado_covid === 'SIM'}
-          onPress={() =>
-            setInput('paciente_contato_pessoa_com_confirmado_covid', 'SIM')
-          }
-        />
-
-        {data.paciente_contato_pessoa_com_confirmado_covid === 'SIM' && (
-          <TextInput
-            label={t('NOME DO CASO FONTE')}
-            style={{ width: '100%' }}
-            mode="outlined"
-            autoCapitalize="none"
-            error=""
-            onChangeText={(text) =>
-              setInput(
-                'paciente_contato_pessoa_com_confirmado_covid_caso_fonte',
-                text
-              )
-            }
-            value={data.paciente_contato_pessoa_com_confirmado_covid_caso_fonte}
-          />
-        )}
-      </View>
-
-      <Text style={{ marginTop: 10 }}>
-        {t(
-          'ESTEVE EM UNIDADE DE SAÚDE NOS ÚLTIMOS 14 DIAS?(PRONTO SOCORRO;INTERNAÇÃO; UTI)'
-        )}
-      </Text>
-      <View>
-        <CheckBox
-          title={t('NÃO')}
-          checked={data.paciente_unidade_saude_14_dias === 'NÃO'}
-          onPress={() => setInput('paciente_unidade_saude_14_dias', 'NÃO')}
-        />
-
         <CheckBox
           title={t('SIM')}
           checked={data.paciente_unidade_saude_14_dias === 'SIM'}
           onPress={() => setInput('paciente_unidade_saude_14_dias', 'SIM')}
         />
-
-        {data.paciente_unidade_saude_14_dias === 'SIM' && (
-          <>
-            <TextInput
-              label={t('INFORMAR NOME DA UNIDADE')}
-              style={{ width: '97.5%', marginBottom: 10 }}
-              mode="outlined"
-              autoCapitalize="none"
-              error=""
-              onChangeText={(text) =>
-                setInput('paciente_unidade_saude_14_dias_local', text)
-              }
-              value={data.paciente_unidade_saude_14_dias_local}
-            />
-            <View style={{ flexDirection: 'row' }}>
-              <RNPickerSelect
-                onValueChange={(text) =>
-                  setInput('paciente_unidade_saude_14_dias_local_estado', text)
-                }
-                value={data.paciente_unidade_saude_14_dias_local_estado}
-                items={states}
-                placeholder={{
-                  label: t('Estado'),
-                  value: '',
-                  color: 'black',
-                }}
-                style={{
-                  ...pickerSelectStyles,
-
-                  iconContainer: {
-                    top: 15,
-                    right: 10,
-                  },
-                }}
-                useNativeAndroidPickerStyle={false}
-                // textInputProps={{ underlineColor: 'yellow' }}
-                Icon={() => (
-                  <Ionicons name="md-arrow-down" size={24} color="gray" />
-                )}
-              />
-
-              <RNPickerSelect
-                onSubmitEditing={() => {}}
-                onValueChange={(text) =>
-                  setInput('paciente_unidade_saude_14_dias_local_cidade', text)
-                }
-                value={data.paciente_unidade_saude_14_dias_local_cidade}
-                items={citiesUnidades}
-                placeholder={{
-                  label: t('Cidade'),
-                  value: '',
-                  color: 'black',
-                }}
-                style={{
-                  ...pickerSelectStyles,
-                  iconContainer: {
-                    top: 15,
-                    right: 10,
-                  },
-                }}
-                useNativeAndroidPickerStyle={false}
-                // textInputProps={{ underlineColor: 'yellow' }}
-                Icon={() => (
-                  <Ionicons name="md-arrow-down" size={24} color="gray" />
-                )}
-              />
-            </View>
-          </>
-        )}
+        <CheckBox
+          title={t('NÃO')}
+          checked={data.paciente_unidade_saude_14_dias === 'NÃO'}
+          onPress={() => setInput('paciente_unidade_saude_14_dias', 'NÃO')}
+        />
       </View>
     </View>
   );
@@ -415,9 +242,10 @@ const pickerSelectStyles = StyleSheet.create({
     borderColor: 'gray',
     borderRadius: 4,
     height: 55,
+
     color: '#000',
     backgroundColor: '#fff',
-    paddingRight: 30, // to ensure the text is never behind the icon
+    paddingRight: 100, // to ensure the text is never behind the icon
   },
   inputAndroid: {
     fontSize: 16,
@@ -428,6 +256,6 @@ const pickerSelectStyles = StyleSheet.create({
     borderColor: 'gray',
     borderRadius: 8,
     color: '#000',
-    paddingRight: 30, // to ensure the text is never behind the icon
+    paddingRight: 100, // to ensure the text is never behind the icon
   },
 });
