@@ -135,5 +135,6 @@ export default {
   'e ':'and ',
   'sintomas ':'symptoms ',
   'apresentados ':'presented',
-  'doenças associadas':'associated diseases'
+  'doenças associadas':'associated diseases',
+  'Sobrenome': 'Last name'
 };

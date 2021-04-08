@@ -5,6 +5,8 @@ import Toast from 'react-native-tiny-toast';
 import { Text, Modal } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import FormUser from '~/components/FormUser';
+import { SERVER_URL } from '~/configs/constantes';
+import ModalWebView from '~/components/ModalWebView';
 
 import Container from '~/components/Container';
 import Header from '~/components/Header';
@@ -33,11 +35,10 @@ const Profile = ({ navigation }) => {
         celular: values.phone.replace(/[^\d]/g, ''),
         telefone: values.phone.replace(/[^\d]/g, ''),
         cpf: values.cpf.replace(/[^\d]/g, ''),
-        rg: values.rg.replace(/[^\d]/g, ''),
+        nome: `${values.name} ${values.lastName}`,
         data_nascimento: moment(values.data_nascimento, 'DD-MM-YYYY').format(
           'YYYY-MM-DD'
         ),
-        nome: values.name,
       };
       const res = await edit(body);
       Toast.showSuccess(t('Dados atualizados com sucesso!'));
@@ -59,9 +60,13 @@ const Profile = ({ navigation }) => {
           },
         },
       } = await getProfile();
+      const nameHandle = paciente.nome.split(' ');
+      // console.log(nameHandle);
+      const lastNameHandle = Array.from(nameHandle.splice(1)).join(' ');
       const handlePaciente = {
         ...paciente,
-        name: paciente.nome,
+        name: nameHandle[0],
+        lastName: lastNameHandle,
         cpf: maskOnlyCPF(paciente.cpf),
         data_nascimento: moment(paciente.data_nascimento).format('DD/MM/YYYY'),
         phone: maskOnlyPhone(paciente.celular),
@@ -115,15 +120,11 @@ const Profile = ({ navigation }) => {
         hideDialog={() => setVisibleAlert(false)}
         message={messageAlert}
       />
-      <Modal
+      <ModalWebView
         visible={modalVisiable}
-        onDismiss={hideModal}
-        contentContainerStyle={{ backgroundColor: 'white', padding: 20 }}
-      >
-        <ScrollView>
-          <Text>{term}</Text>
-        </ScrollView>
-      </Modal>
+        hideModal={hideModal}
+        url={`${SERVER_URL}/termo_de_uso.pdf`}
+      />
     </Container>
   );
 };

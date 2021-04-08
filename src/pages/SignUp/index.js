@@ -9,6 +9,7 @@ import Container from '~/components/Container';
 import FormUser from '~/components/FormUser';
 import Alert from '~/components/Alert';
 import ModalWebView from '~/components/ModalWebView';
+import { SERVER_URL } from '~/configs/constantes';
 
 import { term } from './terms';
 
@@ -36,16 +37,16 @@ const SignUp = ({ navigation }) => {
         celular: values.phone.replace(/[^\d]/g, ''),
         telefone: values.phone.replace(/[^\d]/g, ''),
         cpf: values.cpf.replace(/[^\d]/g, ''),
-        rg: values.rg.replace(/[^\d]/g, ''),
         data_nascimento: moment(values.data_nascimento, 'DD-MM-YYYY').format(
           'YYYY-MM-DD'
         ),
-        nome: values.name,
+        nome: `${values.name} ${values.lastName}`,
       };
       const res = await handleSignUp(body);
       Toast.showSuccess(t('Cadastro realizado com sucesso!'));
     } catch (error) {
       setVisibleAlert(true);
+      console.log(error);
       setMessageAlert(error?.response?.data?.result?.message);
     } finally {
       setStatus('');
@@ -92,7 +93,7 @@ const SignUp = ({ navigation }) => {
       <ModalWebView
         visible={modalVisiable}
         hideModal={hideModal}
-        url="http://biogenetics.test/termo_de_uso.pdf"
+        url={`${SERVER_URL}/termo_de_uso.pdf`}
       />
     </Container>
   );

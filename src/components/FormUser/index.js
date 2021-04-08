@@ -117,6 +117,18 @@ function FormUser({
               </HelperText>
 
               <TextInput
+                label={t('Sobrenome')}
+                mode="outlined"
+                autoCapitalize="none"
+                error={errors.lastName}
+                onChangeText={(text) => setFieldValue('lastName', text)}
+                value={values.lastName}
+              />
+              <HelperText type="error" visible={!!errors.lastName}>
+                {t(errors.lastName)}
+              </HelperText>
+
+              <TextInput
                 label={t('E-mail')}
                 mode="outlined"
                 autoCapitalize="none"
@@ -140,7 +152,7 @@ function FormUser({
                 {t(errors.cpf)}
               </HelperText>
 
-              <TextInput
+              {/* <TextInput
                 label={t('RG')}
                 mode="outlined"
                 autoCapitalize="none"
@@ -150,7 +162,7 @@ function FormUser({
               />
               <HelperText type="error" visible={!!errors.rg}>
                 {t(errors.rg)}
-              </HelperText>
+              </HelperText> */}
 
               <TextInput
                 label={t('Celular')}

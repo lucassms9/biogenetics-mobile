@@ -1,9 +1,12 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 
+import { SERVER_URL } from '~/configs/constantes';
+
 const api = axios.create({
   // baseURL: 'http://biogenetics.test/api/',
-  baseURL: 'http://covidexpress.com.br/api/',
+  // baseURL: 'http://covidexpress.com.br/api/',
+  baseURL: `${SERVER_URL}/api/`,
   headers: {
     'Content-Type': 'application/json',
   },

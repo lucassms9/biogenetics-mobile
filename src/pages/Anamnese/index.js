@@ -40,7 +40,7 @@ const Anamnese = ({ navigation, route }) => {
     try {
       setStatus('loading');
       let dataBody = {};
-
+      console.log(data.viagem_brasil_estado);
       if (data.viagem_brasil_estado) {
         const { data: resState } = await getStateById(
           data.viagem_brasil_estado
@@ -61,23 +61,23 @@ const Anamnese = ({ navigation, route }) => {
           paciente_historico_viagem_14_dias: handleHistoricoOption,
         };
       }
+      console.log(data.paciente_unidade_saude_14_dias);
+      // if (data.paciente_unidade_saude_14_dias === 'SIM') {
+      //   const { data: resState2 } = await getStateById(
+      //     data.paciente_unidade_saude_14_dias_local_estado
+      //   );
+      //   // const { data: resCity2 } = await getCityById(
+      //   //   data.paciente_unidade_saude_14_dias_local_cidade
+      //   // );
 
-      if (data.paciente_unidade_saude_14_dias === 'SIM') {
-        const { data: resState2 } = await getStateById(
-          data.paciente_unidade_saude_14_dias_local_estado
-        );
-        // const { data: resCity2 } = await getCityById(
-        //   data.paciente_unidade_saude_14_dias_local_cidade
-        // );
+      //   const handleData = Object.keys(dataBody).length > 0 ? dataBody : data;
+      //   dataBody = {
+      //     ...handleData,
 
-        const handleData = Object.keys(dataBody).length > 0 ? dataBody : data;
-        dataBody = {
-          ...handleData,
-
-          // paciente_unidade_saude_14_dias_cidade: resCity2.nome,
-          paciente_unidade_saude_14_dias_estado: resState2.sigla,
-        };
-      }
+      //     // paciente_unidade_saude_14_dias_cidade: resCity2.nome,
+      //     paciente_unidade_saude_14_dias_estado: resState2.sigla,
+      //   };
+      // }
 
       const handleData = Object.keys(dataBody).length > 0 ? dataBody : data;
       dataBody = {
@@ -148,18 +148,18 @@ const Anamnese = ({ navigation, route }) => {
         return;
       }
 
-      if (
-        data.paciente_contato_pessoa_com_suspeita_covid === 'SIM' &&
-        !data.paciente_contato_pessoa_com_suspeita_covid_local
-      ) {
-        setMessageAlert(
-          t(
-            'Escolha ao menos uma opção sobre o local de suspeita de covid do paciente'
-          )
-        );
-        setVisibleAlert(true);
-        return;
-      }
+      // if (
+      //   data.paciente_contato_pessoa_com_suspeita_covid === 'SIM' &&
+      //   !data.paciente_contato_pessoa_com_suspeita_covid_local
+      // ) {
+      //   setMessageAlert(
+      //     t(
+      //       'Escolha ao menos uma opção sobre o local de suspeita de covid do paciente'
+      //     )
+      //   );
+      //   setVisibleAlert(true);
+      //   return;
+      // }
 
       if (
         data.paciente_contato_pessoa_com_suspeita_covid_local === 'OUTRO' &&
@@ -180,16 +180,16 @@ const Anamnese = ({ navigation, route }) => {
         return;
       }
 
-      if (
-        data.paciente_unidade_saude_14_dias === 'SIM' &&
-        !data.paciente_unidade_saude_14_dias_local
-      ) {
-        setMessageAlert(
-          t('Preencher o campo Nome, Endereço e Contato para continuar')
-        );
-        setVisibleAlert(true);
-        return;
-      }
+      // if (
+      //   data.paciente_unidade_saude_14_dias === 'SIM' &&
+      //   !data.paciente_unidade_saude_14_dias_local
+      // ) {
+      //   setMessageAlert(
+      //     t('Preencher o campo Nome, Endereço e Contato para continuar')
+      //   );
+      //   setVisibleAlert(true);
+      //   return;
+      // }
 
       return handleSubmit();
     }

@@ -31,7 +31,6 @@ const validationSchema = yup.object().shape({
 
       return teste;
     }),
-  rg: yup.string().required('Campo obrigatório'),
   phone: yup.string().required('Campo obrigatório'),
   sexo: yup.string().required('Campo obrigatório'),
   data_nascimento: yup
