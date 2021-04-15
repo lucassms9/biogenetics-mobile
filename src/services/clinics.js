@@ -1,7 +1,14 @@
 import api from '~/services/api';
 
+export async function listAll() {
+  const res = await api.get('clientes/list-all');
+  return res;
+}
+
 export async function list() {
-  const res = await api.get('clientes');
+  const res = await api.get('clientes', {
+    all: true,
+  });
   return res;
 }
 

@@ -1,11 +1,11 @@
 /* eslint-disable prettier/prettier */
 export default {
   ok: 'OK',
-  cancel: 'Cancel',
-  selectLng: 'Choose the Language',
-  fieldRequired: 'Field Required',
-  'Esqueci minha senha': 'I forget my password',
-  'Recuperar Senha': 'Recover Password',
+  cancel: 'Cancelar',
+  selectLng: 'Elige el idioma',
+  'fieldRequired': 'Campo requerido',
+  'Esqueci minha senha': 'Olvido mi contraseña',
+  'Recuperar Senha': 'Recuperar contraseña',
   Enviar: 'Entregar',
   'Cadastrar-se': 'Regístrate',
   Endereço: 'Dirección',
@@ -48,7 +48,7 @@ export default {
   'Escolha a cidade para continuar': 'Elige la ciudad para continuar',
   'Preencher o campo país para continuar':
     'Complete el campo del país para continuar',
-  'Escolha ao menos uma opção sobre a suspeita de covid do paciente': `Choose at least one option about the patient's suspected covid`,
+  'Escolha ao menos uma opção sobre a suspeita de covid do paciente': `Elija al menos una opción sobre la sospecha de covid del paciente`,
   'Escolha ao menos uma opção sobre o local de suspeita de covid do paciente': `Elija al menos una opción sobre la sospecha de covid del paciente`,
   'Preencher o campo Especificação de OUTROS para continuar':
     'Complete el campo de especificación OTROS para continuar',
@@ -58,7 +58,7 @@ export default {
   FINALIZAR: 'TERMINAR',
   PRÓXIMO: 'SIGUIENTE',
   'Informações Clínicas': 'Información clínica',
-  VOLTAR: 'VOLVER ATRÁS',
+  VOLTAR: 'VOLVER',
   'Selecione os sinais e sintomas apresentados':
     'Seleccione los signos y síntomas presentados',
   FEBRE: 'FIEBRE',
@@ -137,4 +137,19 @@ export default {
   'apresentados ':'presentados',
   'doenças associadas':'',
   'Sobrenome':'Apellido',
+  'Buscar por Cidade':'Buscar por ciudad',
+  'Pedido':'Pedido',
+  'Tipo de exame':'Tipo de examen',
+  'Tipo de amostra':'Tipo de ejemplo',
+  'Resultado':'Resultado',
+  'O paciente tem histórico de ':'El paciente tiene antecedentes de ',
+  'viagem recente? ':'viaje reciente? ',
+  '(período de 14 dias)':'(Período de 14 días)',
+  'O paciente teve ':'El paciente tenía ',
+  'contato ':'contacto ',
+  'com algum caso suspeito ou confirmado de COVID-19?':'con un caso sospechoso o confirmado de COVID-19?',
+  'O paciente esteve em alguma ':'El paciente estaba en alguna ',
+  'Unidade de Saúde ':'Unidad de salud ',
+  'nos últimos 14 dias? (Pronto Socorro, Internação, UTI)':'en los últimos 14 días? (Urgencias, Hospitalización, UCI)',
+  'Coriza':'Moquear'
 };

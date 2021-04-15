@@ -89,11 +89,10 @@ const SignUp = ({ navigation }) => {
         hideDialog={() => setVisibleAlert(false)}
         message={messageAlert}
       />
-
       <ModalWebView
         visible={modalVisiable}
         hideModal={hideModal}
-        url={`${SERVER_URL}/termo_de_uso.pdf`}
+        url={`https://drive.google.com/viewerng/viewer?embedded=true&url=${SERVER_URL}/termo_de_uso.pdf`}
       />
     </Container>
   );

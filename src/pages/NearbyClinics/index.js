@@ -4,10 +4,11 @@ import { ScrollView } from 'react-native-gesture-handler';
 import Autocomplete from 'react-native-autocomplete-input';
 import { Feather } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
+import { CheckBox } from 'react-native-elements';
 import Container from '~/components/Container';
 import Header from '~/components/Header';
 import Loader from '~/components/Loader';
-import { list } from '~/services/clinics';
+import { list, listAll } from '~/services/clinics';
 
 const NearbyClinics = ({ navigation }) => {
   const [query, setQuery] = useState('');
@@ -20,6 +21,7 @@ const NearbyClinics = ({ navigation }) => {
   const [remoteClinics, setRemoteClinics] = useState([]);
   const [clinics, setClinics] = useState([]);
   const [handleOS, setHandleOS] = useState('');
+  const [listAllMode, setListAllMode] = useState(false);
   const { t } = useTranslation();
 
   const setComplete = (query) => {
@@ -57,21 +59,37 @@ const NearbyClinics = ({ navigation }) => {
   const getClinics = async () => {
     try {
       setLoading(true);
-      const {
-        data: {
-          result: {
-            result: { clientes },
+      if (listAllMode) {
+        const {
+          data: {
+            result: {
+              result: { clientes },
+            },
           },
-        },
-      } = await list();
-      setClinics(clientes);
-      setRemoteClinics(clientes);
+        } = await listAll();
+        setClinics(clientes);
+        setRemoteClinics(clientes);
+      } else {
+        const {
+          data: {
+            result: {
+              result: { clientes },
+            },
+          },
+        } = await list();
+        setClinics(clientes);
+        setRemoteClinics(clientes);
+      }
     } catch (error) {
       console.log(error);
     } finally {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    getClinics();
+  }, [listAllMode]);
 
   useEffect(() => {
     setComplete(query);
@@ -114,12 +132,31 @@ const NearbyClinics = ({ navigation }) => {
         <View
           style={{ marginVertical: 20, [handleOS]: 1, marginHorizontal: 20 }}
         >
-          <View>
-            <Text
-              style={{ fontSize: 15, fontWeight: 'bold', marginBottom: 10 }}
-            >
-              {`${t('Laboratório de Pesquisa por Cidade')}:`}
-            </Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'start',
+              alignItems: 'center',
+            }}
+          >
+            <View>
+              <Text
+                style={{ fontSize: 15, fontWeight: 'bold', marginBottom: 10 }}
+              >
+                {`${t('Buscar por Cidade')}:`}
+              </Text>
+            </View>
+            <View>
+              <CheckBox
+                containerStyle={{
+                  backgroundColor: 'transparent',
+                  borderWidth: 0,
+                }}
+                title={t('Ver Todos')}
+                checked={listAllMode}
+                onPress={() => setListAllMode(!listAllMode)}
+              />
+            </View>
           </View>
           <View
             style={{

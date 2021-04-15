@@ -69,7 +69,7 @@ const StepThree = ({ data, setChecked, setInput }) => {
 
       <CheckBox
         title={t('NÃO')}
-        checked={data.viagem_status === 'NÃO' || !data.viagem_status}
+        checked={data.viagem_status === 'NÃO'}
         onPress={() => setInput('viagem_status', 'NÃO')}
       />
 

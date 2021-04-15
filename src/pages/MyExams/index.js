@@ -156,16 +156,16 @@ const MyExams = ({ navigation }) => {
                     >
                       {`${exam.clinica_nome}`}
                     </Text>
-                    <Text
-                      style={{ fontSize: 14 }}
-                    >{`Pedido: ${exam.codigo}`}</Text>
-                    <Text
-                      style={{ fontSize: 14 }}
-                    >{`Tipo de exame: ${exam.exame_nome}`}</Text>
-                    <Text
-                      style={{ fontSize: 14 }}
-                    >{`Tipo de amostra: ${exam.amostra_tipo}`}</Text>
-                    <Text style={{ fontSize: 15 }}>{`Resultado: ${t(
+                    <Text style={{ fontSize: 14 }}>{`${t('Pedido')}: ${
+                      exam.codigo
+                    }`}</Text>
+                    <Text style={{ fontSize: 14 }}>{`${t('Tipo de exame')}: ${
+                      exam.exame_nome
+                    }`}</Text>
+                    <Text style={{ fontSize: 14 }}>{`${t('Tipo de amostra')}: ${
+                      exam.amostra_tipo
+                    }`}</Text>
+                    <Text style={{ fontSize: 15 }}>{`${t('Resultado')}: ${t(
                       exam.resultado
                     )}`}</Text>
                   </View>

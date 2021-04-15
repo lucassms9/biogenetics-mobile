@@ -136,5 +136,21 @@ export default {
   'sintomas ':'symptoms ',
   'apresentados ':'presented',
   'doenças associadas':'associated diseases',
-  'Sobrenome': 'Last name'
+  'Sobrenome': 'Last name',
+  'Buscar por Cidade':'Search by City',
+  'Pedido':'Order',
+  'Tipo de exame':'Exam type',
+  'Tipo de amostra':'Sample type',
+  'Resultado':'Result',
+  'O paciente tem histórico de ':'The patient has a history of ',
+  'viagem recente? ':'recent trip? ',
+  '(período de 14 dias)':'(14 day period)',
+  'O paciente teve ':'The patient had ',
+  'contato ':'contact ',
+  'com algum caso suspeito ou confirmado de COVID-19?':'with a suspected or confirmed case of COVID-19?',
+  'O paciente esteve em alguma ':'The patient was in some ',
+  'Unidade de Saúde ':'Health Unit ',
+  'nos últimos 14 dias? (Pronto Socorro, Internação, UTI)':'in the last 14 days? (Emergency Room, Hospitalization, ICU)',
+  'FALTA DE APETITE':'LACK OF APPETITE',
+  'Coriza':'Coryza'
 };
