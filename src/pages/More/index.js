@@ -8,7 +8,16 @@ import { useAuth } from '../../contexts/auth';
 
 import Container from '~/components/Container';
 import Header from '~/components/Header';
-import ModalLanguage from '~/components/ModalLanguage';
+import LanguageComponent from '~/language/LanguageComponent';
+import { VERSION } from '~/configs/constantes';
+
+import {
+  IconMoreTerm,
+  IconMoreSignout,
+  IconMoreLang,
+  IconMoreHelp,
+  IconMoreAccount,
+} from '~/icons';
 
 const More = ({ navigation }) => {
   const [visible, setVisible] = useState(false);
@@ -35,103 +44,116 @@ const More = ({ navigation }) => {
   return (
     <Container style={{ flex: 1 }}>
       <Header noBack navigation={navigation} title={t('Mais opções')} />
-      <ScrollView>
+
+      <View style={{ marginLeft: 27, marginBottom: 50 }}>
+        <Text style={{ fontWeight: '700', fontSize: 18, marginTop: 45 }}>{t('Menu Biogenetics')}</Text>
+        <Text style={{ fontWeight: '300', marginTop: 18, maxWidth: 220 }}>{t('Aqui você poderá editar os seus dados pessoais, idioma e mais.')}</Text>
+      </View>
+
+      <ScrollView style={{ marginHorizontal: 15 }}>
         <TouchableOpacity
           style={{
-            padding: 15,
-            backgroundColor: '#fff',
-            borderRadius: 10,
-            marginTop: 20,
-            marginHorizontal: 20,
-            shadowColor: '#000',
-            shadowOffset: {
-              width: 0,
-              height: 5,
-            },
-            shadowOpacity: 0.36,
-            shadowRadius: 5.68,
+            borderBottomWidth: 1,
+            borderBottomColor: '#D1D1D1',
+            marginBottom: 25
 
-            elevation: 20,
           }}
           onPress={() => navigation.navigate('Profile')}
         >
           <View
             style={{ flexDirection: 'row', marginBottom: 10, marginLeft: 10 }}
           >
-            <FontAwesome5 name="user-edit" size={24} color="black" />
-            <Text style={{ marginLeft: 10, marginTop: 5, fontSize: 17 }}>
-              {t('Meus Dados')}
+            <IconMoreAccount />
+            <Text style={{ marginLeft: 37, marginTop: 5, fontSize: 15 }}>
+              {t('DADOS DO USUÁRIO')}
             </Text>
           </View>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={{
-            padding: 15,
-            backgroundColor: '#fff',
-            borderRadius: 10,
-            marginTop: 20,
-            marginHorizontal: 20,
-            shadowColor: '#000',
-            shadowOffset: {
-              width: 0,
-              height: 5,
-            },
-            shadowOpacity: 0.36,
-            shadowRadius: 5.68,
+            borderBottomWidth: 1,
+            borderBottomColor: '#D1D1D1',
+            marginBottom: 25
 
-            elevation: 20,
+          }}
+          onPress={() => navigation.navigate('TermUse')}
+        >
+          <View
+            style={{ flexDirection: 'row', marginBottom: 10, marginLeft: 10 }}
+          >
+            <IconMoreTerm />
+            <Text style={{ marginLeft: 37, marginTop: 5, fontSize: 15 }}>
+              {t('TERMOS DE USO')}
+            </Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={{
+            borderBottomWidth: 1,
+            borderBottomColor: '#D1D1D1',
+            marginBottom: 25
+
+          }}
+          onPress={() => { }}
+        >
+          <View
+            style={{ flex: 1, flexDirection: 'row', marginBottom: 10, marginLeft: 10 }}
+          >
+
+            <IconMoreLang />
+            <Text style={{ marginLeft: 37, marginTop: 5, fontSize: 15 }}>
+              {t('IDIOMAS')}
+            </Text>
+            <View style={{ flex: 1, alignItems: 'flex-end' }}><LanguageComponent /></View>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={{
+            borderBottomWidth: 1,
+            borderBottomColor: '#D1D1D1',
+            marginBottom: 25
+
           }}
           onPress={() => navigation.navigate('Suport')}
         >
           <View
             style={{ flexDirection: 'row', marginBottom: 10, marginLeft: 10 }}
           >
-            <Feather name="help-circle" size={28} color="black" />
-            <Text style={{ marginLeft: 10, marginTop: 5, fontSize: 17 }}>
-              {t('Suporte')}
+            <IconMoreHelp />
+            <Text style={{ marginLeft: 37, marginTop: 5, fontSize: 15 }}>
+              {t('CONTATO')}
             </Text>
           </View>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={{
-            padding: 15,
-            backgroundColor: '#fff',
-            borderRadius: 10,
-            marginTop: 20,
-            marginHorizontal: 20,
-            shadowColor: '#000',
-            shadowOffset: {
-              width: 0,
-              height: 5,
-            },
-            shadowOpacity: 0.36,
-            shadowRadius: 5.68,
+            borderBottomWidth: 1,
+            borderBottomColor: '#D1D1D1',
+            marginBottom: 25
 
-            elevation: 20,
           }}
           onPress={signOut}
         >
           <View
             style={{ flexDirection: 'row', marginBottom: 10, marginLeft: 10 }}
           >
-            <MaterialIcons name="logout" size={28} color="black" />
-            <Text style={{ marginLeft: 10, marginTop: 5, fontSize: 17 }}>
-              {t('Fazer logout')}
+            <IconMoreSignout />
+            <Text style={{ marginLeft: 37, marginTop: 5, fontSize: 15 }}>
+              {t('SAIR')}
             </Text>
           </View>
         </TouchableOpacity>
+
+
       </ScrollView>
-      <View style={{ position: 'absolute', right: 10, bottom: 10 }}>
-        <TouchableOpacity onPress={showModal}>
-          <View style={{ flexDirection: 'row' }}>
-            <Text style={{ fontSize: 18 }}>{LANGS[selectedLngCode]} </Text>
-            <Feather name="globe" size={20} color="black" />
-          </View>
-        </TouchableOpacity>
+      <View style={{ justifyContent: 'center', alignItems: 'center',top:-20 }}>
+        <Text style={{ color: '#113CF3' }}>{VERSION}</Text>
       </View>
-      <ModalLanguage visible={visible} hideModal={hideModal} />
+
     </Container>
   );
 };

@@ -136,7 +136,7 @@ const SignIn = ({ navigation }) => {
           value={password}
           errorMessage={erros.password}
           onChangeText={(text) => setPassword(text)}
-          
+
           rightIcon={
             <TouchableOpacity onPress={() => setIsSucure(!isSucure)}>
               <Feather
@@ -192,10 +192,7 @@ const SignIn = ({ navigation }) => {
           </TouchableOpacity>
         </View>
         <View
-          style={{
-            marginTop: 15
-          }}
-        >
+          style={{ marginTop: 15 }}>
           <LanguageComponent />
         </View>
       </View>

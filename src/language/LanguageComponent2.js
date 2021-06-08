@@ -9,7 +9,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { IconBr, IconEs, IconEn } from '~/icons/';
 
-const LanguageComponent = () => {
+const LanguageComponent2 = () => {
   const { i18n } = useTranslation();
 
   const LANGS = {
@@ -44,10 +44,11 @@ const LanguageComponent = () => {
   );
 };
 
-export default LanguageComponent;
+export default LanguageComponent2;
 
 const styles = StyleSheet.create({
   container: {
+    padding: 10,
     flexDirection:'row',
     justifyContent:'center',
     alignContent:'center'
