@@ -10,6 +10,11 @@ import { iconMenuLaudo } from './iconMenuLaudo';
 import { iconMenuUser } from './iconMenuUser';
 import { iconMenu } from './iconMenu';
 
+import { iconLocation } from './iconLocation';
+import { iconMobile } from './iconMobile';
+
+import { iconCovid } from './iconCovid';
+
 import { SvgXml } from 'react-native-svg';
 
 const IconBr = (props) => <SvgXml width="35" height="35" xml={br} {...props} />
@@ -22,7 +27,16 @@ const IconMenuLaudo = (props) => <SvgXml xml={iconMenuLaudo} {...props} />
 const IconMenuUser = (props) => <SvgXml xml={iconMenuUser} {...props} />
 const IconMenu = (props) => <SvgXml xml={iconMenu} {...props} />
 
+
+const IconMobile = (props) => <SvgXml xml={iconMobile} {...props} />
+const IconLocation = (props) => <SvgXml xml={iconLocation} {...props} />
+
+const IconCovid = (props) => <SvgXml xml={iconCovid} {...props} />
+
 export {
+  IconCovid,
+  IconMobile,
+  IconLocation,
   IconBr,
   IconEn,
   IconEs,

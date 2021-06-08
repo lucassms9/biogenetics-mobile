@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, FlatList } from 'react-native';
 
 import { SimpleLineIcons } from '@expo/vector-icons';
 
@@ -8,6 +8,7 @@ import Container from '~/components/Container';
 import Header from '~/components/Header';
 import Loader from '~/components/Loader';
 import { listServices } from '~/services/clinics';
+import { IconCovid } from '~/icons';
 
 const Services = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
@@ -48,48 +49,62 @@ const Services = ({ navigation }) => {
     <Container style={{ flex: 1 }}>
       <Header noBack navigation={navigation} title={t('Serviços')} />
       {loading && <Loader />}
-      <ScrollView style={{ flex: 1 }}>
-        {services.map((service) => (
-          <TouchableOpacity
-            style={{ marginBottom: 15 }}
-            key={service.id}
-            onPress={() =>
-              navigation.navigate('LaboratoryList', { serviceId: service.id })
-            }
-          >
-            <View
-              style={{
-                flex: 1,
-                justifyContent: 'space-between',
-                paddingVertical: 15,
-                paddingHorizontal: 5,
-                flexDirection: 'row',
-                backgroundColor: '#fff',
-                borderRadius: 10,
-                marginTop: 20,
-                marginHorizontal: 20,
-                shadowColor: '#000',
-                shadowOffset: {
-                  width: 0,
-                  height: 5,
-                },
-                shadowOpacity: 0.36,
-                shadowRadius: 5.68,
 
-                elevation: 20,
-                alignItems: 'center',
-              }}
-            >
-              <View>
-                <Text>{service.nome}</Text>
-              </View>
-              <View>
-                <SimpleLineIcons name="arrow-right" size={24} color="black" />
-              </View>
-            </View>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
+      <View style={{marginLeft:27, marginBottom:50}}>
+        <Text style={{ fontWeight: '700', fontSize: 18, marginTop:45 }}>{t('Exames')}</Text>
+        <Text style={{ fontWeight: '300',marginTop:18, maxWidth:220 }}>{t('Como podemos te ajudar hoje? Escolha uma das opções abaixo.')}</Text>
+      </View>
+      {services.length > 0 && (
+        <FlatList
+          data={services}
+          renderItem={({ item }) => {
+            console.log(item)
+            return (
+              (
+                <TouchableOpacity
+                  style={{
+                    flex: 1,
+                    backgroundColor: '#FCFCFC',
+                    marginVertical: 20,
+                    marginHorizontal: 20,
+                    width: 150,
+                    height: 150,
+                    borderRadius: 40,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+
+                    shadowOffset: {
+                      width: 0,
+                      height: 2,
+                    },
+                    shadowOpacity: 0.2,
+                    elevation: Platform.OS === 'ios' ? null : 3,
+
+                  }}
+                  key={item.id}
+                  onPress={() =>
+                    navigation.navigate('LaboratoryList', { serviceId: item.id })
+                  }
+                >
+                  <View style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                    <IconCovid />
+                    <Text style={{ fontSize: 17, marginTop: 22 }}>{item.nome}</Text>
+                  </View>
+
+                </TouchableOpacity>
+              )
+            )
+          }}
+          //Setting the number of column
+          numColumns={2}
+          keyExtractor={(item, index) => index}
+        />
+      )}
+
+
     </Container>
   );
 };

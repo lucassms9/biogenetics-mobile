@@ -9,9 +9,12 @@ const Header = ({ navigation, title, noBack }) => {
   const rightComponent = () => {
     if (!noBack) {
       return <View style={{ flex: 1, width: 200, justifyContent: 'flex-end', alignItems: 'flex-end' }}><Text style={{ color: 'white', fontSize: 18, fontWeight: '600' }}>{title}</Text></View>
+    } else {
+
     }
   }
   const leftComponent = () => {
+
     if (!noBack) {
       return (
         <TouchableOpacity onPress={goBack} >
@@ -19,7 +22,13 @@ const Header = ({ navigation, title, noBack }) => {
         </TouchableOpacity>
       )
     } else {
-      return <View style={{ flex: 1, width: 200, justifyContent: 'flex-end', alignItems: 'flex-end' }}><Text style={{ color: 'white', fontSize: 18, fontWeight: '600' }}>{title}</Text></View>
+
+      return (
+        <View style={{ width: 200, }}>
+          <Text style={{ color: 'white', fontSize: 18, fontWeight: '600' }}>  {title}
+          </Text>
+        </View>
+      )
     }
   }
 

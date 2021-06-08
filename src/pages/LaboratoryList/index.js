@@ -12,6 +12,12 @@ import ButtonPrimary from '~/components/ButtonPrimary';
 
 import { listAll } from '~/services/clinics';
 
+import {
+  IconMobile,
+  IconLocation,
+} from '~/icons'
+import ButtonCard from '~/components/ButtonCard';
+
 const LaboratoryList = ({ navigation, route }) => {
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
@@ -114,158 +120,77 @@ const LaboratoryList = ({ navigation, route }) => {
     <Container style={{ flex: 1 }}>
       <Header navigation={navigation} title={t('Laboratórios')} />
 
-      <ScrollView>
-        <View
-          style={{ marginVertical: 20, [handleOS]: 1, marginHorizontal: 20 }}
-        >
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'flex-start',
-              alignItems: 'center',
-            }}
-          >
-            <View>
-              <Text
-                style={{ fontSize: 15, fontWeight: 'bold', marginBottom: 10 }}
-              >
-                {`${t('Buscar por Cidade')}:`}
-              </Text>
-            </View>
-            <View />
-          </View>
-          <View
-            style={{
-              flex: 1,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            {hasFilter && (
-              <TouchableOpacity
-                style={{
-                  padding: 10,
-                }}
-                onPress={() => clearFilter()}
-              >
-                <View>
-                  <Text style={{ color: '#ff8500', fontWeight: 'bold' }}>
-                    {t('Limpar filtro')}
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            )}
-          </View>
-          <View
-            style={{ backgroundColor: '#fff', padding: 7, borderRadius: 15 }}
-          >
-            <Autocomplete
-              data={autoHandle}
-              autoCorrect={false}
-              hideResults={hideResults}
-              listContainerStyle={{ borderWidth: 0 }}
-              inputContainerStyle={{ borderWidth: 0, elevation: -3 }}
-              listStyle={{ borderBottomWidth: 1, borderRadius: 10, top: -5 }}
-              defaultValue={query}
-              onChangeText={(text) => setQuery(text)}
-              renderItem={({ item, i }) => (
-                <TouchableOpacity
-                  style={{
-                    paddingVertical: 15,
-                    marginHorizontal: 20,
-                  }}
-                  onPress={() => selectItem(item)}
-                >
-                  <Text>{item.handleCity}</Text>
-                </TouchableOpacity>
-              )}
-            />
-          </View>
-        </View>
-        {loading && <Loader />}
-        {clinics.map((clinic) => (
-          <View
-            key={clinic.id}
-            style={{
-              padding: 15,
-              backgroundColor: '#fff',
-              borderRadius: 10,
-              marginTop: 20,
-              marginHorizontal: 20,
-              shadowColor: '#000',
-              shadowOffset: {
-                width: 0,
-                height: 5,
-              },
-              shadowOpacity: 0.36,
-              shadowRadius: 5.68,
+      <View style={{ marginLeft: 27, marginBottom: 50 }}>
+        <Text style={{ fontWeight: '700', fontSize: 18, marginTop: 45 }}>{t('Laboratórios')}</Text>
+        <Text style={{ fontWeight: '300', marginTop: 18, maxWidth: 220 }}>{t('Aqui você consegue encontrar os laboratórios mais próximos de você.')}</Text>
+      </View>
 
-              elevation: 20,
-            }}
-            onPress={() => {}}
-          >
-            <View>
-              <View style={{ marginBottom: 7 }}>
-                <Text
-                  style={{
-                    fontSize: 20,
-                    fontWeight: 'bold',
-                    color: '#ff8500',
-                  }}
-                >
-                  {clinic.nome}
-                </Text>
+      <View style={{
+        height: 400,
+        marginHorizontal: 15,
+        borderColor: '#ddd',
+        shadowColor: Platform.OS === 'ios' ? '#000000' : '#000000',
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.2,
+        elevation: Platform.OS === 'ios' ? null : 3,
+
+      }}>
+
+        <ScrollView >
+
+          {loading && <Loader />}
+          {clinics.map((clinic) => (
+            <View
+              key={clinic.id}
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                height: 115,
+                borderBottomWidth: 1,
+                borderBottomColor: '#C7C7C7',
+
+
+              }}
+              onPress={() => { }}
+            >
+              <View style={{ flex: 0.6, paddingLeft: 15 }}>
+                <Text style={{ marginTop: 10, fontSize: 16 }}>{clinic.nome}</Text>
+                <Text style={{ fontSize: 14, marginTop: 5 }}>{clinic.endereco}</Text>
+                <Text style={{ fontSize: 14 }}>{clinic.bairro}</Text>
+                <Text style={{ fontSize: 14 }}>{`${clinic.bairro} - ${clinic.cidade} - ${clinic.uf}`}</Text>
+                <Text style={{ fontSize: 14 }}>{`${t('TELEFONE')}: ${clinic.responsavel_telefone}`}</Text>
               </View>
-              <View style={{ marginBottom: 10 }}>
-                <Text style={{ fontSize: 15 }}>{clinic.endereco}</Text>
-                <Text style={{ fontSize: 15 }}>{clinic.bairro}</Text>
-              </View>
-              <View style={{ marginBottom: 10 }}>
-                <Text
-                  style={{ fontSize: 15 }}
-                >{`${clinic.cidade} - ${clinic.uf}`}</Text>
+              <View style={{ flex: 0.4, backgroundColor: '#F2F2F2', justifyContent: 'center', alignItems: 'center' }}>
+                <View style={{}}>
+                  <IconLocation />
+                </View>
+                <Text style={{ marginBottom: 11, fontWeight: '700', marginTop: 5 }}>0.5 Km</Text>
+                <View style={{
+                  shadowColor: "#000",
+                  shadowOffset: {
+                    width: 0,
+                    height: 2,
+                  },
+                  shadowOpacity: 0.25,
+                  shadowRadius: 3.84,
+
+                  elevation: 5,
+                }}>
+                  <ButtonCard icon={IconMobile} text={t('LIGAR')} />
+                </View>
+
               </View>
 
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <View
-                  style={{
-                    width: 45,
-                    height: 45,
-                    backgroundColor: '#199e19',
-                    borderRadius: 22,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}
-                >
-                  <Feather name="phone" size={28} color="white" />
-                </View>
-                <Text style={{ marginLeft: 10, fontSize: 15 }}>
-                  {clinic.responsavel_telefone}
-                </Text>
-              </View>
-              <View style={{ alignItems: 'center' }}>
-                <ButtonPrimary
-                  icon=""
-                  text={t('Iniciar Exame')}
-                  onPress={() => {
-                    navigation.navigate('Anamnese', {
-                      cliente_id: clinic.id,
-                      serviceId,
-                    });
-                  }}
-                >
-                  <View
-                    style={{
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}
-                  />
-                </ButtonPrimary>
-              </View>
             </View>
-          </View>
-        ))}
-      </ScrollView>
+          ))}
+        </ScrollView>
+
+
+      </View>
+
     </Container>
   );
 };
