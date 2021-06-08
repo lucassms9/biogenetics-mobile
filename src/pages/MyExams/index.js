@@ -18,6 +18,14 @@ import { list } from '~/services/exams';
 import { statusPedido } from './status';
 import { colors } from '~/styles/index';
 import ModalWebView from '~/components/ModalWebView';
+import ButtonCard from '~/components/ButtonCard';
+import {
+  IconDownload,
+  IconStatusDiag,
+  IconStatusFinishied,
+  IconStatusTriagem,
+  IconStatusAttendece,
+} from '~/icons';
 
 const MyExams = ({ navigation }) => {
   const [visible, setVisible] = useState(false);
@@ -72,127 +80,108 @@ const MyExams = ({ navigation }) => {
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
 
+  const renderIcon = (exam) => {
+    if (exam.status === 'EmAtendimento') {
+      return (
+        <IconStatusAttendece />
+      )
+    }
+
+    if (exam.status === 'EmDiagnostico') {
+      return (
+        <IconStatusDiag />
+      )
+    }
+    if (exam.status === 'EmTriagem') {
+      return (
+        <IconStatusTriagem />
+      )
+    }
+    if (exam.status === 'Finalizado') {
+      return (
+        <IconStatusFinishied />
+      )
+    }
+
+  }
+
   return (
     <>
       <Container style={{ flex: 1 }}>
         <Header noBack navigation={navigation} title={t('Meus Laudos')} />
         {loading && <Loader />}
-        <ScrollView>
-          {exams.map((exam) => (
-            <View
-              key={exam.id}
-              style={{
-                flex: 1,
-                paddingVertical: 15,
-                paddingHorizontal: 5,
-                flexDirection: 'row',
-                backgroundColor: '#fff',
-                borderRadius: 10,
-                marginTop: 20,
-                marginHorizontal: 20,
-                shadowColor: '#000',
-                shadowOffset: {
-                  width: 0,
-                  height: 5,
-                },
-                shadowOpacity: 0.36,
-                shadowRadius: 5.68,
 
-                elevation: 20,
-                alignItems: 'center',
-              }}
-            >
-              <View style={{ flex: 0.4 }}>
-                <View
-                  style={{
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    left: -7,
-                  }}
-                >
-                  <MaterialCommunityIcons
-                    name="file-document-outline"
-                    size={70}
-                    color={colors.primary}
-                  />
+        <View style={{ marginLeft: 27, marginBottom: 50 }}>
+          <Text style={{ fontWeight: '700', fontSize: 18, marginTop: 45 }}>{t('Meus Laudos')}</Text>
+          <Text style={{ fontWeight: '300', marginTop: 18, maxWidth: 220 }}>{t('Consulte o status e o resultado dos seus exames realizados.')}</Text>
+        </View>
+
+        <View style={{
+          height: 400,
+          marginHorizontal: 15,
+          borderColor: '#ddd',
+          shadowColor: Platform.OS === 'ios' ? '#000000' : '#000000',
+          shadowOffset: {
+            width: 0,
+            height: 2,
+          },
+          shadowOpacity: 0.2,
+          elevation: Platform.OS === 'ios' ? null : 3,
+
+        }}>
+          <ScrollView>
+            {exams.map((exam) => (
+              <View
+                key={exam.id}
+                style={{
+                  flex: 1,
+                  flexDirection: 'row',
+                  height: 115,
+                  borderBottomWidth: 1,
+                  borderBottomColor: '#C7C7C7',
+
+
+                }}
+                onPress={() => { }}
+              >
+                <View style={{ flex: 0.1, }}>
+                  {renderIcon(exam)}
                 </View>
-                <View
-                  style={{
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    backgroundColor: colors.primary,
-                    height: 25,
-                    width: 90,
-                    borderRadius: 15,
-                    marginTop: 10,
-                  }}
-                >
-                  <Text
-                    style={{
-                      fontSize: 13,
-                      color: 'white',
-                      fontWeight: 'bold',
-                    }}
-                  >
-                    {t(statusPedido[exam.status])}
-                  </Text>
+                <View style={{ flex: 0.6, paddingLeft: 15 }}>
+                  <Text style={{ marginTop: 10, fontSize: 16 }}>{`${t('Laudo')} Nº ${exam.codigo
+                    }`}</Text>
+
+                  <Text style={{ fontSize: 14, marginTop: 5 }}>Paciente</Text>
+                  <Text style={{ fontSize: 14 }}>{`${t('DATA')}: `}</Text>
+
+                  <Text style={{ fontSize: 14 }}>{`${t('EXAME')}: `}</Text>
+
                 </View>
-              </View>
-              <View style={{ marginBottom: 10, flex: 0.8 }}>
-                <View
-                  style={{
-                    flex: 1,
-                    flexDirection: 'row',
-                  }}
-                >
-                  <View style={{ flex: 0.8 }}>
-                    <Text
-                      style={{
-                        fontSize: 20,
-                        marginBottom: 10,
-                        fontWeight: 'bold',
-                        color: '#ff8500',
-                      }}
-                    >
-                      {`${exam.clinica_nome}`}
-                    </Text>
-                    <Text style={{ fontSize: 14 }}>{`${t('Pedido')}: ${
-                      exam.codigo
-                    }`}</Text>
-                    <Text style={{ fontSize: 14 }}>{`${t('Tipo de exame')}: ${
-                      exam.exame_nome
-                    }`}</Text>
-                    <Text style={{ fontSize: 14 }}>{`${t('Tipo de amostra')}: ${
-                      exam.amostra_tipo
-                    }`}</Text>
-                    <Text style={{ fontSize: 15 }}>{`${t('Resultado')}: ${t(
-                      exam.resultado
-                    )}`}</Text>
+                <View style={{ flex: 0.4, backgroundColor: '#F2F2F2', justifyContent: 'center', alignItems: 'center' }}>
+                  <View style={{}}>
+                    <IconDownload />
                   </View>
-                  <View
-                    style={{
-                      flex: 0.3,
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}
-                  >
-                    {exam.resultado !== '-' && (
-                      <TouchableOpacity
-                        style={{}}
-                        onPress={() => openLaudo(exam.url_exame)}
-                      >
-                        <View style={{ alignItems: 'center' }}>
-                          <Text>PDF</Text>
-                          <Fontisto name="world-o" size={24} color="black" />
-                        </View>
-                      </TouchableOpacity>
-                    )}
+                  <Text style={{ marginBottom: 11, fontWeight: '700', marginTop: 5 }}>{t('Baixar PDF')}</Text>
+                  <View style={{
+                    shadowColor: "#000",
+                    shadowOffset: {
+                      width: 0,
+                      height: 2,
+                    },
+                    shadowOpacity: 0.25,
+                    shadowRadius: 3.84,
+
+                    elevation: 5,
+                  }}>
+                    <ButtonCard text={t('VER LAUDO')} />
                   </View>
+
                 </View>
+
               </View>
-            </View>
-          ))}
-        </ScrollView>
+            ))}
+          </ScrollView>
+        </View>
         <ModalWebView visible={visible} hideModal={hideModal} url={modalUrl} />
       </Container>
     </>

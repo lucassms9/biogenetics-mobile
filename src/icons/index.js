@@ -21,11 +21,23 @@ import { iconMoreLang } from './iconMoreLang';
 import { iconMoreSignout } from './iconMoreSignout';
 import { iconMoreTerm } from './iconMoreTerm';
 
+import { iconStatusAttendece } from './iconStatusAttendece';
+import { iconStatusDiag } from './iconStatusDiag';
+import { iconStatusFinishied } from './iconStatusFinishied';
+import { iconStatusTriagem } from './iconStatusTriagem';
+import { iconDownload } from './iconDownload';
+
 import { SvgXml } from 'react-native-svg';
 
 const IconBr = (props) => <SvgXml xml={br} {...props} />
 const IconEn = (props) => <SvgXml xml={en} {...props} />
 const IconEs = (props) => <SvgXml xml={es} {...props} />
+
+const IconDownload = (props) => <SvgXml xml={iconDownload} {...props} />
+const IconStatusAttendece = (props) => <SvgXml xml={iconStatusAttendece} {...props} />
+const IconStatusDiag = (props) => <SvgXml xml={iconStatusDiag} {...props} />
+const IconStatusFinishied = (props) => <SvgXml xml={iconStatusFinishied} {...props} />
+const IconStatusTriagem = (props) => <SvgXml xml={iconStatusTriagem} {...props} />
 
 const IconMenuLabs = (props) => <SvgXml xml={iconMenuLabs} {...props} />
 const IconMenuServices = (props) => <SvgXml xml={iconMenuServices} {...props} />
@@ -46,6 +58,11 @@ const IconMoreSignout = (props) => <SvgXml xml={iconMoreSignout} {...props} />
 const IconMoreTerm = (props) => <SvgXml xml={iconMoreTerm} {...props} />
 
 export {
+  IconStatusDiag,
+  IconDownload,
+  IconStatusFinishied,
+  IconStatusTriagem,
+  IconStatusAttendece,
   IconMoreTerm,
   IconMoreSignout,
   IconMoreLang,
