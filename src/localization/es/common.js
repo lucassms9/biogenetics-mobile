@@ -110,10 +110,10 @@ export default {
   'DOENÇAS HEPÁTICAS': 'ENFERMEDADES DEL HIGADO',
   OUTROS: 'OTROS',
   'Meus Laudos': 'Mis informes',
-  Atendimento: 'Asistencia',
-  Triagem: 'Poner en pantalla',
+  Atendimento: 'Atención',
+  Triagem: 'Cribado',
   Diagnóstico: 'Diagnóstico',
-  Finalizado: 'Finished',
+  Finalizado: 'Terminado',
   Positivo: 'Positive',
   Negativo: 'Negativo',
   'Mais opções': 'Mas opciones',
@@ -123,7 +123,7 @@ export default {
   Telefone: 'Teléfono',
   'Entre em contato com nosso suporte por e-mail ou telefone':'Póngase en contacto con nuestro soporte por correo electrónico o por teléfono',
   'D I A G N Ó S T I C O S':'D I A G N O S T I C O S',
-  'Cadastro conclúido! por favor, dirija-se ao laboratório escolhido para a realizar coleta.':'¡Registro completado! por favor diríjase al laboratorio elegido para recogerlo.',
+  'Cadastro conclúido! por favor, dirija-se ao laboratório escolhido para a realizar coleta':'¡Registro completado! por favor diríjase al laboratorio elegido para recogerlo',
   'Português':'Portugués',
   'Inglês':'Inglés',
   'Espanhol':'Español',
@@ -151,5 +151,9 @@ export default {
   'O paciente esteve em alguma ':'El paciente estaba en alguna ',
   'Unidade de Saúde ':'Unidad de salud ',
   'nos últimos 14 dias? (Pronto Socorro, Internação, UTI)':'en los últimos 14 días? (Urgencias, Hospitalización, UCI)',
-  'Coriza':'Moquear'
+  'Coriza':'Moquear',
+  'Qual País':'Cul País',
+  'Ver Todos':'Ver todo',
+  'apresentados':'presentados',
+  'Salvar dados para login':'Guardar datos de inicio de sesión'
 };

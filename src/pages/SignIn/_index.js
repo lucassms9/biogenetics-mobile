@@ -5,8 +5,10 @@ import {
   Text,
   TouchableOpacity,
   Platform,
+  KeyboardAvoidingView,
   Keyboard,
 } from 'react-native';
+import { TextInput, HelperText, Icon } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { Feather } from '@expo/vector-icons';
 
@@ -15,11 +17,9 @@ import logoBio from '@assets/biogenetics-logo.png';
 import { useAuth } from '~/contexts/auth';
 
 import Container from '~/components/Container';
-import TextInput from '~/components/TextInput';
-import ButtonGradient from '~/components/ButtonGradient';
-import CheckBox from '~/components/CheckBox';
+import ButtonPrimary from '~/components/ButtonPrimary';
 import Alert from '~/components/Alert';
-import LanguageComponent from '~/language/LanguageComponent';
+import ModalLanguage from '~/components/ModalLanguage';
 
 const SignIn = ({ navigation }) => {
   const [visibleAlert, setVisibleAlert] = useState(false);
@@ -30,7 +30,6 @@ const SignIn = ({ navigation }) => {
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isSucure, setIsSucure] = useState(true);
-  const [checked, setChecked] = useState(false);
 
   const { handleSignIn } = useAuth();
   const { t, i18n } = useTranslation();
@@ -93,7 +92,7 @@ const SignIn = ({ navigation }) => {
       >
         <Image
           resizeMode="contain"
-          style={{ width: '85%', height: 70, top: 20 }}
+          style={{ width: '85%', height: 95, top: 20 }}
           source={logoBio}
         />
         <View>
@@ -104,7 +103,8 @@ const SignIn = ({ navigation }) => {
               justifyContent: 'flex-end',
               fontWeight: '500',
               alignItems: 'flex-end',
-              right: -50,
+
+              right: -65,
             }}
           >
             {t('D I A G N Ó S T I C O S')}
@@ -113,57 +113,45 @@ const SignIn = ({ navigation }) => {
       </View>
       <View
         style={{
-          flex: 1,
+          flex: 0.6,
           marginHorizontal: 20,
         }}
       >
         <TextInput
-          placeholder={t('signin:inputEmail')}
+          label={t('signin:inputEmail')}
           mode="outlined"
           autoCapitalize="none"
           keyboardType="email-address"
           value={email}
-          errorMessage={erros.email}
           onChangeText={(text) => setEmail(text)}
         />
-
+        <HelperText type="error" visible={!!erros.email}>
+          {erros.email}
+        </HelperText>
         <TextInput
           mode="outlined"
-          style={{ borderWidth: 0 }}
-          placeholder={t('signin:inputPassword')}
+          label={t('signin:inputPassword')}
           autoCapitalize="none"
           secureTextEntry={isSucure}
           value={password}
-          errorMessage={erros.password}
           onChangeText={(text) => setPassword(text)}
-          
-          rightIcon={
-            <TouchableOpacity onPress={() => setIsSucure(!isSucure)}>
-              <Feather
-                style={{ marginTop: Platform.OS === 'ios' ? 0 : 3 }}
-                name="eye"
-                size={20}
-                color="black"
-              />
-            </TouchableOpacity>
+          right={
+            <TextInput.Icon
+              name="eye" // where <Icon /> is any component from vector-icons or anything else
+              onPress={() => setIsSucure(!isSucure)}
+            />
           }
         />
+        <HelperText type="error" visible={!!erros.password}>
+          {erros.password}
+        </HelperText>
 
-        <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-          <CheckBox checked={checked} onPress={() => setChecked(!checked)} />
-          <Text style={{ color: '#0E2777', fontSize: 15 }}>
-            {t('Salvar dados para login')}
-          </Text>
-        </View>
-
-        <View style={{ marginHorizontal: 20 }}>
-          <ButtonGradient
-            style={{ marginTop: 20 }}
-            text={t('signin:buttonLogin')}
-            onPress={signSubIn}
-            loading={loading}
-          />
-        </View>
+        <ButtonPrimary
+          style={{ marginTop: 20 }}
+          text={t('signin:buttonLogin')}
+          onPress={signSubIn}
+          loading={loading}
+        />
 
         <View
           style={{
@@ -173,8 +161,11 @@ const SignIn = ({ navigation }) => {
           }}
         >
           <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-            <Text style={{ fontSize: 13, color: '#0E2777', fontWeight: 'bold' }}>
-              {t('signin:createAccount2')}
+            <Text style={{ fontSize: 15 }}>
+              {t('signin:createAccount')}{' '}
+              <Text style={{ fontWeight: 'bold' }}>
+                {t('signin:createAccount2')}
+              </Text>
             </Text>
           </TouchableOpacity>
         </View>
@@ -186,17 +177,30 @@ const SignIn = ({ navigation }) => {
           }}
         >
           <TouchableOpacity onPress={() => navigation.navigate('Recover')}>
-            <Text style={{ fontSize: 15, color: '#0E2777' }}>
+            <Text style={{ fontSize: 15, textDecorationLine: 'underline' }}>
               {t('signin:recoverPassword')}
             </Text>
           </TouchableOpacity>
         </View>
         <View
           style={{
-            marginTop: 15
+            flex: 1,
+            justifyContent: 'flex-end',
+            alignSelf: 'flex-end',
+            marginBottom: 10,
           }}
         >
-          <LanguageComponent />
+          <TouchableOpacity onPress={showModal}>
+            <View style={{ flexDirection: 'row' }}>
+              <Text style={{ fontSize: 18 }}>{LANGS[selectedLngCode]} </Text>
+              <Feather
+                style={{ marginTop: Platform.OS === 'ios' ? 0 : 3 }}
+                name="globe"
+                size={20}
+                color="black"
+              />
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
 
@@ -205,6 +209,7 @@ const SignIn = ({ navigation }) => {
         hideDialog={() => setVisibleAlert(false)}
         message={messageAlert}
       />
+      <ModalLanguage visible={visible} hideModal={hideModal} />
     </Container>
   );
 };

@@ -1,20 +1,19 @@
 import React from 'react';
 
-import { Button } from 'react-native-paper';
+import { Button } from 'react-native-elements';
 
 function ButtonPrimary({ loading, onPress, text, icon = 'login', style }) {
   return (
     <Button
-      style={{ backgroundColor: '#004ba7', ...style }}
+    buttonStyle={{ backgroundColor: '#004ba7', height: 50,  }}
       icon={icon}
       mode="contained"
       loading={loading}
+      title={text}
       onPress={onPress}
       labelStyle={{ color: '#fff', fontSize: 18 }}
-      contentStyle={{ height: 45 }}
-    >
-      {text}
-    </Button>
+      containerStyle={{ borderRadius: 30, ...style, }}
+    />
   );
 }
 

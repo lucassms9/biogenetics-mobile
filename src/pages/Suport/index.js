@@ -21,7 +21,7 @@ const Suport = ({ navigation }) => {
       >
         <View
           style={{
-            height: 150,
+            height: 180,
             backgroundColor: '#fff',
             padding: 20,
             borderRadius: 15,

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Image } from 'react-native';
 
+import { TextInput, HelperText } from 'react-native-paper';
 import logoBio from '@assets/biogenetics-logo.png';
 import { useTranslation } from 'react-i18next';
 import Header from '~/components/Header';
 import Container from '~/components/Container';
-import ButtonGradient from '~/components/ButtonGradient';
-import TextInput from '~/components/TextInput';
+import ButtonPrimary from '~/components/ButtonPrimary';
 import Alert from '~/components/Alert';
 import { useAuth } from '~/contexts/auth';
 
@@ -57,32 +57,35 @@ const Recover = ({ navigation }) => {
     <Container style={{ flex: 1 }}>
       <Header navigation={navigation} title={t('Esqueci minha senha')} />
       <View
-        style={{ flex: 0.3, justifyContent: 'center', marginLeft:25 }}
+        style={{ flex: 0.4, justifyContent: 'center', alignItems: 'center' }}
       >
-        <Text style={{ fontWeight: '700', fontSize: 18, color:'#1C2D53' }}>Recuperar senha</Text>
-        <Text style={{marginTop:19, maxWidth:290, }}>Insira o seu endereço de e-mail cadastrado,
-          que lhe enviaremos uma senha
-          de acesso provisório.</Text>
+        <Image
+          resizeMode="contain"
+          style={{ width: '85%', height: 95, top: 20 }}
+          source={logoBio}
+        />
       </View>
 
       <View
         style={{
           marginHorizontal: 20,
-
+          flex: 0.6,
           justifyContent: 'flex-start',
         }}
       >
         <TextInput
-          placeholder={t('Email')}
+          label={t('Email')}
           mode="outlined"
           autoCapitalize="none"
           keyboardType="email-address"
           value={email}
           onChangeText={(text) => setEmail(text)}
-          errorMessage={erros.email}
         />
+        <HelperText type="error" visible={!!erros.email}>
+          {erros.email}
+        </HelperText>
 
-        <ButtonGradient
+        <ButtonPrimary
           style={{ marginTop: 20 }}
           text={t('Recuperar Senha')}
           onPress={recoverSub}

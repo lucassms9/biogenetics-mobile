@@ -14,6 +14,8 @@ const CheckBoxComponent = ({ onPress, title, checked }) => (
       backgroundColor: 'transparent',
       borderWidth: 0,
       marginLeft: 0,
+      margin: 0,
+      padding: 0,
     }}
     title={title}
     checked={checked}

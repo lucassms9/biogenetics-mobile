@@ -15,6 +15,6 @@ export default {
   orange: '#ff8500',
   blue: '#16709C',
   backgroung: '#003048',
-  tabBarColor: '#f7f7f7',
+  tabBarColor: '#075CE9',
   header: '#01B0F1',
 };

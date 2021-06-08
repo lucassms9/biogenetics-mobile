@@ -1,8 +1,8 @@
 export default {
   inputEmail: 'E-mail',
   inputPassword: 'Senha',
-  buttonLogin: 'Entrar',
+  buttonLogin: 'ENTRAR',
   createAccount: `Não tem uma conta?`,
-  createAccount2: `Cadastre-se agora.`,
+  createAccount2: `Cadastre-se agora`,
   recoverPassword: 'Esqueci minha senha',
 };

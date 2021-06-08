@@ -10,7 +10,7 @@ const StepTwo = ({ data, setChecked, setInput }) => {
   const selectedLngCode = i18n.language;
   return (
     <View>
-      {selectedLngCode === 'pt' && (
+      {selectedLngCode === 'pt-BR' && (
         <RenderPT data={data} setChecked={setChecked} setInput={setInput} />
       )}
       {selectedLngCode === 'es' && (

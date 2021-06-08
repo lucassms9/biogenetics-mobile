@@ -123,7 +123,7 @@ export default {
   Telefone: 'Phone',
   'Entre em contato com nosso suporte por e-mail ou telefone':'Contact our support by email or phone.',
   'D I A G N Ó S T I C O S':'D I A G N O S T I C S',
-  'Cadastro conclúido! por favor, dirija-se ao laboratório escolhido para a realizar coleta.':'Registration completed! please go to the chosen laboratory to collect it.',
+  'Cadastro conclúido! por favor, dirija-se ao laboratório escolhido para a realizar coleta':'Registration completed! please go to the chosen laboratory to collect it',
   'Português':'Portuguese',
   'Inglês':'English',
   'Espanhol':'Spanish',
@@ -134,7 +134,7 @@ export default {
   'sinais ':'signs ',
   'e ':'and ',
   'sintomas ':'symptoms ',
-  'apresentados ':'presented',
+  'apresentados':'presented',
   'doenças associadas':'associated diseases',
   'Sobrenome': 'Last name',
   'Buscar por Cidade':'Search by City',
@@ -152,5 +152,9 @@ export default {
   'Unidade de Saúde ':'Health Unit ',
   'nos últimos 14 dias? (Pronto Socorro, Internação, UTI)':'in the last 14 days? (Emergency Room, Hospitalization, ICU)',
   'FALTA DE APETITE':'LACK OF APPETITE',
-  'Coriza':'Coryza'
+  'Coriza':'Coryza',
+  'Qual País':'Which Country',
+  'Ver Todos':'See All',
+  'apresentado ':'presented',
+  'Salvar dados para login':'Save login data'
 };

@@ -20,6 +20,14 @@ import NearbyClinics from '~/pages/NearbyClinics';
 import More from '~/pages/More';
 import { colors } from '~/styles';
 
+import {
+  IconMenu,
+  IconMenuUser,
+  IconMenuLaudo,
+  IconMenuServices,
+  IconMenuLabs,
+} from '~/icons';
+
 const Tab = createBottomTabNavigator();
 
 const MainTabBottom = () => {
@@ -42,13 +50,10 @@ const MainTabBottom = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => (
-            <Ionicons name="md-location-sharp" size={24} color={color} />
+            <IconMenuLabs fillOpacity={focused ? "1" : "0.7"} />
           ),
           tabBarLabel: ({ focused }) => {
-            const color = focused ? colors.primary : '#000';
-            return (
-              <Text style={{ fontSize: 13, color }}> {t('Laboratórios')} </Text>
-            );
+            return <Text style={{ fontSize: 11, color: '#fff', opacity: focused ? 1 : 0.7 }}> {t('Laboratórios')} </Text>;
           },
         }}
       />
@@ -59,13 +64,10 @@ const MainTabBottom = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => (
-            <MaterialIcons name="medical-services" size={24} color={color} />
+            <IconMenuServices fillOpacity={focused ? "1" : "0.7"} />
           ),
           tabBarLabel: ({ focused }) => {
-            const color = focused ? colors.primary : '#000';
-            return (
-              <Text style={{ fontSize: 14, color }}> {t('Serviços')} </Text>
-            );
+            return <Text style={{ fontSize: 11, color: '#fff', opacity: focused ? 1 : 0.7 }}> {t('Serviços')} </Text>;
           },
         }}
       />
@@ -76,13 +78,24 @@ const MainTabBottom = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => (
-            <Ionicons name="document-outline" size={24} color={color} />
+            <IconMenuLaudo fillOpacity={focused ? "1" : "0.7"} />
           ),
           tabBarLabel: ({ focused }) => {
-            const color = focused ? colors.primary : '#000';
-            return (
-              <Text style={{ fontSize: 13, color }}> {t('Meus Laudos')} </Text>
-            );
+            return <Text style={{ fontSize: 11, color: '#fff', opacity: focused ? 1 : 0.7 }}> {t('Meus Laudos')} </Text>;
+          },
+        }}
+      />
+
+      <Tab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ focused, color, size }) => (
+            <IconMenuUser fillOpacity={focused ? "1" : "0.7"} />
+          ),
+          tabBarLabel: ({ focused }) => {
+            return <Text style={{ fontSize: 11, color: '#fff', opacity: focused ? 1 : 0.7 }}> {t('Menu')} </Text>;
           },
         }}
       />
@@ -93,11 +106,10 @@ const MainTabBottom = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => (
-            <Feather name="list" size={24} color={color} />
+            <IconMenu fillOpacity={focused ? "1" : "0.7"} />
           ),
           tabBarLabel: ({ focused }) => {
-            const color = focused ? colors.primary : '#000';
-            return <Text style={{ fontSize: 13, color }}> {t('Mais')} </Text>;
+            return <Text style={{ fontSize: 11, color: '#fff', opacity: focused ? 1 : 0.7 }}> {t('Menu')} </Text>;
           },
         }}
       />

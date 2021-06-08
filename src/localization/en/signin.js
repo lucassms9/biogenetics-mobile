@@ -1,8 +1,8 @@
 export default {
   inputEmail: 'E-mail',
   inputPassword: 'Password',
-  buttonLogin: 'Login',
+  buttonLogin: 'LOGIN',
   createAccount: `Don't have an account?`,
-  createAccount2: `Register now.`,
+  createAccount2: `Register now`,
   recoverPassword: 'I forgot my password',
 };

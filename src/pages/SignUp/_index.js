@@ -61,24 +61,17 @@ const SignUp = ({ navigation }) => {
   };
 
   return (
-    <Container >
+    <Container style={{ flex: 1 }}>
       <Header navigation={navigation} title={t('Cadastrar-se')} />
 
       <ScrollView>
-
         <View
           style={{
-            marginHorizontal: 10,
-            marginBottom:50,
+            marginHorizontal: 20,
             flex: 1,
             justifyContent: 'flex-start',
           }}
         >
-          <View style={{ marginVertical: 40 }}>
-            <Text style={{ fontSize: 18, fontWeight: '700' }}>Olá, vamos iniciar o seu cadastro?</Text>
-            <Text style={{ marginTop: 18, fontWeight: '300' }}>Preencha todos os campos.</Text>
-          </View>
-
           <FormUser
             submitForm={submitForm}
             status={status}

@@ -135,7 +135,7 @@ const NearbyClinics = ({ navigation }) => {
           <View
             style={{
               flexDirection: 'row',
-              justifyContent: 'start',
+              justifyContent: 'flex-start',
               alignItems: 'center',
             }}
           >

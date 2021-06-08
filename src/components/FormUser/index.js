@@ -4,12 +4,13 @@ import { Formik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import Toast from 'react-native-tiny-toast';
 import axios from 'axios';
-import { Ionicons, AntDesign, FontAwesome } from '@expo/vector-icons';
-
-import { TextInput, HelperText } from 'react-native-paper';
+import { Ionicons, AntDesign, MaterialIcons } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 import RNPickerSelect from 'react-native-picker-select';
 
 import ButtonPrimary from '~/components/ButtonPrimary';
+import TextInput from '~/components/TextInput';
+import CheckBox from '~/components/CheckBox';
 
 import styles from './styles';
 
@@ -111,10 +112,8 @@ function FormUser({
                 error={errors.name}
                 onChangeText={(text) => setFieldValue('name', text)}
                 value={values.name}
+                errorMessage={errors.name}
               />
-              <HelperText type="error" visible={!!errors.name}>
-                {t(errors.name)}
-              </HelperText>
 
               <TextInput
                 label={t('Sobrenome')}
@@ -123,10 +122,9 @@ function FormUser({
                 error={errors.lastName}
                 onChangeText={(text) => setFieldValue('lastName', text)}
                 value={values.lastName}
+                errorMessage={errors.lastName}
               />
-              <HelperText type="error" visible={!!errors.lastName}>
-                {t(errors.lastName)}
-              </HelperText>
+
 
               <TextInput
                 label={t('E-mail')}
@@ -135,10 +133,9 @@ function FormUser({
                 error={errors.email}
                 onChangeText={(text) => setFieldValue('email', text)}
                 value={values.email}
+                errorMessage={errors.email}
               />
-              <HelperText type="error" visible={!!errors.email}>
-                {t(errors.email)}
-              </HelperText>
+
 
               <TextInput
                 label={t('CPF')}
@@ -147,22 +144,11 @@ function FormUser({
                 error={errors.cpf}
                 onChangeText={maskCPF(setFieldValue, 'cpf')}
                 value={values.cpf}
+                errorMessage={errors.cpf}
               />
-              <HelperText type="error" visible={!!errors.cpf}>
-                {t(errors.cpf)}
-              </HelperText>
 
-              {/* <TextInput
-                label={t('RG')}
-                mode="outlined"
-                autoCapitalize="none"
-                error={errors.rg}
-                onChangeText={maskRG(setFieldValue, 'rg')}
-                value={values.rg}
-              />
-              <HelperText type="error" visible={!!errors.rg}>
-                {t(errors.rg)}
-              </HelperText> */}
+
+
 
               <TextInput
                 label={t('Celular')}
@@ -171,15 +157,14 @@ function FormUser({
                 error={errors.phone}
                 onChangeText={maskPhone(setFieldValue, 'phone')}
                 value={values.phone}
+                errorMessage={errors.phone}
               />
-              <HelperText type="error" visible={!!errors.phone}>
-                {t(errors.phone)}
-              </HelperText>
+
 
               <View style={styles.mh5}>
                 <Text style={styles.labelPicker}>{t('Sexo')}</Text>
                 <RNPickerSelect
-                  onSubmitEditing={() => {}}
+                  onSubmitEditing={() => { }}
                   onValueChange={(text) => setFieldValue('sexo', text)}
                   value={values.sexo}
                   items={[
@@ -207,12 +192,10 @@ function FormUser({
                   useNativeAndroidPickerStyle={false}
                   // textInputProps={{ underlineColor: 'yellow' }}
                   Icon={() => (
-                    <Ionicons name="md-arrow-down" size={24} color="gray" />
+                    <MaterialIcons name="keyboard-arrow-down" size={24} color="gray" />
                   )}
                 />
-                <HelperText type="error" visible={!!errors.sexo}>
-                  {t(errors.sexo)}
-                </HelperText>
+            
               </View>
 
               <TextInput
@@ -222,24 +205,22 @@ function FormUser({
                 error={errors.data_nascimento}
                 onChangeText={maskDate(setFieldValue, 'data_nascimento')}
                 value={values.data_nascimento}
+                errorMessage={errors.data_nascimento}
               />
 
-              <HelperText type="error" visible={!!errors.data_nascimento}>
-                {t(errors.data_nascimento)}
-              </HelperText>
+
 
               <TextInput
                 label={t('Profissão')}
                 mode="outlined"
                 autoCapitalize="none"
                 error={errors.profissao}
+                errorMessage={errors.profissao}
                 onChangeText={(text) => setFieldValue('profissao', text)}
                 value={values.profissao}
               />
 
-              <HelperText type="error" visible={!!errors.profissao}>
-                {t(errors.profissao)}
-              </HelperText>
+
 
               <TextInput
                 label={t('Cep')}
@@ -249,11 +230,9 @@ function FormUser({
                 error={errors.cep}
                 onChangeText={maskCEP(setFieldValue, 'cep')}
                 value={values.cep}
+                errorMessage={errors.cep}
               />
 
-              <HelperText type="error" visible={!!errors.cep}>
-                {t(errors.cep)}
-              </HelperText>
 
               <TextInput
                 label={t('Endereço')}
@@ -262,11 +241,9 @@ function FormUser({
                 error={errors.endereco}
                 onChangeText={(text) => setFieldValue('endereco', text)}
                 value={values.endereco}
+                errorMessage={errors.endereco}
               />
 
-              <HelperText type="error" visible={!!errors.endereco}>
-                {t(errors.endereco)}
-              </HelperText>
 
               <TextInput
                 label={t('Bairro')}
@@ -275,11 +252,10 @@ function FormUser({
                 error={errors.bairro}
                 onChangeText={(text) => setFieldValue('bairro', text)}
                 value={values.bairro}
+                errorMessage={errors.bairro}
               />
 
-              <HelperText type="error" visible={!!errors.bairro}>
-                {t(errors.bairro)}
-              </HelperText>
+
 
               <TextInput
                 label={t('Cidade')}
@@ -288,11 +264,9 @@ function FormUser({
                 error={errors.cidade}
                 onChangeText={(text) => setFieldValue('cidade', text)}
                 value={values.cidade}
+                errorMessage={errors.cidade}
               />
 
-              <HelperText type="error" visible={!!errors.cidade}>
-                {t(errors.cidade)}
-              </HelperText>
 
               <TextInput
                 label={t('UF')}
@@ -301,11 +275,10 @@ function FormUser({
                 error={errors.uf}
                 onChangeText={(text) => setFieldValue('uf', text)}
                 value={values.uf}
+                errorMessage={errors.uf}
               />
 
-              <HelperText type="error" visible={!!errors.uf}>
-                {t(errors.uf)}
-              </HelperText>
+
               <TextInput
                 label={t('Nome da Mãe')}
                 mode="outlined"
@@ -313,11 +286,10 @@ function FormUser({
                 error={errors.nome_da_mae}
                 onChangeText={(text) => setFieldValue('nome_da_mae', text)}
                 value={values.nome_da_mae}
+                errorMessage={errors.nome_da_mae}
               />
 
-              <HelperText type="error" visible={!!errors.nome_da_mae}>
-                {t(errors.nome_da_mae)}
-              </HelperText>
+
 
               <TextInput
                 label={t('Senha')}
@@ -327,43 +299,25 @@ function FormUser({
                 secureTextEntry={isSucure}
                 onChangeText={(text) => setFieldValue('senha', text)}
                 value={values.senha}
-                right={
-                  <TextInput.Icon
-                    name="eye" // where <Icon /> is any component from vector-icons or anything else
-                    onPress={() => setIsSucure(!isSucure)}
-                  />
+                errorMessage={errors.senha}
+                rightIcon={
+                  <TouchableOpacity onPress={() => setIsSucure(!isSucure)}>
+                    <Feather
+                      style={{ marginTop: Platform.OS === 'ios' ? 0 : 3 }}
+                      name="eye"
+                      size={20}
+                      color="black"
+                    />
+                  </TouchableOpacity>
                 }
               />
 
-              <HelperText type="error" visible={!!errors.senha}>
-                {t(errors.senha)}
-              </HelperText>
 
               {termShow ? (
                 <View style={{ flexDirection: 'row', marginLeft: 10 }}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      setChecked(!checked);
-                    }}
-                    style={{ flexDirection: 'row', alignItems: 'center' }}
-                  >
-                    <View style={{ flexDirection: 'row' }}>
-                      {checked ? (
-                        <AntDesign
-                          name="checkcircleo"
-                          size={24}
-                          color={colors.primary}
-                        />
-                      ) : (
-                        <FontAwesome
-                          name="circle-thin"
-                          size={27}
-                          color={colors.primary}
-                          style={{ top: -2 }}
-                        />
-                      )}
-                    </View>
-                  </TouchableOpacity>
+                  <CheckBox checked={checked} onPress={() => {
+                    setChecked(!checked);
+                  }} />
 
                   <TouchableOpacity
                     onPress={() => {
@@ -432,12 +386,10 @@ const pickerSelectStyles = StyleSheet.create({
     fontSize: 16,
     paddingVertical: 12,
     paddingHorizontal: 10,
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 4,
+    borderRadius: 30,
     height: 55,
     color: '#000',
-    backgroundColor: '#fff',
+    backgroundColor: '#F6F6F6',
     paddingRight: 30, // to ensure the text is never behind the icon
   },
   inputAndroid: {
@@ -445,12 +397,10 @@ const pickerSelectStyles = StyleSheet.create({
     fontSize: 16,
     paddingVertical: 12,
     paddingHorizontal: 10,
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 4,
+    borderRadius: 30,
     height: 55,
     color: '#000',
-    backgroundColor: '#fff',
+    backgroundColor: '#F6F6F6',
     paddingRight: 30, // to ensure the text is never behind the icon
   },
 });
