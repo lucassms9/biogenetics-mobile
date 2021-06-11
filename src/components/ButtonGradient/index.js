@@ -6,13 +6,13 @@ import { LinearGradient } from 'expo-linear-gradient';
 function ButtonGradient({ loading, onPress, text, icon = 'login', style }) {
   return (
     <Button
-      buttonStyle={{ height: 50, }}
+      buttonStyle={{ height: 50 }}
       icon={icon}
       mode="contained"
       loading={loading}
       onPress={onPress}
       title={text}
-      titleStyle={{fontWeight:'700'}}
+      titleStyle={{ fontWeight: '700' }}
       ViewComponent={LinearGradient} // Don't forget this!
       linearGradientProps={{
         colors: ['#1493EB', '#1138F3'],
@@ -20,10 +20,9 @@ function ButtonGradient({ loading, onPress, text, icon = 'login', style }) {
         end: { x: 1, y: 0.2 },
       }}
       labelStyle={{ color: '#fff', fontSize: 18 }}
-      containerStyle={{ borderRadius: 30, ...style, }}
+      containerStyle={{ borderRadius: 30, ...style }}
     />
   );
 }
-
 
 export default ButtonGradient;

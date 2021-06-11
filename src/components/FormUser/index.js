@@ -4,8 +4,13 @@ import { Formik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import Toast from 'react-native-tiny-toast';
 import axios from 'axios';
-import { Ionicons, AntDesign, MaterialIcons } from '@expo/vector-icons';
-import { Feather } from '@expo/vector-icons';
+import {
+  Ionicons,
+  AntDesign,
+  MaterialIcons,
+  Feather,
+} from '@expo/vector-icons';
+
 import RNPickerSelect from 'react-native-picker-select';
 
 import ButtonPrimary from '~/components/ButtonPrimary';
@@ -125,7 +130,6 @@ function FormUser({
                 errorMessage={errors.lastName}
               />
 
-
               <TextInput
                 label={t('E-mail')}
                 mode="outlined"
@@ -135,7 +139,6 @@ function FormUser({
                 value={values.email}
                 errorMessage={errors.email}
               />
-
 
               <TextInput
                 label={t('CPF')}
@@ -147,9 +150,6 @@ function FormUser({
                 errorMessage={errors.cpf}
               />
 
-
-
-
               <TextInput
                 label={t('Celular')}
                 mode="outlined"
@@ -159,7 +159,6 @@ function FormUser({
                 value={values.phone}
                 errorMessage={errors.phone}
               />
-
 
               <View style={styles.mh5}>
                 <Text style={styles.labelPicker}>{t('Sexo')}</Text>
@@ -192,10 +191,13 @@ function FormUser({
                   useNativeAndroidPickerStyle={false}
                   // textInputProps={{ underlineColor: 'yellow' }}
                   Icon={() => (
-                    <MaterialIcons name="keyboard-arrow-down" size={24} color="gray" />
+                    <MaterialIcons
+                      name="keyboard-arrow-down"
+                      size={24}
+                      color="gray"
+                    />
                   )}
                 />
-            
               </View>
 
               <TextInput
@@ -208,8 +210,6 @@ function FormUser({
                 errorMessage={errors.data_nascimento}
               />
 
-
-
               <TextInput
                 label={t('Profissão')}
                 mode="outlined"
@@ -219,8 +219,6 @@ function FormUser({
                 onChangeText={(text) => setFieldValue('profissao', text)}
                 value={values.profissao}
               />
-
-
 
               <TextInput
                 label={t('Cep')}
@@ -233,7 +231,6 @@ function FormUser({
                 errorMessage={errors.cep}
               />
 
-
               <TextInput
                 label={t('Endereço')}
                 mode="outlined"
@@ -243,7 +240,6 @@ function FormUser({
                 value={values.endereco}
                 errorMessage={errors.endereco}
               />
-
 
               <TextInput
                 label={t('Bairro')}
@@ -255,8 +251,6 @@ function FormUser({
                 errorMessage={errors.bairro}
               />
 
-
-
               <TextInput
                 label={t('Cidade')}
                 mode="outlined"
@@ -266,7 +260,6 @@ function FormUser({
                 value={values.cidade}
                 errorMessage={errors.cidade}
               />
-
 
               <TextInput
                 label={t('UF')}
@@ -278,7 +271,6 @@ function FormUser({
                 errorMessage={errors.uf}
               />
 
-
               <TextInput
                 label={t('Nome da Mãe')}
                 mode="outlined"
@@ -288,8 +280,6 @@ function FormUser({
                 value={values.nome_da_mae}
                 errorMessage={errors.nome_da_mae}
               />
-
-
 
               <TextInput
                 label={t('Senha')}
@@ -312,12 +302,14 @@ function FormUser({
                 }
               />
 
-
               {termShow ? (
                 <View style={{ flexDirection: 'row', marginLeft: 10 }}>
-                  <CheckBox checked={checked} onPress={() => {
-                    setChecked(!checked);
-                  }} />
+                  <CheckBox
+                    checked={checked}
+                    onPress={() => {
+                      setChecked(!checked);
+                    }}
+                  />
 
                   <TouchableOpacity
                     onPress={() => {

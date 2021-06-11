@@ -1,12 +1,14 @@
 import api from '~/services/api';
 
-export async function listAll() {
-  const res = await api.get('clientes/list-all');
+export async function listAll(zipCode, lat, long) {
+  const res = await api.get(
+    `clientes/list-all?cep=${zipCode}&lat=${lat}&long=${long}`
+  );
   return res;
 }
 
-export async function list() {
-  const res = await api.get('clientes', {
+export async function list(zipCode, lat, long) {
+  const res = await api.get(`clientes?cep=${zipCode}&lat=${lat}&long=${long}`, {
     all: true,
   });
   return res;

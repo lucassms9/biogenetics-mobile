@@ -43,11 +43,15 @@ const More = ({ navigation }) => {
 
   return (
     <Container style={{ flex: 1 }}>
-      <Header noBack navigation={navigation} title={t('Mais opções')} />
+      <Header noBack navigation={navigation} title={t('Menu')} />
 
       <View style={{ marginLeft: 27, marginBottom: 50 }}>
-        <Text style={{ fontWeight: '700', fontSize: 18, marginTop: 45 }}>{t('Menu Biogenetics')}</Text>
-        <Text style={{ fontWeight: '300', marginTop: 18, maxWidth: 220 }}>{t('Aqui você poderá editar os seus dados pessoais, idioma e mais.')}</Text>
+        <Text style={{ fontWeight: '700', fontSize: 18, marginTop: 45 }}>
+          {t('Menu Biogenetics')}
+        </Text>
+        <Text style={{ fontWeight: '300', marginTop: 18, maxWidth: 220 }}>
+          {t('Aqui você poderá editar os seus dados pessoais, idioma e mais.')}
+        </Text>
       </View>
 
       <ScrollView style={{ marginHorizontal: 15 }}>
@@ -55,8 +59,7 @@ const More = ({ navigation }) => {
           style={{
             borderBottomWidth: 1,
             borderBottomColor: '#D1D1D1',
-            marginBottom: 25
-
+            marginBottom: 25,
           }}
           onPress={() => navigation.navigate('Profile')}
         >
@@ -74,8 +77,7 @@ const More = ({ navigation }) => {
           style={{
             borderBottomWidth: 1,
             borderBottomColor: '#D1D1D1',
-            marginBottom: 25
-
+            marginBottom: 25,
           }}
           onPress={() => navigation.navigate('TermUse')}
         >
@@ -93,20 +95,25 @@ const More = ({ navigation }) => {
           style={{
             borderBottomWidth: 1,
             borderBottomColor: '#D1D1D1',
-            marginBottom: 25
-
+            marginBottom: 25,
           }}
           onPress={() => { }}
         >
           <View
-            style={{ flex: 1, flexDirection: 'row', marginBottom: 10, marginLeft: 10 }}
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              marginBottom: 10,
+              marginLeft: 10,
+            }}
           >
-
             <IconMoreLang />
             <Text style={{ marginLeft: 37, marginTop: 5, fontSize: 15 }}>
               {t('IDIOMAS')}
             </Text>
-            <View style={{ flex: 1, alignItems: 'flex-end' }}><LanguageComponent /></View>
+            <View style={{ flex: 1, alignItems: 'flex-end' }}>
+              <LanguageComponent />
+            </View>
           </View>
         </TouchableOpacity>
 
@@ -114,8 +121,7 @@ const More = ({ navigation }) => {
           style={{
             borderBottomWidth: 1,
             borderBottomColor: '#D1D1D1',
-            marginBottom: 25
-
+            marginBottom: 25,
           }}
           onPress={() => navigation.navigate('Suport')}
         >
@@ -133,8 +139,7 @@ const More = ({ navigation }) => {
           style={{
             borderBottomWidth: 1,
             borderBottomColor: '#D1D1D1',
-            marginBottom: 25
-
+            marginBottom: 25,
           }}
           onPress={signOut}
         >
@@ -147,13 +152,12 @@ const More = ({ navigation }) => {
             </Text>
           </View>
         </TouchableOpacity>
-
-
       </ScrollView>
-      <View style={{ justifyContent: 'center', alignItems: 'center',top:-20 }}>
+      <View
+        style={{ justifyContent: 'center', alignItems: 'center', top: -20 }}
+      >
         <Text style={{ color: '#113CF3' }}>{VERSION}</Text>
       </View>
-
     </Container>
   );
 };

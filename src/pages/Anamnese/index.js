@@ -13,7 +13,7 @@ import StepOne from './StepOne';
 import StepTwo from './StepTwo';
 import StepThree from './StepThree';
 
-import ButtonPrimary from '~/components/ButtonPrimary';
+import ButtonGradient from '~/components/ButtonGradient';
 import { getStateById } from '~/services/geoName';
 import { createAnamnese } from '~/services/clinics';
 
@@ -88,7 +88,9 @@ const Anamnese = ({ navigation, route }) => {
 
       const res = await createAnamnese(dataBody);
       Toast.showSuccess(
-        t('Cadastro conclúido! por favor, dirija-se ao laboratório escolhido para a realizar coleta')
+        t(
+          'Cadastro conclúido! por favor, dirija-se ao laboratório escolhido para a realizar coleta'
+        )
       );
       navigation.navigate('Main', { screen: 'MyExams' });
     } catch (error) {
@@ -240,7 +242,8 @@ const Anamnese = ({ navigation, route }) => {
             >
               <View>
                 {step > 1 && (
-                  <ButtonPrimary
+                  <ButtonGradient
+                    style={{ width: 120 }}
                     loading={status === 'loading'}
                     onPress={backStep}
                     text={t('VOLTAR')}
@@ -248,7 +251,8 @@ const Anamnese = ({ navigation, route }) => {
                 )}
               </View>
               <View>
-                <ButtonPrimary
+                <ButtonGradient
+                  style={{ width: 120 }}
                   loading={status === 'loading'}
                   onPress={nextStep}
                   text={textButton}
