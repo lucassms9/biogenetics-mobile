@@ -84,6 +84,7 @@ const MyExams = ({ navigation }) => {
     FileSystem.downloadAsync(uri, `${FileSystem.documentDirectory}exame.pdf`)
       .then(({ uri }) => {
         console.log('Finished downloading to ', uri);
+        alert(t('Download realizado com sucesso'));
       })
       .catch((error) => {
         console.error(error);
