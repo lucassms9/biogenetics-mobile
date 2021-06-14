@@ -48,7 +48,7 @@ const MyExams = ({ navigation }) => {
           },
         },
       } = await list();
-
+      console.log(pedidos);
       setExams(pedidos);
     } catch (error) {
       console.log(error);
@@ -75,6 +75,7 @@ const MyExams = ({ navigation }) => {
       showModal(true);
       showModalUrl(url);
     }
+
     // showModal(true);
     // showModalUrl(url);
     // Linking.openURL(url);
@@ -121,7 +122,7 @@ const MyExams = ({ navigation }) => {
             {t('Meus Laudos')}
           </Text>
           <Text style={{ fontWeight: '300', marginTop: 18, maxWidth: 220 }}>
-            {t('Consulte o status e o resultado dos seus exames realizados.')}
+            {t('Consulte o status e o resultado dos seus exames realizados')}
           </Text>
         </View>
 
@@ -155,14 +156,24 @@ const MyExams = ({ navigation }) => {
               >
                 <View style={{ flex: 0.1 }}>{renderIcon(exam)}</View>
                 <View style={{ flex: 0.6, paddingLeft: 15 }}>
-                  <Text style={{ marginTop: 10, fontSize: 16 }}>{`${t(
-                    'Laudo'
-                  )} Nº ${exam.codigo}`}</Text>
+                  <Text
+                    numberOfLines={1}
+                    style={{ marginTop: 10, fontSize: 16 }}
+                  >{`${t('Laudo')} Nº ${exam.codigo}`}</Text>
 
-                  <Text style={{ fontSize: 14, marginTop: 5 }}>Paciente</Text>
-                  <Text style={{ fontSize: 14 }}>{`${t('DATA')}: `}</Text>
+                  <Text
+                    numberOfLines={1}
+                    style={{ fontSize: 14, marginTop: 5 }}
+                  >
+                    {exam?.paciente_nome}
+                  </Text>
+                  <Text numberOfLines={1} style={{ fontSize: 14 }}>{`${t(
+                    'DATA'
+                  )}: `}</Text>
 
-                  <Text style={{ fontSize: 14 }}>{`${t('EXAME')}: `}</Text>
+                  <Text numberOfLines={1} style={{ fontSize: 14 }}>{`${t(
+                    'EXAME'
+                  )}: `}</Text>
                 </View>
                 <View
                   style={{

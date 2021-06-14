@@ -31,6 +31,7 @@ const RenderEN = ({ data, setChecked, setInput }) => {
         style={{
           marginLeft: 5,
           marginTop: 15,
+          marginBottom: 15,
           flexDirection: 'row',
           flexWrap: 'wrap',
         }}
@@ -177,6 +178,7 @@ const RenderES = ({ data, setChecked, setInput }) => {
         style={{
           marginLeft: 5,
           marginTop: 15,
+          marginBottom: 15,
           flexDirection: 'row',
           flexWrap: 'wrap',
         }}
@@ -326,6 +328,7 @@ const RenderPT = ({ data, setChecked, setInput }) => {
         style={{
           marginLeft: 5,
           marginTop: 15,
+          marginBottom: 15,
           flexDirection: 'row',
           flexWrap: 'wrap',
         }}

@@ -20,25 +20,12 @@ import {
 } from '~/icons';
 
 const More = ({ navigation }) => {
-  const [visible, setVisible] = useState(false);
+  const { handleSignOut } = useAuth();
 
-  const { handleSignOut, user } = useAuth();
-
-  const showModal = () => setVisible(true);
-  const hideModal = () => setVisible(false);
-
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const signOut = () => {
     handleSignOut();
-  };
-
-  const selectedLngCode = i18n.language;
-
-  const LANGS = {
-    'pt-BR': t('Português'),
-    en: t('Inglês'),
-    es: t('Espanhol'),
   };
 
   return (
@@ -50,7 +37,7 @@ const More = ({ navigation }) => {
           {t('Menu Biogenetics')}
         </Text>
         <Text style={{ fontWeight: '300', marginTop: 18, maxWidth: 220 }}>
-          {t('Aqui você poderá editar os seus dados pessoais, idioma e mais.')}
+          {t('Aqui você poderá editar os seus dados, pessoais idioma e mais')}
         </Text>
       </View>
 

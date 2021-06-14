@@ -62,7 +62,7 @@ const Services = ({ navigation }) => {
           {t('Exames')}
         </Text>
         <Text style={{ fontWeight: '300', marginTop: 18, maxWidth: 220 }}>
-          {t('Como podemos te ajudar hoje? Escolha uma das opções abaixo.')}
+          {t('Como podemos te ajudar hoje? Escolha uma das opções abaixo')}
         </Text>
       </View>
 

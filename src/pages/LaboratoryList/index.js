@@ -123,17 +123,6 @@ const LaboratoryList = ({ navigation, route }) => {
     setQuery('');
   };
 
-  const selectItem = (item) => {
-    const newClinic = remoteClinics.filter(
-      (remoClinic) =>
-        remoClinic.uf === item.uf && remoClinic.cidade === item.cidade
-    );
-    setClinics(newClinic);
-    setQuery(item.handleCity);
-
-    setChoose(true);
-  };
-
   const filterBiZipcode = () => {
     console.log('filterBiZipcode');
     getClinics();
@@ -149,7 +138,7 @@ const LaboratoryList = ({ navigation, route }) => {
         </Text>
         <Text style={{ fontWeight: '300', marginTop: 18, maxWidth: 220 }}>
           {t(
-            'Aqui você consegue encontrar os laboratórios mais próximos de você.'
+            'Aqui você consegue encontrar os laboratórios mais próximos de você'
           )}
         </Text>
       </View>
@@ -176,8 +165,8 @@ const LaboratoryList = ({ navigation, route }) => {
           borderColor: '#ddd',
           shadowColor: Platform.OS === 'ios' ? '#000000' : '#000000',
           shadowOffset: {
-            width: 0,
-            height: 2,
+            width: -5,
+            height: 4,
           },
           shadowOpacity: 0.2,
           elevation: Platform.OS === 'ios' ? null : 3,
@@ -198,7 +187,9 @@ const LaboratoryList = ({ navigation, route }) => {
               }}
               onPress={() => { }}
             >
-              <View style={{ flex: 0.6, paddingLeft: 15 }}>
+              <View
+                style={{ flex: 0.6, paddingLeft: 15, backgroundColor: '#fff' }}
+              >
                 <Text numberOfLines={1} style={{ marginTop: 10, fontSize: 16 }}>
                   {clinic.nome}
                 </Text>

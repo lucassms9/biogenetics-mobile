@@ -50,11 +50,20 @@ const MainTabBottom = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => (
-            <IconMenuLabs fillOpacity={focused ? "1" : "0.7"} />
+            <IconMenuLabs fillOpacity={focused ? '1' : '0.7'} />
           ),
-          tabBarLabel: ({ focused }) => {
-            return <Text style={{ fontSize: 11, color: '#fff', opacity: focused ? 1 : 0.7 }}> {t('Laboratórios')} </Text>;
-          },
+          tabBarLabel: ({ focused }) => (
+            <Text
+              style={{
+                fontSize: 11,
+                color: '#fff',
+                opacity: focused ? 1 : 0.7,
+              }}
+            >
+              {' '}
+              {t('Laboratórios')}{' '}
+            </Text>
+          ),
         }}
       />
 
@@ -64,11 +73,20 @@ const MainTabBottom = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => (
-            <IconMenuServices fillOpacity={focused ? "1" : "0.7"} />
+            <IconMenuServices fillOpacity={focused ? '1' : '0.7'} />
           ),
-          tabBarLabel: ({ focused }) => {
-            return <Text style={{ fontSize: 11, color: '#fff', opacity: focused ? 1 : 0.7 }}> {t('Serviços')} </Text>;
-          },
+          tabBarLabel: ({ focused }) => (
+            <Text
+              style={{
+                fontSize: 11,
+                color: '#fff',
+                opacity: focused ? 1 : 0.7,
+              }}
+            >
+              {' '}
+              {t('Serviços')}{' '}
+            </Text>
+          ),
         }}
       />
 
@@ -78,11 +96,20 @@ const MainTabBottom = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => (
-            <IconMenuLaudo fillOpacity={focused ? "1" : "0.7"} />
+            <IconMenuLaudo fillOpacity={focused ? '1' : '0.7'} />
           ),
-          tabBarLabel: ({ focused }) => {
-            return <Text style={{ fontSize: 11, color: '#fff', opacity: focused ? 1 : 0.7 }}> {t('Meus Laudos')} </Text>;
-          },
+          tabBarLabel: ({ focused }) => (
+            <Text
+              style={{
+                fontSize: 11,
+                color: '#fff',
+                opacity: focused ? 1 : 0.7,
+              }}
+            >
+              {' '}
+              {t('Meus Laudos')}{' '}
+            </Text>
+          ),
         }}
       />
 
@@ -92,11 +119,20 @@ const MainTabBottom = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => (
-            <IconMenuUser fillOpacity={focused ? "1" : "0.7"} />
+            <IconMenuUser fillOpacity={focused ? '1' : '0.7'} />
           ),
-          tabBarLabel: ({ focused }) => {
-            return <Text style={{ fontSize: 11, color: '#fff', opacity: focused ? 1 : 0.7 }}> {t('Menu')} </Text>;
-          },
+          tabBarLabel: ({ focused }) => (
+            <Text
+              style={{
+                fontSize: 11,
+                color: '#fff',
+                opacity: focused ? 1 : 0.7,
+              }}
+            >
+              {' '}
+              {t('Perfil')}{' '}
+            </Text>
+          ),
         }}
       />
 
@@ -106,11 +142,20 @@ const MainTabBottom = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => (
-            <IconMenu fillOpacity={focused ? "1" : "0.7"} />
+            <IconMenu fillOpacity={focused ? '1' : '0.7'} />
           ),
-          tabBarLabel: ({ focused }) => {
-            return <Text style={{ fontSize: 11, color: '#fff', opacity: focused ? 1 : 0.7 }}> {t('Menu')} </Text>;
-          },
+          tabBarLabel: ({ focused }) => (
+            <Text
+              style={{
+                fontSize: 11,
+                color: '#fff',
+                opacity: focused ? 1 : 0.7,
+              }}
+            >
+              {' '}
+              {t('Menu')}{' '}
+            </Text>
+          ),
         }}
       />
     </Tab.Navigator>
