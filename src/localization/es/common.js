@@ -182,5 +182,6 @@ export default {
   'Início': 'COMIENZO',
   'TELEFONE': 'TELÉFONO',
   'Aqui estão os laboratórios mais próximos de você': 'Aquí están los laboratorios más cercanos a ti',
-  LIGAR: 'PARA CONECTAR'
+  LIGAR: 'PARA CONECTAR',
+  'Termos de Uso': 'Terminos de uso'
 };

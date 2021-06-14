@@ -11,6 +11,7 @@ import MyExamDetail from '../pages/MyExams/detail';
 import ClinicDetail from '../pages/NearbyClinics/detail';
 
 import Suport from '../pages/Suport';
+import TermUse from '../pages/TermUse';
 import Profile from '../pages/Profile';
 import MyExams from '~/pages/MyExams';
 import Services from '~/pages/Services';
@@ -211,6 +212,13 @@ const AppRoutes = () => (
     <AppStack.Screen
       name="Suport"
       component={Suport}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <AppStack.Screen
+      name="TermUse"
+      component={TermUse}
       options={{
         headerShown: false,
       }}

@@ -9,7 +9,8 @@ import { useAuth } from '../../contexts/auth';
 import Container from '~/components/Container';
 import Header from '~/components/Header';
 import LanguageComponent from '~/language/LanguageComponent';
-import { VERSION } from '~/configs/constantes';
+import { VERSION, SERVER_URL } from '~/configs/constantes';
+import ModalWebView from '~/components/ModalWebView';
 
 import {
   IconMoreTerm,
@@ -21,11 +22,18 @@ import {
 
 const More = ({ navigation }) => {
   const { handleSignOut } = useAuth();
-
+  const [modalVisiable, setModalVisiable] = useState(false);
   const { t } = useTranslation();
 
   const signOut = () => {
     handleSignOut();
+  };
+
+  const openModel = () => {
+    setModalVisiable(true);
+  };
+  const hideModal = () => {
+    setModalVisiable(false);
   };
 
   return (
@@ -66,7 +74,7 @@ const More = ({ navigation }) => {
             borderBottomColor: '#D1D1D1',
             marginBottom: 25,
           }}
-          onPress={() => navigation.navigate('TermUse')}
+          onPress={openModel}
         >
           <View
             style={{ flexDirection: 'row', marginBottom: 10, marginLeft: 10 }}
@@ -145,6 +153,11 @@ const More = ({ navigation }) => {
       >
         <Text style={{ color: '#113CF3' }}>{VERSION}</Text>
       </View>
+      <ModalWebView
+        visible={modalVisiable}
+        hideModal={hideModal}
+        url={`https://drive.google.com/viewerng/viewer?embedded=true&url=${SERVER_URL}/termo_de_uso.pdf`}
+      />
     </Container>
   );
 };

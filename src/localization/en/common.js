@@ -183,5 +183,6 @@ export default {
   'Início': 'Start',
   'Olá!': 'Helo!',
   'Aqui estão os laboratórios mais próximos de você': 'Here are the laboratories closest to you',
-  LIGAR: 'TO CALL'
+  LIGAR: 'TO CALL',
+  'Termos de Uso': 'Terms of use'
 };
