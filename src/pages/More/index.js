@@ -74,7 +74,7 @@ const More = ({ navigation }) => {
             borderBottomColor: '#D1D1D1',
             marginBottom: 25,
           }}
-          onPress={openModel}
+          onPress={() => navigation.navigate('TermUse')}
         >
           <View
             style={{ flexDirection: 'row', marginBottom: 10, marginLeft: 10 }}

@@ -215,14 +215,6 @@ const LaboratoryList = ({ navigation, route }) => {
                   alignItems: 'center',
                 }}
               >
-                <View style={{}}>
-                  <IconLocation />
-                </View>
-                <Text
-                  style={{ marginBottom: 11, fontWeight: '700', marginTop: 5 }}
-                >
-                  {clinic.distancia_label}
-                </Text>
                 <View
                   style={{
                     shadowColor: '#000',

@@ -37,7 +37,6 @@ export const AuthProvider = ({ children }) => {
         },
       } = await signIn(email, senha);
 
-      setUser(result.paciente);
       await AsyncStorage.setItem(
         '@RNAuth:user',
         JSON.stringify(result.paciente)
@@ -50,6 +49,7 @@ export const AuthProvider = ({ children }) => {
       });
       api.defaults.headers.Authorization = `Bearer ${result.token}`;
       await AsyncStorage.setItem('@RNAuth:token', result.token);
+      setUser(result.paciente);
     } catch (error) {
       throw error;
     }

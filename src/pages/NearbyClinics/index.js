@@ -208,7 +208,7 @@ const NearbyClinics = ({ navigation }) => {
               onPress={() => { }}
             >
               <View
-                style={{ flex: 0.6, paddingLeft: 15, backgroundColor: '#fff' }}
+                style={{ flex: 0.7, paddingLeft: 15, backgroundColor: '#fff' }}
               >
                 <Text numberOfLines={1} style={{ marginTop: 10, fontSize: 16 }}>
                   {clinic.nome}
@@ -235,14 +235,6 @@ const NearbyClinics = ({ navigation }) => {
                   alignItems: 'center',
                 }}
               >
-                <View style={{}}>
-                  <IconLocation />
-                </View>
-                <Text
-                  style={{ marginBottom: 11, fontWeight: '700', marginTop: 5 }}
-                >
-                  {clinic.distancia_label}
-                </Text>
                 <View
                   style={{
                     shadowColor: '#000',
